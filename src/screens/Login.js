@@ -3,7 +3,7 @@ import React, {useState,useEffect} from 'react'
 import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native'
 import {Button, Input, Image} from "react-native-elements"
 import { StatusBar } from 'expo-status-bar'
-import { auth } from '../firebase'
+// import { auth } from '../firebase'
 
 
 const LoginScreen = ({navigation}) => {
@@ -11,13 +11,13 @@ const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState("")
 
   useEffect (() => {
-   const unsubscribe = auth.onAuthStateChanged((authUser)=> {
-      if (authUser){
-        navigation.replace("Home")
-      }
-    });
+  //  const unsubscribe = auth.onAuthStateChanged((authUser)=> {
+  //     if (authUser){
+  //       navigation.replace("Home")
+  //     }
+    // });
 
-    return unsubscribe;
+    // return unsubscribe;
   }, [])
   const signIn = () => {}
 
