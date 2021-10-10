@@ -10,7 +10,7 @@ function TabNavigator(props) {
 
 	return (
 		<Tab.Navigator>
-			<Tab.Screen name="StackNavigator" component={StackNavigator} />
+			<Tab.Screen name="MyFlock" component={StackNavigator} />
 		</Tab.Navigator>
 	);
 }
