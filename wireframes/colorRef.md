@@ -11,4 +11,5 @@ Here is the color scheme we chose to work with:
 | Orange | #e8984e | Icon, Borders |
 | Lavender | #bf90b1 | Icon, Dividers |
 | Grey | #564a57 |  Text-Long |
+| Deep Purple | #1f142e | Icon, Text-Emphasis |
 | Black| #000000 |  Text-Emphasis |
