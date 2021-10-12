@@ -39,7 +39,7 @@ story:{
     width:70,
     height:70,
     borderRadius:50,
-    marginLeft:6,
+    margin:6,
     borderWidth:2,
     borderColor:'#ff8501'
 
