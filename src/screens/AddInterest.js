@@ -3,29 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { View, StyleSheet, Text, ScrollView } from "react-native";
 import { Input, Button } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
-const interests = [
-  "Graphic design",
-  "Community service",
-  "Cooking or baking",
-  "Examples of interests",
-  "Exercising and healthcare",
-  "Outdoor activities",
-  "Playing an instrument",
-  "Team or individual sports",
-  "Travel",
-  "Woodworking or other projects",
-  "Writing or blogging",
-  "Basketball",
-  "Volleyball",
-  "Marathon running",
-  "Skiing",
-  "Tennis",
-  "Cycling",
-  "Swimming",
-  "Baseball",
-  "Mountain climbing",
-];
+import Stories from "../components/Stories";
+import { interests } from "../../data/interests";
 
 const AddInterest = () => {
   const [newInterest, setNewInterest] = useState("");
@@ -48,6 +27,9 @@ const AddInterest = () => {
     } else {
       setfilterdIntestests(interests);
     }
+  };
+  const selectTag = () => {
+    settagSelected(true);
   };
 
   return (
@@ -74,15 +56,17 @@ const AddInterest = () => {
         <ScrollView>
           {filterdIntestests.map((interest, index) => (
             <TouchableOpacity>
-              <Text
-                key={index}
-                style={
-                  styles.interestTag
-                }
-                onPress={() => settagSelected(true)}
-              >
+              <Text key={index} style={styles.interestTag} onPress={selectTag}>
                 {interest}
               </Text>
+              <View>
+                
+                  <ScrollView>
+                    <Stories interest={interest} />
+                  </ScrollView>
+              
+              
+                </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
@@ -107,20 +91,22 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     flexWrap: "wrap",
     justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
   },
   interestTag: {
     borderRadius: 10,
     fontSize: 20,
     padding: 3,
-    margin: 10,
+    marginLeft: 35,
     width: 300,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
     borderWidth: 10,
     // borderColor: "#BF90B1",
-   backgroundColor: "white",
-   borderColor:"white",
+    backgroundColor: "white",
+    borderColor: "white",
     // color:'white',
   },
   inputInterest: {
