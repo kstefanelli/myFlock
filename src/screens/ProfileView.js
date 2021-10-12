@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import FriendsList from '../components/FriendsList';
+import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
 const ProfileView = (user) => {

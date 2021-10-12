@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-const mapView = () => {
+const InitialLocation = () => {
 	const [mapRegion, setmapRegion] = useState({
 		latitude: 37.78825,
 		longitude: -122.4324,
@@ -15,7 +15,7 @@ const mapView = () => {
 		</View>
 	);
 };
-export default mapView;
+export default InitialLocation;
 /* class mapView extends React.Component {
 	constructor(props) {
 		super(props);
