@@ -3,10 +3,11 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
-const ProfileView = (user) => {
+const ProfileView = () => {
+	const user = USERS[0]
 	return (
 		<View style={styles.profileView}>
-			<Text style={styles.profileName}>{user.userName}User Name Here!</Text>
+			<Text style={styles.profileName}>{user.username}</Text>
 			<Image source={{ uri: user.profileImage }} style={styles.profileImage} />
 			<Text>{user.intro}Intro text goes here: </Text>
 			<Text>{user.interests}A list of interests goes here: </Text>
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		borderRadius: 125,
 		borderWidth: 10,
-		borderColor: '#bf90b1',
+		borderColor: '#e8984e',
 		alignItems: 'center',
 	},
 	profileName: {
