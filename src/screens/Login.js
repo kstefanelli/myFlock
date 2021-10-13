@@ -27,10 +27,10 @@ const LoginScreen = ({navigation}) => {
       <StatusBar style= "light" />
       <Image
       source = {{
-        uri:"https://images.unsplash.com/photo-1621944276209-ec3dc5136f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1214&q=80",
+        uri:"https://images.unsplash.com/photo-1612814621951-b24b753ca716?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80",
       }}
-      style = {{width: 175,
-        height: 175,
+      style = {{width: 250,
+      height: 250,
       marginTop:10,
       marginBottom:10,
       marginRight:10,
@@ -59,6 +59,7 @@ const LoginScreen = ({navigation}) => {
 //Styles and colors to be replaced with chosen design colors
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#E6E8DA',
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -68,8 +69,8 @@ inputContainer: {
   width: 300,
 },
 button: {
-  backgroundColor: '#718355',
-  borderColor: '#718355',
+  backgroundColor: '#1F142E',
+  borderColor: '#1F142E',
   borderWidth: 5,
   width: 200,
   margin: 5,
@@ -77,4 +78,3 @@ button: {
 });
 
 export default LoginScreen
-
