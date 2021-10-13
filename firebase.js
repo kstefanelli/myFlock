@@ -1,3 +1,8 @@
+/* eslint-disable no-unused-vars */
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
 const firebaseConfig = {
     apiKey: "AIzaSyCCCbNKwN5wgJ8vCqgeqkl4d-roRkfVe8c",
     authDomain: "myflock-e10c3.firebaseapp.com",
@@ -7,3 +12,14 @@ const firebaseConfig = {
     appId: "1:559175423203:web:32f1c4e5c0e64f794ee1d6",
     measurementId: "G-HMZV51336F"
   };
+
+  let app;
+
+if (firebase.apps.length ===0) {
+  app = firebase.initializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+export const db = firebase.firestore();
+export const auth = firebase.auth();

@@ -3,23 +3,44 @@ import React, {useState,useEffect} from 'react'
 import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native'
 import {Button, Input, Image} from "react-native-elements"
 import { StatusBar } from 'expo-status-bar'
-// import { auth } from '../firebase'
+import { auth } from '../../firebase'
 
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
 
-  useEffect (() => {
-  //  const unsubscribe = auth.onAuthStateChanged((authUser)=> {
-  //     if (authUser){
-  //       navigation.replace("Home")
-  //     }
-    // });
+  const logOutUser = () => {
+    auth.signOut().then(()=>{
+      // navigation.replace('Login')
+      alert('You have been logged out!')
+    })
+  };
 
-    // return unsubscribe;
+  useEffect (() => {
+   const unsubscribe = auth.onAuthStateChanged((authUser)=> {
+      if (authUser){
+        alert("Hello-logged in!")
+        // navigation.replace("Home")
+      }
+    });
+
+    return unsubscribe;
   }, [])
-  const signIn = () => {}
+
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      alert(errorMessage)
+    });
+  }
+
 
 //image to be replaced with murmuration image
   return (
@@ -51,6 +72,7 @@ const LoginScreen = ({navigation}) => {
       </View>
       <Button buttonStyle={styles.button} onPress={signIn}title="Login"  />
       <Button buttonStyle={styles.button} onPress= {()=> navigation.navigate('Register')}title="Register" />
+      <Button buttonStyle={styles.button} onPress={logOutUser}title="Logout - Temp" />
       <View style={{height: 100}} />
     </KeyboardAvoidingView>
   )
