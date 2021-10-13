@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Icon} from 'react-native-elements'
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import StackNavigator from './StackNavigator';
 import AddInterest from '../screens/AddInterest';
 import LoginScreen from '../screens/Login';
@@ -13,12 +15,38 @@ function TabNavigator(props) {
 	const Tab = createBottomTabNavigator();
 
 	return (
-		<Tab.Navigator>
-			<Tab.Screen name="StackNavigator" component={StackNavigator} />
+		<Tab.Navigator
+			initialRouteName="Home"
+			activeColor="#1f142e"
+			inactiveColor='#564a57'
+			labeled={true}
+			barStyle={{
+				// backgroundColor: '#fff',
+				alignItems: 'center',
+			}}
+
+			screenOptions={({route}) => ({
+				tabBarIcon: ({focused, color, size}) => {
+					let iconName
+					if (route.name === 'home') {
+						iconName = focused ? 'home' : 'home'
+					} else if (route.name === 'map') {
+						iconName = focused ? 'map' : 'map-outline'
+					} else if (route.name === 'chat') {
+						iconName = focused ? 'chatbox' : 'chatbox-outline'
+					} else if (route.name === 'profile') {
+						iconName = focused ? 'person' : 'person'
+					}
+					return <Icon type='ionicon' name={iconName} size={size} color={color} />
+				}
+			})}
+		>
+
+			<Tab.Screen name="home" component={StackNavigator} />
 			<Tab.Screen name="Add Interest" component={AddInterest} />
 			<Tab.Screen name="Login" component={LoginScreen} />
 			<Tab.Screen name="Edit Profile" component={EditProfileScreen} />
-			<Tab.Screen name="Profile View" component={ProfileView} />
+			<Tab.Screen name="profile" component={ProfileView} />
 		</Tab.Navigator>
 	);
 }
