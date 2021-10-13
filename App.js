@@ -11,13 +11,13 @@ import DrawerNavigator from './src/navigation/DrawerNavigator';
 const Stack = createStackNavigator();
 
 function App() {
-	const isLoggedin = true;
+	const isLoggedIn = true;
 
 	return (
 		<>
 			<StatusBar style="dark" />
 			<NavigationContainer>
-				{isSignedIn ? (
+				{isLoggedIn ? (
 					<>
 						<DrawerNavigator />
 					</>
