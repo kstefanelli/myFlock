@@ -1,14 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Home from './src/screens/Home';
+import MainNavigator from './src/navigation/MainNavigator';
+import Onboarding from './src/components/Onboarding';
 import DrawerNavigator from './src/navigation/DrawerNavigator';
 
-//top-level: App > DrawerNavigator > TabNavigator > StackNavigator > screens > components
+const Stack = createStackNavigator();
+
 function App() {
+	const isLoggedin = true;
+
 	return (
 		<>
+			<StatusBar style="dark" />
 			<NavigationContainer>
-				<DrawerNavigator />
+				{isSignedIn ? (
+					<>
+						<DrawerNavigator />
+					</>
+				) : (
+					<Stack.Navigator headerMode="none">
+						<>
+							<Stack.Screen name="Onboard" component={Onboarding} />
+							<Stack.Screen name="HomePage" component={Home} />
+							<Stack.Screen name="LogIn" component={LoginScreen} />
+						</>
+					</Stack.Navigator>
+				)}
 			</NavigationContainer>
 		</>
 	);

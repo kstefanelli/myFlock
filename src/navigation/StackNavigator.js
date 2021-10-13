@@ -3,6 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import AddInterest from '../screens/AddInterest';
+import LoginScreen from '../screens/Login';
 
 const StackNavigator = (props) => {
 	const Stack = createStackNavigator();
@@ -15,6 +16,7 @@ const StackNavigator = (props) => {
 	};
 	return (
 		<Stack.Navigator screenOptions={globalScreenOptions} options={{ gestureEnabled: false }}>
+			<Stack.Screen name="Login" component={LoginScreen} />
 			<Stack.Screen name="Home" component={Home} />
 		</Stack.Navigator>
 	);

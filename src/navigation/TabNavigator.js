@@ -16,7 +16,6 @@ function TabNavigator(props) {
 		<Tab.Navigator>
 			<Tab.Screen name="StackNavigator" component={StackNavigator} />
 			<Tab.Screen name="Add Interest" component={AddInterest} />
-			<Tab.Screen name="Login" component={LoginScreen} />
 			<Tab.Screen name="Edit Profile" component={EditProfileScreen} />
 			<Tab.Screen name="Profile View" component={ProfileView} />
 		</Tab.Navigator>
