@@ -7,10 +7,10 @@ const ProfileView = () => {
 	const user = USERS[0]
 	return (
 		<View style={styles.profileView}>
-			<Text style={styles.profileName}>{user.username}</Text>
+			<Text style={styles.profileName}>Meet {user.username}</Text>
 			<Image source={{ uri: user.profileImage }} style={styles.profileImage} />
-			<Text>{user.intro}Intro text goes here: </Text>
-			<Text>{user.interests}A list of interests goes here: </Text>
+			<Text> Intro: {user.intro} </Text>
+			<Text>Interests: {user.interests} </Text>
 			<FriendsList />
 		</View>
 	);
