@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import FriendsList from '../sub-components/FriendsList';

@@ -1,8 +1,4 @@
 # Logs
-.expo/
-.expo/packager-info.json
-temp.js
-package-lock.json
 logs
 *.log
 npm-debug.log*
@@ -105,3 +101,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+.expo/
+.expo/packager-info.json
+
