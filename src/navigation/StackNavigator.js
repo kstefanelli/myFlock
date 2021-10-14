@@ -1,19 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { Image, View, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
+<<<<<<< HEAD
+import AddInterest from '../screens/AddInterest';
+import LoginScreen from '../screens/Login';
+=======
+>>>>>>> main
 
 const StackNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator
-			screenOptions={{
-				headerShown: false,
-			}}
-			options={{ gestureEnabled: false }}
-		>
-			<Stack.Screen name="Home" component={Home} />
+		<Stack.Navigator headerMode="none" options={{ gestureEnabled: false }}>
+			<Stack.Screen
+				name="Home"
+				component={Home}
+				options={{
+					title: 'myFlock',
+					headerTitle: (props) => <LogoTitle {...props} />,
+					headerRight: () => (
+						<Button
+							onPress={() => navigation.navigate('AddInterest')}
+							title="AddInterest"
+							color="#00cc00"
+						/>
+					),
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };
