@@ -40,7 +40,7 @@ const Onboarding = () => {
 						}}
 						rightButtonLabel="Continue"
 						rightButtonPress={() => {
-							navigation.navigate('HomePage');
+							navigation.navigate('Drawer');
 						}}
 					/>
 				</View>

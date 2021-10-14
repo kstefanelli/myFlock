@@ -3,7 +3,8 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
-const ProfileView = (user) => {
+const ProfileView = () => {
+	const user = USERS[0];
 	return (
 		<View style={styles.profileView}>
 			<Text style={styles.profileName}>{user.userName}User Name Here!</Text>
