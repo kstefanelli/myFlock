@@ -1,4 +1,5 @@
 # Logs
+.expo/
 .expo/packager-info.json
 temp.js
 package-lock.json

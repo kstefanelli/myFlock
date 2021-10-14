@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
-import { Button, Input, Image } from 'react-native-elements';
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { Button, Input, Text, Image } from 'react-native-elements';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { auth } from '../../firebase';
 
@@ -19,9 +20,9 @@ const LoginScreen = ({ navigation }) => {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
-				alert('You are logged in!');
+				alert('Hello-logged in!');
+				// navigation.replace("Home")
 			}
-			navigation.navigate('HomePage', { email, password });
 		});
 
 		return unsubscribe;
@@ -45,22 +46,15 @@ const LoginScreen = ({ navigation }) => {
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<StatusBar style="light" />
-			<Image
-				source={{
-					uri: 'https://images.unsplash.com/photo-1612814621951-b24b753ca716?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1171&q=80',
-				}}
-				style={{
-					width: 250,
-					height: 250,
-					marginTop: 10,
-					marginBottom: 10,
-					marginRight: 10,
-					marginLeft: 10,
-					borderRadius: 50,
-					padding: 10,
-				}}
-			/>
+			<Text h3 style={{ marginTop: 50, textAlign: 'center' }}>
+				Welcome Back!
+			</Text>
+			<FontAwesome5 name="kiwi-bird" size={200} color="black" />
+
 			<View style={styles.inputContainer}>
+				<Text h3 style={{ marginBottom: 5 }}>
+					Log in to find out where your peeps are at...
+				</Text>
 				<Input
 					placeholder="Email"
 					autoFocus
@@ -100,10 +94,12 @@ const styles = StyleSheet.create({
 	inputContainer: {
 		width: 300,
 	},
+	//need to get text color to black
 	button: {
-		backgroundColor: '#1F142E',
-		borderColor: '#1F142E',
-		borderWidth: 5,
+		color: 'black',
+		backgroundColor: '#e6e8da',
+		borderColor: '#e8984e',
+		borderWidth: 1,
 		width: 200,
 		margin: 5,
 	},

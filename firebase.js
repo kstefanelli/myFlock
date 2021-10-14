@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
 
@@ -21,5 +20,7 @@ if (firebase.apps.length === 0) {
 	app = firebase.app();
 }
 
-export const db = firebase.firestore();
-export const auth = firebase.auth();
+const db = app.firestore();
+const auth = firebase.auth();
+
+export { db, auth };
