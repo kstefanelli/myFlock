@@ -20,8 +20,7 @@ const LoginScreen = ({ navigation }) => {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
-				alert('Hello-logged in!');
-				// navigation.replace("Home")
+				navigation.replace("Home")
 			}
 		});
 
