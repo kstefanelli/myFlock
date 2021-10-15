@@ -103,4 +103,4 @@ dist
 .tern-port
 .expo/
 .expo/packager-info.json
-
+package-lock.json
