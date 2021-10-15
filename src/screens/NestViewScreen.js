@@ -9,78 +9,82 @@ import EggItem from '../components/EggItem'
 import {auth, db} from '../../firebase'
 
 
-const Home = ({navigation}) => {
+const NestView = () => {
   const [chats, setChats] = useState([])
 
   const signOutUser = () => {
     auth.signOut().then(()=>{
-      navigation.navigate('Login')
+      // navigation.navigate('Login')
       alert('You have signed out')
     })
   };
 
   useEffect( ()=> {
-    // const unsubscribe = db.collection("chats").onSnapshot((snapshot)=> {
-    //   setChats(snapshot.docs.map(doc=> ({
-    //     id: doc.id,
-    //     data: doc.data(),
-    //   })))
-    // });
-    // return unsubscribe;
+    const unsubscribe = db.collection("chats").onSnapshot((snapshot)=> {
+      setChats(snapshot.docs.map(doc=> ({
+        id: doc.id,
+        data: doc.data(),
+      })))
+    });
+    return unsubscribe;
   }, [])
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "My Nest",
-      headerStyle: {
-        backgroundColor: "#FFF",
-      },
-      headerTitleStyle: {
-        color: "#354A18",
-      },
-      headerTintColor: "white",
-      headerLeft: () => (
-      <View style ={{marginLeft: 20}} >
-        <TouchableOpacity onPress={signOutUser}
-        activeOpacity={0.5}>
-        <Avatar rounded source={{uri: "https://images.unsplash.com/photo-1553161170-0c3481941f27?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80" }} />
-        </TouchableOpacity>
-      </View>),
-      headerRight: () => (
-        <View style={{ marginRight: 20 }} >
-        <TouchableOpacity onPress={()=>navigation.navigate('AddChat')}
-        activeOpacity={0.5}>
-          <Ionicons name="chatbubbles-outline" size={24} color="black" />
-        </TouchableOpacity>
-        </View>
-    ),
-    });
-  }, [navigation])
+  // useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     title: "My Nest",
+  //     headerStyle: {
+  //       backgroundColor: "#FFF",
+  //     },
+  //     headerTitleStyle: {
+  //       color: "#354A18",
+  //     },
+  //     headerTintColor: "white",
+  //     headerLeft: () => (
+  //     <View style ={{marginLeft: 20}} >
+  //       <TouchableOpacity onPress={signOutUser}
+  //       activeOpacity={0.5}>
+  //       <Avatar rounded source={{uri: "https://images.unsplash.com/photo-1553161170-0c3481941f27?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1469&q=80" }} />
+  //       </TouchableOpacity>
+  //     </View>),
+  //     headerRight: () => (
+  //       <View style={{ marginRight: 20 }} >
+  //       <TouchableOpacity onPress={()=>navigation.navigate('AddChat')}
+  //       activeOpacity={0.5}>
+  //         <Ionicons name="chatbubbles-outline" size={24} color="black" />
+  //       </TouchableOpacity>
+  //       </View>
+  //   ),
+  //   });
+  // }, [navigation])
 
 const enterChat = (id, chatName) => {
-navigation.navigate("Chat", {
-  id, chatName
-})
+// navigation.navigate("Chat", {
+//   id, chatName
+// })
 }
 
   return (
     <SafeAreaView >
       <ScrollView style={styles.container}>
         {chats.map(({id, data: {chatName}})=> (
-          <CustomListItem key ={id}
+          <EggItem key ={id}
           id={id}
           chatName={chatName}
           enterChat={enterChat} />
         ))}
+        <Text>Production Note - this list will change to circles/eggs
+        </Text>
       </ScrollView>
     </SafeAreaView>
   )
 }
-
-export default Home
 
 const styles = StyleSheet.create({
   container:{
     height: "100%"
   }
 })
+
+export default NestView
+
+

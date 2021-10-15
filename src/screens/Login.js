@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
 				alert('Hello-logged in!');
-				// navigation.replace("Home")
+				// navigation.navigate('Home')
 			}
 		});
 
@@ -42,7 +42,6 @@ const LoginScreen = ({ navigation }) => {
 			});
 	};
 
-	//image to be replaced with murmuration image
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<StatusBar style="light" />
