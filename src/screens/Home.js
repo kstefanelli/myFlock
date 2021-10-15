@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
 const Home = (props) => {
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<Text>Welcome to my app!</Text>
 			<Text>This successfully works</Text>
-		</View>
+		</SafeAreaView>
 	);
 };
 
