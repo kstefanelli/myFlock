@@ -8,10 +8,10 @@ const ProfileView = () => {
 	const user = USERS[0];
 	return (
 		<View style={styles.profileView}>
-			<Text style={styles.profileName}>{user.userName}User Name Here!</Text>
+			<Text style={styles.profileName}>Meet {user.username}!</Text>
 			<Image source={{ uri: user.profileImage }} style={styles.profileImage} />
-			<Text>{user.intro}Intro text goes here: </Text>
-			<Text>{user.interests}A list of interests goes here: </Text>
+			<Text>Bio: {user.intro} </Text>
+			<Text>Interests: {user.interests}</Text>
 			<FriendsList />
 		</View>
 	);
@@ -20,6 +20,7 @@ const ProfileView = () => {
 const styles = StyleSheet.create({
 	profileView: {
 		alignItems: 'center',
+		backgroundColor: '#e6e8da',
 	},
 	profileImage: {
 		height: 250,
