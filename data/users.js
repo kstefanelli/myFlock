@@ -8,7 +8,7 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.8150937,
-          longitude: 73.9112119
+          longitude: 73.9112119,
         },
         pronouns: "she/her/hers",
         profileImage: "http://media3.s-nbcnews.com/i/MSNBC/Components/Photo/_new/tdy-120822-joyce-carpati-02.jpg",
@@ -22,7 +22,7 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.64492082,
-          longitude: 73.84318539
+          longitude: 73.84318539,
         },
         pronouns: "she/her/hers",
         profileImage: "https://media.self.com/photos/57d8de3946d0cb351c8c6f92/master/w_354,h_536,c_limit/Screen%20shot%202011-09-19%20at%206.35.28%20PM.png",
@@ -65,7 +65,7 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.72163197,
-          longitude: 73.90455961
+          longitude: 73.90455961,
         },
         pronouns: "she/her/hers",
         profileImage: "https://i.dailymail.co.uk/i/pix/2012/03/10/article-2112984-121A8D01000005DC-526_468x461.jpg",
@@ -79,8 +79,9 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.78961392,
-          longitude: 73.99668535
+          longitude: 73.99668535,
         },
+        pronouns: "she/her/hers",
         intro: "Charlotte D'Amore",
         email: 'Viva_Koch32@gmail.com',
         profileImage: 'http://placeimg.com/640/489',
@@ -95,6 +96,7 @@ export const USERS = [
           latitude:  40.6069573,
           longitude: 74.05922803,
         },
+        pronouns: "she/her/hers",
         intro: 'Rosemary Barrows',
         email: 'Anastacio.Kutch@yahoo.com',
         profileImage: 'http://placeimg.com/640/481',
@@ -107,8 +109,9 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.68062402,
-          longitude: 73.95971607
+          longitude: 73.95971607,
         },
+        pronouns: "he/him/his",
         intro: 'Alberta Dickinson',
         email: 'Damian_Kuhn96@gmail.com',
         profileImage: 'http://placeimg.com/640/482',
@@ -121,8 +124,9 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude:  40.6383027,
-          longitude: 73.9728792
+          longitude: 73.9728792,
         },
+        pronouns: "they/them/their",
         intro: 'Jamie Goodwin',
         email: 'Brett_Weissnat@hotmail.com',
         profileImage: 'http://placeimg.com/640/483',
@@ -135,8 +139,9 @@ export const USERS = [
         location: {
           name: "New York City",
           latitude: 40.68495487,
-          longitude: 73.90855668
+          longitude: 73.90855668,
         },
+        pronouns: "they/them/their",
         intro: "Austin O'Keefe",
         email: 'Teagan_Schmidt@hotmail.com',
         profileImage: 'http://placeimg.com/640/485',
@@ -151,6 +156,7 @@ export const USERS = [
           latitude: 47.67104665,
           longitude: 122.25720262,
         },
+        pronouns: "she/her/hers",
         intro: 'Inez Nolan',
         email: 'Soledad.Bogisich@yahoo.com',
         profileImage: 'http://placeimg.com/640/484',
@@ -163,8 +169,9 @@ export const USERS = [
         location: {
           name: "Seattle",
           latitude:  47.67880979,
-          longitude: 122.24083802
+          longitude: 122.24083802,
         },
+        pronouns: "she/her/hers",
         intro: 'Orville Renner',
         email: 'Doug.Weber49@gmail.com',
         profileImage: 'http://placeimg.com/640/486',
@@ -177,8 +184,9 @@ export const USERS = [
         location: {
           name: "Seattle",
           latitude: 47.58415994,
-          longitude: 122.19806453
+          longitude: 122.19806453,
         },
+        pronouns: "he/him/his",
         intro: 'Eileen Bayer',
         email: 'Michel.Boyle@yahoo.com',
         profileImage: 'http://placeimg.com/640/487',
@@ -191,8 +199,9 @@ export const USERS = [
         location: {
           name: "Seattle",
           latitude: 47.5058246,
-          longitude: 122.34206067
+          longitude: 122.34206067,
         },
+        pronouns: "she/her/hers",
         intro: 'Joseph Batz',
         email: 'Chyna.Mueller35@hotmail.com',
         profileImage: 'http://placeimg.com/640/488',
@@ -207,6 +216,7 @@ export const USERS = [
           latitude: 47.55919168,
           longitude: 122.4258235,
         },
+        pronouns: "she/her/hers",
         email: 'Dereck6@gmail.com',
         profileImage: 'http://placeimg.com/640/489',
         interests: ["Community service"]
@@ -218,10 +228,123 @@ export const USERS = [
         location: {
           name: "Seattle",
           latitude: 47.7330388,
-          longitude: 122.40371218
+          longitude: 122.40371218,
         },
+        pronouns: "he/him/his",
         email: "emre.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/11.jpg",
+        interests: ['Community Service', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 12,
+        username: "Ben",
+        intro: "I like to dance and love to play foosball",
+        location: {
+          name: "Seattle",
+          latitude: 47.52575526,
+          longitude: 122.23617521,
+        },
+        pronouns: "he/him/his",
+        email: "bendoor@example.com",
+        profileImage: "https://randomuser.me/api/portraits/men/46.jpg",
+        interests: ['Community Service', 'hiking', 'biking', 'poetry']
+      },
+      {
+        id: 13,
+        username: "Ron",
+        intro: "I like to hike and love to dance",
+        location: {
+          name: "Seattle",
+          latitude: 47.62818032,
+          longitude: 122.29212331,
+        },
+        pronouns: "he/him/his",
+        email: "ronfalcon.pektemek@example.com",
+        profileImage: "https://randomuser.me/api/portraits/men/59.jpg",
         interests: ['Theater', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 14,
+        username: "Carlos",
+        intro: "I like to ski and love to larp",
+        location: {
+          name: "Seattle",
+          latitude: 47.69599351,
+          longitude: 122.3785803,
+        },
+        pronouns: "they/them/their",
+        email: "carlos.pektemek@example.com",
+        profileImage: "https://randomuser.me/api/portraits/men/56.jpg",
+        interests: ['Food', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 15,
+        username: "Zephyr",
+        intro: "I like to crochet and love to play basketball",
+        location: {
+          name: "Seattle",
+          latitude: 47.7330388,
+          longitude: 122.40371218
+        },
+        pronouns: "she/her/hers",
+        email: "zeph@example.com",
+        profileImage: "https://randomuser.me/api/portraits/women/58.jpg",
+        interests: ['Shopping', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 16,
+        username: "Camille",
+        intro: "I like to crochet and love to play basketball",
+        location: {
+          name: "Seattle",
+          latitude: 47.7330388,
+          longitude: 122.40371218
+        },
+        pronouns: "she/her/hers",
+        email: "camille@example.com",
+        profileImage: "https://randomuser.me/api/portraits/women/94.jpg",
+        interests: ['Poetry', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 17,
+        username: "Chloe",
+        intro: "I like to crochet and love to play basketball",
+        location: {
+          name: "Seattle",
+          latitude: 47.7330388,
+          longitude: 122.40371218
+        },
+        pronouns: "she/her/hers",
+        email: "chloe.pektemek@example.com",
+        profileImage: "https://randomuser.me/api/portraits/women/68.jpg",
+        interests: ['Biking', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 18,
+        username: "Reggie",
+        intro: "I like to crochet and love to play basketball",
+        location: {
+          name: "Kansas City",
+          latitude: 39.01206126,
+          longitude: 94.62996893,
+        },
+        pronouns: "they/them/their",
+        email: "reggie@example.com",
+        profileImage: "https://randomuser.me/api/portraits/men/20.jpg",
+        interests: ['Horses', 'art', 'skiing', 'cooking']
+      },
+      {
+        id: 19,
+        username: "Sue-Ann",
+        intro: "I like to crochet and love to play basketball",
+        location: {
+          name: "Kansas City",
+          latitude: 39.07323786,
+          longitude: 94.69950512,
+        },
+        pronouns: "she/her/hers",
+        email: "chloe.pektemek@example.com",
+        profileImage: "https://randomuser.me/api/portraits/women/95.jpg",
+        interests: ['Community Service', 'art', 'skiing', 'cooking']
       }
 ]
