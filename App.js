@@ -12,7 +12,7 @@ import RegisterScreen from './src/screens/RegisterScreen';
 const Stack = createStackNavigator();
 
 function App() {
-	const isLoggedIn = false;
+	const isLoggedIn = true;
 
 	return (
 		<>
