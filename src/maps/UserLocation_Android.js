@@ -1,0 +1,62 @@
+import React, { useState, useEffect } from 'react';
+import { Platform, Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+import * as Location from 'expo-location';
+import InitialLocation from './InitialLocation';
+
+function UserLocation_Android({ navigation }) {
+	const [location, setLocation] = useState(null);
+	const [errorMsg, setErrorMsg] = useState(null);
+
+	let latitude = 37.78825;
+	let longitude = -122.4324;
+
+	useEffect(() => {
+		(async () => {
+			try {
+				if (Platform.OS === 'android' && !Constants.isDevice) {
+					setErrorMsg(
+						'Oops, this will not work on Snack in an Android emulator. Try it on your device!'
+					);
+					return;
+				}
+				let { status } = await Location.requestForegroundPermissionsAsync();
+				if (status !== 'granted') {
+					setErrorMsg('Permission to access location was denied');
+					return;
+				}
+
+				let location = await Location.getCurrentPositionAsync({});
+				console.log('>> got location', location);
+				navigation.navigate('InitialLocation', {
+					latitude: location.coords.latitude,
+					longitude: location.coords.longitude,
+				});
+				setLocation(location);
+			} catch (e) {
+				console.log('>>> error', e);
+			}
+		})();
+	}, []);
+
+	return (
+		<View style={styles.container}>
+			<Text>{errorMsg ? errorMsg : 'Waiting...'}</Text>
+		</View>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		padding: 20,
+	},
+	paragraph: {
+		fontSize: 18,
+		textAlign: 'center',
+	},
+});
+
+export default UserLocation_Android;
