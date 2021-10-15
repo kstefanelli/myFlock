@@ -21,7 +21,7 @@ const LoginScreen = ({ navigation }) => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
 				alert('Hello-logged in!');
-				// navigation.replace("Home")
+				navigation.replace("Home")
 			}
 		});
 
