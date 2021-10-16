@@ -8,6 +8,8 @@ import Onboarding from './src/components/Onboarding';
 import DrawerNavigator from './src/navigation/DrawerNavigator';
 import Login from './src/screens/Login';
 import RegisterScreen from './src/screens/RegisterScreen';
+import ChatScreen from './src/screens/ChatScreen';
+import AddInterest from './src/screens/AddInterest';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +31,7 @@ function App() {
 							<Stack.Screen name="Onboard" component={Onboarding} />
 							<Stack.Screen name="Register" component={RegisterScreen} />
 							<Stack.Screen name="Drawer" component={DrawerNavigator} />
+							
 						</>
 					</Stack.Navigator>
 				)}

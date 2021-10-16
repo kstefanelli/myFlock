@@ -12,6 +12,7 @@ const Home = (props) => {
 		<Stack.Navigator>
 			<Stack.Screen name="User Location" component={UserLocation_Android} />
 			<Stack.Screen name="Initial Location" component={InitialLocation} />
+			
 		</Stack.Navigator>
 	);
 };

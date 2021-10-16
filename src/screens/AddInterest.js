@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import Stories from "../components/Stories";
 import { interests } from "../../data/interests";
 
-const AddInterest = () => {
+const AddInterest = ({navigation}) => {
   const [newInterest, setNewInterest] = useState("");
   const [tagBagroundColor, setTagBagroundColor] = useState("");
   const [tagselected, settagSelected] = useState(false);
@@ -62,7 +62,7 @@ const AddInterest = () => {
               <View>
                 
                   <ScrollView>
-                    <Stories interest={interest} />
+                    <Stories interest={interest} navigation = {navigation}/>
                   </ScrollView>
               
               
