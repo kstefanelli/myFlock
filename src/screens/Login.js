@@ -34,6 +34,7 @@ const LoginScreen = ({ navigation }) => {
 			if (authUser) {
 				alert('Hello-logged in!');
 				// navigation.navigate("Home")
+				navigation.replace("Home")
 			}
 		});
 
