@@ -14,5 +14,9 @@ export const interests = [
     "Books",
     "Television",
     "Family",
-    "Dancing"
+    "Dancing",
+    "Animals",
+    "Nature",
+    "Podcasts",
+    "Dining Out"
   ];
