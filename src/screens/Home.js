@@ -1,17 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import UserLocation_Android from '../maps/UserLocation_Android';
+import InitialLocation from '../maps/InitialLocation';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Home = (props) => {
+	const Stack = createStackNavigator();
+
 	return (
-		<View style={styles.container}>
-			<Text>Welcome to my app!</Text>
-			<Text>This successfully works</Text>
-		</View>
+		<Stack.Navigator>
+			<Stack.Screen name="User Location" component={UserLocation_Android} />
+			<Stack.Screen name="Initial Location" component={InitialLocation} />
+		</Stack.Navigator>
 	);
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
 	container: {
@@ -21,3 +24,5 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 });
+
+export default Home;

@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import MapView from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-const InitialLocation = () => {
+const InitialLocation = ({ route }) => {
+	console.log(route.params, 'InitialLocation');
+	const { latitude, longitude } = route.params;
 	const [mapRegion, setmapRegion] = useState({
-		latitude: 37.78825,
-		longitude: -122.4324,
+		/* 		latitude: props.latitude,
+		longitude: props.longitude, */
+		latitude,
+		longitude,
 		latitudeDelta: 0.0922,
 		longitudeDelta: 0.0421,
 	});

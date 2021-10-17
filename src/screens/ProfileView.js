@@ -1,16 +1,19 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
 const ProfileView = () => {
-	const user = USERS[0]
+
+	const user = USERS[0];
 	return (
 		<View style={styles.profileView}>
-			<Text style={styles.profileName}>Meet {user.username}</Text>
+			<Text style={styles.profileName}>Meet {user.username}!</Text>
 			<Image source={{ uri: user.profileImage }} style={styles.profileImage} />
-			<Text> Intro: {user.intro} </Text>
-			<Text>Interests: {user.interests} </Text>
+			<Text>Bio: {user.intro} </Text>
+			<Text>Interests: {user.interests}</Text>
+
 			<FriendsList />
 		</View>
 	);
@@ -19,6 +22,7 @@ const ProfileView = () => {
 const styles = StyleSheet.create({
 	profileView: {
 		alignItems: 'center',
+		backgroundColor: '#e6e8da',
 	},
 	profileImage: {
 		height: 250,

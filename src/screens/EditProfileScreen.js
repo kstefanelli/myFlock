@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
-import {} from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import { Button, Input, Text } from 'react-native-elements';
+import { StatusBar } from 'expo-status-bar';
 
 const EditProfileScreen = () => {
 	const [pronouns, setPronouns] = useState('');
@@ -15,13 +16,9 @@ const EditProfileScreen = () => {
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<StatusBar style="light" />
 
-			<Text h3 style={{ marginBottom: 50 }}>
-				Edit Profile
-			</Text>
 			<View style={styles.inputContainer}>
 				<Input
 					placeholder="Pronouns"
-					autofocus
 					type="text"
 					value={pronouns}
 					onChangeText={(text) => setPronouns(text)}
@@ -42,8 +39,6 @@ const EditProfileScreen = () => {
 	);
 };
 
-export default EditProfileScreen;
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -55,9 +50,12 @@ const styles = StyleSheet.create({
 		width: 300,
 	},
 	button: {
-		borderColor: '#E8984E',
+		backgroundColor: '#1F142E',
+		borderColor: '#1F142E',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,
 	},
 });
+
+export default EditProfileScreen;
