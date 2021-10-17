@@ -3,11 +3,12 @@
 
 
 ## Our Inspiration:
-Birds of a feather flock together! We wanted to create a mobile app that  facilitates the discovery of platonic friendships and activity partners based on two simple factors: shared interests and proximity.
+Birds of a feather flock together! We wanted to create a mobile app that  facilitates the discovery of platonic friends and activity partners based on two simple factors: shared interests and proximity.
 
 ## Try Out the App:
 If you want to test our app, the prerequisite is that you have Expo installed on your device.
-While our app is in development, beta testers can try it out by cloning this repo, using the terminal to navigate to the main directory, running "npm install" and then running "npm start". The start script will open Expo where you will be prompted to open the app in the simulator of your choice.
+
+While our app is in development, beta testers can try it out by cloning this repo, using the terminal to navigate to the main directory, running "npm install" and then running "npm start". The start script will then open Expo where you will be prompted to view in the simulator of your choice.
 
 An alternate to running the app in a simulator is to install Expo on a mobile device, run the start script from the terminal, and then scan the QR code. As you onboard, you will be prompted to allow the app to access your location. To get the most from myFlock, please grant this permission.
 
@@ -36,6 +37,12 @@ Our onboarding sequence will get you set up in no time. Once you are signed up a
   - Figma
   - HTML
   - CSS
+
+## Future Considerations:
+
+    Support travelers
+    Customize search radius
+    Go Stealth
 
 ## Our Team:
  - Victoria Lee ( [LinkedIn](https://www.linkedin.com/in/victoria-lee-dev/) | [GitHub](https://github.com/dalgonaio) )

@@ -19,7 +19,7 @@ const ProfileView = () => {
                     </View>
                 ))}
             </ScrollView>
-			<Text>Interests: {user.interests}</Text>
+
 			<FriendsList />
 			<Text>Location: {user.location.name}</Text>
 		</View>
