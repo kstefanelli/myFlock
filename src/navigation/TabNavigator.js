@@ -54,7 +54,7 @@ function TabNavigator(props) {
 					title: 'myFlock',
 					headerRight: () => (
 						<Button
-							onPress={() => navigation.navigate('Add Interest')}
+							onPress={() => navigation.navigate('AddInterest')}
 							title="AddInterest"
 							color="#00cc00"
 						/>
