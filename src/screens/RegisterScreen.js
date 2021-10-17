@@ -1,10 +1,13 @@
 /* eslint-disable no-unused-vars */
+//Kristina's OG code
+
+
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -14,15 +17,30 @@ const RegisterScreen = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   const register = () => {
+    let uid;
  auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: name,
           photoURL:
             imageUrl || 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200',
         });
+        uid=authUser.user.uid;
+        console.log('typeof uid', typeof uid)
       })
+      .then(db.collection('Users')
+      .add({
+        name: name,
+        email: email,
+        imageUrl: imageUrl,
+        age: 0,
+        bio: "",
+        interests: [],
+        isLoggedIn: false,
+        location: []
+      })
+      )
       .catch((error) => alert(error.message));
   };
 

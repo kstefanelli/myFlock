@@ -4,15 +4,27 @@ import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import { Button, Input, Text, Image } from 'react-native-elements';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
+
 
 const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [UID, setUID] = useState("")
 
 	const logOutUser = () => {
 		auth.signOut().then(() => {
+		db.collection("Users")
+  .where("UUID", "==", UID)
+  .get()
+  .then(function(querySnapshot) {
+    querySnapshot.forEach(function(document) {
+     document.ref.update({
+		isLoggedIn: false})
+})
+});
 			// navigation.replace('Login')
+
 			alert('You have been logged out!');
 		});
 	};
@@ -21,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
 				alert('Hello-logged in!');
-				// navigation.navigate('Home')
+				// navigation.navigate("Home")
 			}
 		});
 
@@ -34,7 +46,18 @@ const LoginScreen = ({ navigation }) => {
 			.then((userCredential) => {
 				// Signed in
 				const user = userCredential.user;
-				// ...
+				const UID= user.uid;
+				db.collection("Users")
+  .where("UUID", "==", UID)
+  .get()
+  .then(function(querySnapshot) {
+    querySnapshot.forEach(function(document) {
+     document.ref.update({
+		isLoggedIn: true
+ })
+ .then(setUID(UID));
+    });
+  });
 			})
 			.catch((error) => {
 				const errorMessage = error.message;
