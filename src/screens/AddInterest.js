@@ -55,8 +55,8 @@ const AddInterest = ({navigation}) => {
       <View style={styles.interestTagContainer}>
         <ScrollView>
           {filterdIntestests.map((interest, index) => (
-            <TouchableOpacity>
-              <Text key={index} style={styles.interestTag} onPress={selectTag}>
+            <TouchableOpacity key={index} >
+              <Text style={styles.interestTag} onPress={selectTag}>
                 {interest}
               </Text>
               <View>

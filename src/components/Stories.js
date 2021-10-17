@@ -20,7 +20,7 @@ const Stories = ({ interest, navigation }) => {
     <View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filteredUsers.map((story, index) => (
-          <TouchableOpacity onPress={() => navigation.navigate("ChatScreen")}>
+          <TouchableOpacity onPress={() => navigation.navigate("ChatScreen",{user:story,id:index})}>
             <View key={index} style={{ alignItems: "center" }}>
               <Image
                 source={{ uri: story.profileImage }}
