@@ -5,6 +5,7 @@ import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
 const ProfileView = () => {
+
 	const user = USERS[0];
 	return (
 		<View style={styles.profileView}>
@@ -12,6 +13,7 @@ const ProfileView = () => {
 			<Image source={{ uri: user.profileImage }} style={styles.profileImage} />
 			<Text>Bio: {user.intro} </Text>
 			<Text>Interests: {user.interests}</Text>
+
 			<FriendsList />
 		</View>
 	);
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 		borderRadius: 125,
 		borderWidth: 10,
-		borderColor: '#bf90b1',
+		borderColor: '#e8984e',
 		alignItems: 'center',
 	},
 	profileName: {
