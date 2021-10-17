@@ -5,6 +5,7 @@ import FriendsList from '../sub-components/FriendsList';
 import { USERS } from '../../data/users';
 
 const ProfileView = () => {
+
 	const user = USERS[0];
 	return (
 		<View style={styles.profileView}>
@@ -19,7 +20,6 @@ const ProfileView = () => {
                     </View>
                 ))}
             </ScrollView>
-
 			<FriendsList />
 			<Text>Location: {user.location.name}</Text>
 		</View>
