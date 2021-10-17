@@ -3,14 +3,14 @@ import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements'
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+// import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import StackNavigator from './StackNavigator';
 import AddInterest from '../screens/AddInterest';
 import LoginScreen from '../screens/Login';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import ProfileView from '../screens/ProfileView';
 import Home from '../screens/Home';
-import { Icon } from 'react-native-elements';
+
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
 //YOU WILL SPEND HOURS WITH A BLACK SCREEN AND NO CONSOLE.LOG NOT KNOWING WHAT HAPPENED
