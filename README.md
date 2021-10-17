@@ -25,7 +25,7 @@ Our onboarding sequence will get you set up in no time. Once you are signed up a
 
 - Back End:
   - FireBase
-    - handles user authentication and a noSQl database.
+    - handles user authentication and a noSQL database.
 - Front End:
   - Expo
     - enables speedy development that is compatible with both iOS and Android mobile devices
