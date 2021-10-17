@@ -38,8 +38,8 @@ Our onboarding sequence will get you set up in no time. Once you are signed up a
   - CSS
 
 ## Our Team:
- - Victoria Lee (LinkedIn | GitHub)
- - Tingting Li (LinkedIn | GitHub)
- - Audrey Maldonado (LinkedIn | GitHub)
- - Kristina Stefanelli (LinkedIn | GitHub)
- - Suzanne Wong (LinkedIn | GitHub)
+ - Victoria Lee ( [LinkedIn](https://www.linkedin.com/in/victoria-lee-dev/) | [GitHub](https://github.com/dalgonaio) )
+ - Tingting Li ( [LinkedIn](https://www.linkedin.com/in/tingting-li-tia/) | [GitHub](https://github.com/tiyalee) )
+ - Audrey Maldonado ( [LinkedIn](https://www.linkedin.com/in/audrey-maldonado/) | [GitHub](https://github.com/Adorism) )
+ - Kristina Stefanelli ( [LinkedIn](https://www.linkedin.com/in/kristinastefanelli/) | [GitHub](https://github.com/kstefanelli) )
+ - Suzanne Wong ( [LinkedIn](https://www.linkedin.com/in/wongsuzanne/) | [GitHub](https://github.com/suzannewong) )
