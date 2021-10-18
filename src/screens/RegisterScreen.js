@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-//Kristina's OG code
-
-
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';

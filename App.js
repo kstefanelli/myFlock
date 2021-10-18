@@ -1,4 +1,3 @@
-
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
 import {StatusBar} from 'expo-status-bar';
@@ -6,19 +5,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {auth, db} from './firebase';
 
-
-import Home from "./src/screens/Home";
-import Onboarding from "./src/components/Onboarding";
-import DrawerNavigator from "./src/navigation/DrawerNavigator";
-import Login from "./src/screens/Login";
-import RegisterScreen from "./src/screens/RegisterScreen";
-import ChatScreen from "./src/screens/ChatScreen";
-import AddInterest from "./src/screens/AddInterest";
+import Home from './src/screens/Home';
+import Onboarding from './src/components/Onboarding';
+import DrawerNavigator from './src/navigation/DrawerNavigator';
+import Login from './src/screens/Login';
+import RegisterScreen from './src/screens/RegisterScreen';
 
 const Stack = createStackNavigator();
 
 function App() {
-
   const [isLoggedIn, setIsLoggedIn] = useState('');
 
   useEffect(() => {
@@ -32,7 +27,6 @@ function App() {
     });
 
   });
-
 
   return (
     <>

@@ -13,7 +13,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         profileImage: "http://media3.s-nbcnews.com/i/MSNBC/Components/Photo/_new/tdy-120822-joyce-carpati-02.jpg",
         intro: "I was in a news article about sharing my best beauty tips",
-        interests: ['crafting', 'chickens', 'yoga', 'Cooking or baking', 'reading', 'writing', 'Travel', "Graphic design"],
+        interests: ['Art', 'Animals', 'Health', 'Baking', 'Books', 'Travel', 'Design'],
     },
     {
         userId: 124,
@@ -27,7 +27,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         profileImage: "https://media.self.com/photos/57d8de3946d0cb351c8c6f92/master/w_354,h_536,c_limit/Screen%20shot%202011-09-19%20at%206.35.28%20PM.png",
         intro: "It wasn't until I was 75 that I seriously considered becoming a fitness instructor.",
-        interests: ['crafting', 'jogging', 'yoga', 'movies', 'reading', "Graphic design"],
+        interests: ['Art', 'Working Out', 'Health', 'Movies', 'Books', "Design"],
     },
     {
         userId: 125,
@@ -41,7 +41,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         profileImage: "https://www.fieldandstream.com/uploads/2019/01/18/NDZTQH2MAT7CAKUQDZDAP5JTVI.png",
         intro: "I fought off a rabid animal by drawing on my martial arts training. Not even kidding.",
-        interests: ['karate', 'Cooking or baking', 'bird watching', 'hiking','Tennis', 'reading', 'Skiing','Community service'],
+        interests: ['Working Out', 'Cooking', 'Nature', 'Outdoor Activities','Sports', 'Books', 'Community Service'],
     },
     {
         useId: 126,
@@ -55,7 +55,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         profileImage: "https://wboc.images.worldnow.com/images/8870055_BG1.jpg",
         intro: "Once, when there was an intruder in my house, I made him call the police on himself.",
-        interests: ['true crime podcasts', 'fine dining', 'art', 'Cooking or baking', 'reading'],
+        interests: ['Podcasts', 'Dining Out', 'Art', 'Cooking', 'Books'],
 
     },
     {
@@ -70,7 +70,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         profileImage: "https://i.dailymail.co.uk/i/pix/2012/03/10/article-2112984-121A8D01000005DC-526_468x461.jpg",
         intro: "I rate restaurants. I know the best places to eat in town.",
-        interests: ['crafting', 'poetry', 'yoga', 'Cooking or baking', 'fine dining', 'reading', 'writing', 'dancing'],
+        interests: ['Art', 'Books', 'Health', 'Cooking', 'Dining Out', 'Dancing'],
     },
     {
         id: 1,
@@ -115,7 +115,7 @@ export const USERS = [
         intro: 'Alberta Dickinson',
         email: 'Damian_Kuhn96@gmail.com',
         profileImage: 'http://placeimg.com/640/482',
-        interests: ["Travel","Skiing"]
+        interests: ["Travel","Outdoor Activities"]
       },
       {
         id: 4,
@@ -130,7 +130,7 @@ export const USERS = [
         intro: 'Jamie Goodwin',
         email: 'Brett_Weissnat@hotmail.com',
         profileImage: 'http://placeimg.com/640/483',
-        interests: ["Skiing"]
+        interests: ["Outdoor Activities"]
       },
       {
         id: 5,
@@ -145,7 +145,7 @@ export const USERS = [
         intro: "Austin O'Keefe",
         email: 'Teagan_Schmidt@hotmail.com',
         profileImage: 'http://placeimg.com/640/485',
-        interests: ["Skiing"]
+        interests: ["Outdoor Activities"]
       },
       {
         id: 6,
@@ -160,7 +160,7 @@ export const USERS = [
         intro: 'Inez Nolan',
         email: 'Soledad.Bogisich@yahoo.com',
         profileImage: 'http://placeimg.com/640/484',
-        interests: ["Skiing"]
+        interests: ["Outdoor Activities"]
       },
       {
         id: 7,
@@ -175,7 +175,7 @@ export const USERS = [
         intro: 'Orville Renner',
         email: 'Doug.Weber49@gmail.com',
         profileImage: 'http://placeimg.com/640/486',
-        interests: ["Skiing"]
+        interests: ["Outdoor Activities"]
       },
       {
         id: 8,
@@ -190,7 +190,7 @@ export const USERS = [
         intro: 'Eileen Bayer',
         email: 'Michel.Boyle@yahoo.com',
         profileImage: 'http://placeimg.com/640/487',
-        interests:["Skiing"]
+        interests:["Health"]
       },
       {
         id: 9,
@@ -205,7 +205,7 @@ export const USERS = [
         intro: 'Joseph Batz',
         email: 'Chyna.Mueller35@hotmail.com',
         profileImage: 'http://placeimg.com/640/488',
-        interests: ["Skiing"]
+        interests: ["Animals"]
       },
       {
         id: 10,
@@ -219,7 +219,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         email: 'Dereck6@gmail.com',
         profileImage: 'http://placeimg.com/640/489',
-        interests: ["Community service"]
+        interests: ["Community Service"]
       },
       {
         id: 11,
@@ -233,7 +233,7 @@ export const USERS = [
         pronouns: "he/him/his",
         email: "emre.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/11.jpg",
-        interests: ['Community Service', 'art', 'skiing', 'cooking']
+        interests: ['Community Service', 'Art', 'Outdoor Activities', 'Cooking']
       },
       {
         id: 12,
@@ -247,7 +247,7 @@ export const USERS = [
         pronouns: "he/him/his",
         email: "bendoor@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/46.jpg",
-        interests: ['Community Service', 'hiking', 'biking', 'poetry']
+        interests: ['Community Service', 'Working Out', 'Outdoor Activities', 'Books']
       },
       {
         id: 13,
@@ -261,7 +261,7 @@ export const USERS = [
         pronouns: "he/him/his",
         email: "ronfalcon.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/59.jpg",
-        interests: ['Theater', 'art', 'skiing', 'cooking']
+        interests: ['Movies', 'Art', 'sOutdoor Activities', 'Baking']
       },
       {
         id: 14,
@@ -275,7 +275,7 @@ export const USERS = [
         pronouns: "they/them/their",
         email: "carlos.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/56.jpg",
-        interests: ['Food', 'art', 'skiing', 'cooking']
+        interests: ['Dining Out', 'Art', 'Outdoor Activities', 'Cooking']
       },
       {
         id: 15,
@@ -289,7 +289,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         email: "zeph@example.com",
         profileImage: "https://randomuser.me/api/portraits/women/58.jpg",
-        interests: ['Shopping', 'art', 'skiing', 'cooking']
+        interests: ['Art', 'Outdoor Activities', 'Cooking']
       },
       {
         id: 16,
@@ -303,7 +303,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         email: "camille@example.com",
         profileImage: "https://randomuser.me/api/portraits/women/94.jpg",
-        interests: ['Poetry', 'art', 'skiing', 'cooking']
+        interests: ['Art', 'Books', 'Cooking']
       },
       {
         id: 17,
@@ -317,7 +317,7 @@ export const USERS = [
         pronouns: "she/her/hers",
         email: "chloe.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/women/68.jpg",
-        interests: ['Biking', 'art', 'skiing', 'cooking']
+        interests: ['Outdoor Activities', 'Art', 'Cooking']
       },
       {
         id: 18,
@@ -331,7 +331,7 @@ export const USERS = [
         pronouns: "they/them/their",
         email: "reggie@example.com",
         profileImage: "https://randomuser.me/api/portraits/men/20.jpg",
-        interests: ['Horses', 'art', 'skiing', 'cooking']
+        interests: ['Animals', 'Art', 'Cooking']
       },
       {
         id: 19,
@@ -345,6 +345,6 @@ export const USERS = [
         pronouns: "she/her/hers",
         email: "chloe.pektemek@example.com",
         profileImage: "https://randomuser.me/api/portraits/women/95.jpg",
-        interests: ['Community Service', 'art', 'skiing', 'cooking']
+        interests: ['Community Service', 'Art', 'Music']
       }
 ]
