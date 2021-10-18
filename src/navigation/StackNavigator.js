@@ -10,7 +10,7 @@ const StackNavigator = (props) => {
 
 	return (
 		<Stack.Navigator 
-		// headerMode="none" 
+		headerMode="false" 
 		options={{ gestureEnabled: false }}>
 			<Stack.Screen
 				name="Home"
