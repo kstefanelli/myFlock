@@ -5,7 +5,7 @@ import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 
-const EditProfileScreen = () => {
+const EditProfileScreen = ({navigation}) => {
 	const [pronouns, setPronouns] = useState('');
 	const [bio, setBio] = useState('');
 	const [imageUrl, setImageUrl] = useState('');

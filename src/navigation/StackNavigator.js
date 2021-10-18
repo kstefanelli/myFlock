@@ -9,8 +9,10 @@ const StackNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator
-		// headerMode="none"
+
+		<Stack.Navigator 
+		headerShown="false" 
+
 		options={{ gestureEnabled: false }}>
 			<Stack.Screen
 				name="Home"

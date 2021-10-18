@@ -37,7 +37,7 @@ function App() {
             <DrawerNavigator />
           </>
         ) : (
-          <Stack.Navigator headerMode="none">
+          <Stack.Navigator headerShown="false">
             <>
               <Stack.Screen name="LogIn" component={Login} />
               <Stack.Screen name="Onboard" component={Onboarding} />

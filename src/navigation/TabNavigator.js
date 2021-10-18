@@ -3,13 +3,10 @@ import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {Icon} from 'react-native-elements'
-// import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
-import StackNavigator from './StackNavigator';
-import AddInterest from '../screens/AddInterest';
-import LoginScreen from '../screens/Login';
-import EditProfileScreen from '../screens/EditProfileScreen';
 import ProfileView from '../screens/ProfileView';
-import Home from '../screens/Home';
+import NestViewScreen from '../screens/NestViewScreen';
+import UserLocation from '../maps/UserLocation'
+import AddChatScreen from '../screens/AddChat';
 
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
@@ -48,34 +45,36 @@ function TabNavigator(props) {
 			})}
 		>
 			<Tab.Screen
-				name="HomePage"
-				component={Home}
+				name="Profile"
+				component={ProfileView}
 				options={{
-					title: 'myFlock',
+					title: 'Profile',
 					headerRight: () => (
 						<Button
-							onPress={() => navigation.navigate('AddInterest')}
-							title="AddInterest"
+							onPress={() => navigation.navigate('Edit Profile')}
+							title='Edit Profile'
 							color="#00cc00"
 						/>
 					),
 				}}
 			/>
-			<Tab.Screen name="Add Interest" component={AddInterest} />
-			<Tab.Screen name="Edit Profile" component={EditProfileScreen} />
+
+			<Tab.Screen name="Map" component={UserLocation} /> 
 			<Tab.Screen
-				name="Profile View"
-				component={ProfileView}
+				name="Nest View"
+				component={NestViewScreen}
 				options={{
-					title: 'myFlock',
+					title: 'Nest View',
 					headerRight: () => (
 						<Button
-							onPress={() => navigation.navigate('Edit Profile')}
-							title="Edit Profile"
+							onPress={() => navigation.navigate('Add a new chat')}
+							title='Add Chat'
 							color="#00cc00"
 						/>
 					),
-				}}/>
+				}}
+			/>
+			
 
 		</Tab.Navigator>
 	);
