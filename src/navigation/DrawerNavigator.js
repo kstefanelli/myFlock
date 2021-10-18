@@ -10,6 +10,8 @@ import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
 import NestView from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
+import marker from '../maps/marker';
+
 const Drawer = createDrawerNavigator();
 
 function DrawerNavigator() {
@@ -23,10 +25,11 @@ function DrawerNavigator() {
 			<Drawer.Screen name="UserLocation" component={UserLocation_Android} />
 			<Drawer.Screen name="InitialLocation" component={InitialLocation} />
 			<Drawer.Screen name="ChatScreen" component={ChatScreen} />
-		<Drawer.Screen name="Login" component={LoginScreen} />
-		<Drawer.Screen name="Register" component={RegisterScreen} />
-		<Drawer.Screen name="Nest View" component={NestView} />
-		<Drawer.Screen name="Add a Chat" component={AddChatScreen} />
+			<Drawer.Screen name="Login" component={LoginScreen} />
+			<Drawer.Screen name="Register" component={RegisterScreen} />
+			<Drawer.Screen name="Nest View" component={NestView} />
+			<Drawer.Screen name="Add a Chat" component={AddChatScreen} />
+			<Drawer.Screen name="allMarker" component={marker} />
 		</Drawer.Navigator>
 	);
 }
