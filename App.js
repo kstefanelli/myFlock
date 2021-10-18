@@ -17,7 +17,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState('');
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setIsLoggedIn(true);
       } else {
@@ -25,8 +25,8 @@ function App() {
 				alert('You are not logged in!-App.js')
       }
     });
-
-  });
+    return unsubscribe;
+  },[]);
 
   return (
     <>

@@ -79,8 +79,8 @@ const NestView = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView >
-      <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container} >
+
         <Text h2 style={{marginTop: 50, marginBottom: 30, textAlign: 'center'}}>
           Birds of a Feather
         </Text>
@@ -105,7 +105,7 @@ const NestView = ({navigation}) => {
         <Text h2 style={{marginTop: 30, marginBottom: 50, textAlign: 'center'}}>
           Flock Together
         </Text>
-      </ScrollView>
+
     </SafeAreaView>
   );
 };
