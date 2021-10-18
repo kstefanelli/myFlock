@@ -23,34 +23,33 @@ const ChatScreen = ({ navigation, route }) => {
   const [messages, setMessages] = useState([]);
   const sendMessage = () => {
     Keyboard.dismiss();
-
-    db.collection("chats").doc(route.params.id).collection("messages").add({
-      timeStamp: firebase.firestore.fieldValue.serverTimestamp(),
-      message: input,
-      displayName: auth.currentUser.firstName,
-      email: auth.currentUser.email,
-      photoUrl: auth.currentUser.imageUrl,
-    });
+    // db.collection("chats").doc(route.params.id).collection("messages").add({
+    //   timeStamp: firebase.firestore.fieldValue.serverTimestamp(),
+    //   message: input,
+    //   displayName: auth.currentUser.firstName,
+    //   email: auth.currentUser.email,
+    //   photoUrl: auth.currentUser.imageUrl,
+    // });
 
     setInput("");
   };
 
-  useLayoutEffect(() => {
-    const unsubscribe = db
-      .collection("chats")
-      .doc(route.params.id)
-      .collection("messages")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setMessages(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        )
-      );
-    return unsubscribe;
-  }, [route]);
+  // useLayoutEffect(() => {
+  //   const unsubscribe = db
+  //     .collection("chats")
+  //     .doc(route.params.id)
+  //     .collection("messages")
+  //     .orderBy("timestamp", "desc")
+  //     .onSnapshot((snapshot) =>
+  //       setMessages(
+  //         snapshot.docs.map((doc) => ({
+  //           id: doc.id,
+  //           data: doc.data(),
+  //         }))
+  //       )
+  //     );
+  //   return unsubscribe;
+  // }, [route]);
 
   // useLayoutEffect(() => {
   //   navigation.setOptions({
@@ -87,29 +86,29 @@ const ChatScreen = ({ navigation, route }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
             <ScrollView>
-              {messages.map(({is,data})=>(
-                data.email===auth.currentUser.email?(
-                  <View style = {styles.reciever}>
-                     <Avatar
-                rounded
-                source={{
-                  uri: friend.profileImage,
-                }}
-              />
-              <Text style={styles.recieverText}>{data.message}</Text>
-                    </View>
-                ):(
-                  <View style = {styles.sender}>
-                  <Avatar
-             rounded
-             source={{
-               uri: friend.profileImage,
-             }}
-           />
-           <Text style={styles.senderText}>{data.message}</Text>
-                 </View>
+              {messages.map(({ is, data }) =>
+                data.email === auth.currentUser.email ? (
+                  <View style={styles.reciever}>
+                    <Avatar
+                      rounded
+                      source={{
+                        uri: friend.profileImage,
+                      }}
+                    />
+                    <Text style={styles.recieverText}>{data.message}</Text>
+                  </View>
+                ) : (
+                  <View style={styles.sender}>
+                    <Avatar
+                      rounded
+                      source={{
+                        uri: friend.profileImage,
+                      }}
+                    />
+                    <Text style={styles.senderText}>{data.message}</Text>
+                  </View>
                 )
-              ))}
+              )}
               <Avatar
                 rounded
                 source={{
@@ -166,24 +165,18 @@ const styles = StyleSheet.create({
     color: "grey",
     borderRadius: 30,
   },
-  reciever:{
-    padding:15,
-    backgroundColor:'#ECECEC',
-    alignSelf:'flex-end',
-    borderRadius:20,
-
-
+  reciever: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-end",
+    borderRadius: 20,
   },
-  sender:{
- padding:15,
-    backgroundColor:'#ECECEC',
-    alignSelf:'flex-start',
-    borderRadius:20,
+  sender: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-start",
+    borderRadius: 20,
   },
-  recieverText:{
-
-  },
-  senderText:{
-
-  }
+  recieverText: {},
+  senderText: {},
 });

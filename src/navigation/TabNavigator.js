@@ -10,6 +10,7 @@ import LoginScreen from '../screens/Login';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import ProfileView from '../screens/ProfileView';
 import Home from '../screens/Home';
+import ChatScreen from '../screens/ChatScreen';
 
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
