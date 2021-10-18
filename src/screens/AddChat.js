@@ -17,6 +17,7 @@ const AddChatScreen = ({navigation}) => {
       await db.collection('chats').add({
         chatName: thisChatName,
       });
+      navigation.navigate("ChatScreen",{chatName:thisChatName})
       navigation.goBack();
     } catch (error) {
       alert(error);

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState} from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -17,39 +17,45 @@ import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { db, auth } from "../../firebase";
 import * as firebase from "firebase";
 
+
+
+
 const ChatScreen = ({ navigation, route }) => {
-  const friend = route.params.user;
+
+  console.log("auth.currentUser.name",auth.currentUser.displayName)
+
+  // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const sendMessage = () => {
     Keyboard.dismiss();
-    // db.collection("chats").doc(route.params.id).collection("messages").add({
-    //   timeStamp: firebase.firestore.fieldValue.serverTimestamp(),
-    //   message: input,
-    //   displayName: auth.currentUser.firstName,
-    //   email: auth.currentUser.email,
-    //   photoUrl: auth.currentUser.imageUrl,
-    // });
+    db.collection("chats").doc(route.params.chatName).collection("messages").add({
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoUrl: auth.currentUser.photoURL,
+    });
 
     setInput("");
   };
 
-  // useLayoutEffect(() => {
-  //   const unsubscribe = db
-  //     .collection("chats")
-  //     .doc(route.params.id)
-  //     .collection("messages")
-  //     .orderBy("timestamp", "desc")
-  //     .onSnapshot((snapshot) =>
-  //       setMessages(
-  //         snapshot.docs.map((doc) => ({
-  //           id: doc.id,
-  //           data: doc.data(),
-  //         }))
-  //       )
-  //     );
-  //   return unsubscribe;
-  // }, [route]);
+  useLayoutEffect(() => {
+    const unsubscribe = db
+      .collection("chats")
+      .doc(route.params.id)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+    return unsubscribe;
+  }, []);
 
   // useLayoutEffect(() => {
   //   navigation.setOptions({
@@ -92,7 +98,7 @@ const ChatScreen = ({ navigation, route }) => {
                     <Avatar
                       rounded
                       source={{
-                        uri: friend.profileImage,
+                        uri: auth.currentUser.profileImage,
                       }}
                     />
                     <Text style={styles.recieverText}>{data.message}</Text>
@@ -102,7 +108,7 @@ const ChatScreen = ({ navigation, route }) => {
                     <Avatar
                       rounded
                       source={{
-                        uri: friend.profileImage,
+                        uri: auth.currentUser.profileImage,
                       }}
                     />
                     <Text style={styles.senderText}>{data.message}</Text>
@@ -112,10 +118,10 @@ const ChatScreen = ({ navigation, route }) => {
               <Avatar
                 rounded
                 source={{
-                  uri: friend.profileImage,
+                  uri: auth.currentUser.profileImage,
                 }}
               />
-              <Text>{friend.username}</Text>
+              <Text>{auth.currentUser.username}</Text>
             </ScrollView>
             <View style={styles.footer}>
               {/* <Avatar
@@ -170,12 +176,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#ECECEC",
     alignSelf: "flex-end",
     borderRadius: 20,
+    marginRight:15,
+    marginBottom:20,
+    maxWidth:"80%",
+    position:'relative',
   },
   sender: {
     padding: 15,
     backgroundColor: "#ECECEC",
     alignSelf: "flex-start",
     borderRadius: 20,
+    margin:15,
+    maxWidth:"80%",
+    position:'relative',
   },
   recieverText: {},
   senderText: {},
