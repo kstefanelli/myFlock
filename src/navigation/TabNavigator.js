@@ -58,6 +58,7 @@ function TabNavigator(props) {
 					),
 				}}
 			/>
+
 			<Tab.Screen name="Map" component={UserLocation} /> 
 			<Tab.Screen
 				name="Nest View"
