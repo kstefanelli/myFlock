@@ -9,8 +9,8 @@ const StackNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator 
-		// headerMode="none" 
+		<Stack.Navigator
+		// headerMode="none"
 		options={{ gestureEnabled: false }}>
 			<Stack.Screen
 				name="Home"
@@ -21,7 +21,7 @@ const StackNavigator = (props) => {
 					headerRight: () => (
 						<Button
 							onPress={() => navigation.navigate('AddInterest')}
-							title="AddInterest"
+							title="terest"
 							color="#00cc00"
 						/>
 					),

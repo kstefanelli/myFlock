@@ -63,7 +63,19 @@ function TabNavigator(props) {
 			/>
 			<Tab.Screen name="Add Interest" component={AddInterest} />
 			<Tab.Screen name="Edit Profile" component={EditProfileScreen} />
-			<Tab.Screen name="Profile View" component={ProfileView} />
+			<Tab.Screen
+				name="Profile View"
+				component={ProfileView}
+				options={{
+					title: 'myFlock',
+					headerRight: () => (
+						<Button
+							onPress={() => navigation.navigate('Edit Profile')}
+							title="Edit Profile"
+							color="#00cc00"
+						/>
+					),
+				}}/>
 
 		</Tab.Navigator>
 	);

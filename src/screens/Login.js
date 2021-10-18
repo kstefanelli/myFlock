@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, SafeAreaView, Image, TouchableOpacity} from 'react-native';
 import { Input, Text} from 'react-native-elements';
 import {StatusBar} from 'expo-status-bar';
 import {auth, db} from '../../firebase';
@@ -44,12 +44,12 @@ const LoginScreen = ({navigation}) => {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <StatusBar style="light" />
-      <Text h3 style={{marginTop: 50, textAlign: 'center'}}>
+      <Text h3 style={{marginTop: 80, textAlign: 'center'}}>
         Welcome Back!
       </Text>
       <Image
-        source={require('../../assets/myFlockIcons/Budgie.png')}
-        style={{height: 200, width: 200, marginBottom: 25, marginTop: 25}}
+        source={require('../../assets/supplementary_images/bird.png')}
+        style={{height: 160, width: 160, marginBottom: 25, marginTop: 25}}
       />
 
       <View style={styles.inputContainer}>
