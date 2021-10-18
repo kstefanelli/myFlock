@@ -59,8 +59,20 @@ function TabNavigator(props) {
 				}}
 			/>
 			<Tab.Screen name="Map" component={UserLocation} /> 
-			<Tab.Screen name="Nest View" component={NestViewScreen} /> 
-			<Tab.Screen name="Add a new Chat" component={AddChatScreen} /> 
+			<Tab.Screen
+				name="Nest View"
+				component={NestViewScreen}
+				options={{
+					title: 'Nest View',
+					headerRight: () => (
+						<Button
+							onPress={() => navigation.navigate('Add a new chat')}
+							title='Add Chat'
+							color="#00cc00"
+						/>
+					),
+				}}
+			/>
 			
 
 		</Tab.Navigator>
