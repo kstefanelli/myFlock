@@ -9,22 +9,6 @@ const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const logOutUser = () => {
-  //   db.collection('Users')
-  //     .where('email', '==', email)
-  //     .get()
-  //     .then(function (querySnapshot) {
-  //       querySnapshot.forEach(function (document) {
-  //         document.ref.update({
-  //           isLoggedIn: false,
-  //         });
-  //       });
-  //       auth.signOut().then(() => {});
-  //       // navigation.replace('Login')
-  //       alert('You have been logged out!');
-  //     });
-  // };
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
