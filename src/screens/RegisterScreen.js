@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-//Kristina's OG code
-
-
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
@@ -17,6 +13,7 @@ const RegisterScreen = () => {
   const [imageUrl, setImageUrl] = useState('');
 
   const register = () => {
+    let uid;
  auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
@@ -25,6 +22,8 @@ const RegisterScreen = () => {
           photoURL:
             imageUrl || 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200',
         });
+        uid=authUser.user.uid;
+        console.log('typeof uid', typeof uid)
       })
       .then(db.collection('Users')
       .add({
