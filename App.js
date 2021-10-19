@@ -28,7 +28,6 @@ function App() {
 					<Stack.Navigator headerShown="false">
 						<>
 							<Stack.Screen name="LogIn" component={Login} />
-							<Stack.Screen name="Onboard" component={Onboarding} />
 							<Stack.Screen name="Register" component={RegisterScreen} />
 							<Stack.Screen name="Drawer" component={DrawerNavigator} />
 							<Stack.Screen name="Home" component={Home} />
