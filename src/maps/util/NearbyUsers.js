@@ -33,7 +33,7 @@ const NearbyUsers = ({ route }) => {
 				console.log(snapshot.docs);
 			});
 		return unsubscribe;
-	}, [route]);
+	}, []);
 
 	return (
 		<View style={styles.container}>

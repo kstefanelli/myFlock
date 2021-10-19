@@ -14,10 +14,8 @@ const AddChatScreen = ({navigation}) => {
 
   const createChat = async () => {
     try {
-      await db.collection('chats').add({
-        chatName: thisChatName,
-      });
-      navigation.goBack();
+      navigation.navigate("ChatScreen",{chatName:thisChatName})
+
     } catch (error) {
       alert(error);
     }
@@ -25,7 +23,7 @@ const AddChatScreen = ({navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Add a new Chat',
+      title: 'Chat',
       headerBackTitle: 'Chats',
     });
   }, [navigation]);

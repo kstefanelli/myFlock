@@ -5,14 +5,54 @@ import { Input, Button } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Stories from "../components/Stories";
 import { interests } from "../../data/interests";
+import { auth, db } from "../../firebase";
 
-const AddInterest = ({navigation}) => {
+const AddInterest = ({ navigation }) => {
   const [newInterest, setNewInterest] = useState("");
   const [tagBagroundColor, setTagBagroundColor] = useState("");
   const [tagselected, settagSelected] = useState(false);
   const [filterdIntestests, setfilterdIntestests] = useState(interests);
+  const [email, setEmail] = useState("");
+  const [myInterest, setMyInterest] = useState([]);
+
+  const addInterestToMyProfile = () => {
+    useEffect(() => {
+      auth().onAuthStateChanged((user) => {
+        if (user) {
+          let email = user.email;
+          setEmail(email);
+          setMyInterest = user.interest;
+        }
+      });
+    }, []).then(
+      db
+        .collection("Users")
+        .where("email", "==", email)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (document) {
+            document.ref.update({
+              interests: [newInterest],
+            });
+          });
+        })
+    );
+  };
+  // .catch((error) => alert(error.message))
+
+  // db.collection('Users')
+  //   .where('email', '==', email)
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (document) {
+  //       document.ref.update({
+  //         interests: [interests]
+  //       });
+  //     });
+  //
 
   const add = () => {
+    // add interest in firebase
     if (newInterest.length) {
       interests.unshift(newInterest);
     }
@@ -55,18 +95,15 @@ const AddInterest = ({navigation}) => {
       <View style={styles.interestTagContainer}>
         <ScrollView>
           {filterdIntestests.map((interest, index) => (
-            <TouchableOpacity key={index} >
-              <Text style={styles.interestTag} onPress={selectTag}>
+            <TouchableOpacity key={index}>
+              <Text style={styles.interestTag} onPress={addInterestToMyProfile}>
                 {interest}
               </Text>
               <View>
-                
-                  <ScrollView>
-                    <Stories interest={interest} navigation = {navigation}/>
-                  </ScrollView>
-              
-              
-                </View>
+                <ScrollView>
+                  <Stories interest={interest} navigation={navigation} />
+                </ScrollView>
+              </View>
             </TouchableOpacity>
           ))}
         </ScrollView>

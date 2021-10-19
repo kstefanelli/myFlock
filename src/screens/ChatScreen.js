@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useLayoutEffect, useState,useRef } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -18,32 +19,39 @@ import { db, auth } from "../../firebase";
 import * as firebase from "firebase";
 
 const ChatScreen = ({ navigation, route }) => {
-  const friend = route.params.user;
+  console.log("auth.currentUser.name", auth.currentUser.displayName);
+
+  // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const scrollViewRef = useRef();
   const sendMessage = () => {
     Keyboard.dismiss();
 
-    db.collection("chats").doc(route.params.id).collection("messages").add({
-      timeStamp: firebase.firestore.fieldValue.serverTimestamp(),
-      message: input,
-      displayName: auth.currentUser.firstName,
-      email: auth.currentUser.email,
-      photoUrl: auth.currentUser.imageUrl,
-    });
+    db.collection("chats")
+      .doc(route.params.chatName)
+      .collection("messages")
+      .add({
+        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+        message: input,
+        displayName: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+        photoUrl: auth.currentUser.photoURL,
+      });
 
     setInput("");
   };
 
   useLayoutEffect(() => {
+
     const unsubscribe = db
       .collection("chats")
-      .doc(route.params.id)
+      .doc(route.params.chatName)
       .collection("messages")
-      .orderBy("timestamp", "desc")
+      .orderBy("timeStamp", "asc")
       .onSnapshot((snapshot) =>
         setMessages(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map(doc => ({
             id: doc.id,
             data: doc.data(),
           }))
@@ -51,6 +59,8 @@ const ChatScreen = ({ navigation, route }) => {
       );
     return unsubscribe;
   }, [route]);
+
+
 
   // useLayoutEffect(() => {
   //   navigation.setOptions({
@@ -77,7 +87,7 @@ const ChatScreen = ({ navigation, route }) => {
   // }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 2, BackgroundColor: "white" }}>
+    <SafeAreaView style={{ flex: 1, BackgroundColor: "white" }}>
       <StatusBar style="light" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -86,37 +96,61 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView>
-              {messages.map(({is,data})=>(
-                data.email===auth.currentUser.email?(
-                  <View style = {styles.reciever}>
-                     <Avatar
+            <ScrollView
+            ref={scrollViewRef}
+            onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+            >
+
+              {messages.map(({ id, data }) =>
+                (data.email === auth.currentUser.email ? (
+                  <View key={id} style={styles.reciever}>
+                    <Avatar
+                      rounded
+                      bottom={15}
+                      right={-5}
+                      size={30}
+                      position="absolute"
+                      containerStyle={{
+                        bottom: 15,
+                        right: -5,
+                        size: 30,
+                        position: "absolute",
+                      }}
+                      source={{
+                        uri: auth.currentUser.photoURL,
+                      }}
+                    />
+                    <Text style={styles.recieverText}>{data.message}</Text>
+                  </View>
+                ) : (
+                  <View style={styles.sender}>
+                    <Avatar
+                      rounded
+                      bottom={15}
+                      left={-5}
+                      size={30}
+                      position="absolute"
+                      containerStyle={{
+                        bottom: 15,
+                        left: -5,
+                        size: 30,
+                        position: "absolute",
+                      }}
+                      source={{
+                        uri: data.photoUrl,
+                      }}
+                    />
+                    <Text style={styles.senderText}>{data.message}</Text>
+                  </View>
+                ))
+              )}
+              {/* <Avatar
                 rounded
                 source={{
-                  uri: friend.profileImage,
+                  uri: auth.currentUser.photoURL,
                 }}
               />
-              <Text style={styles.recieverText}>{data.message}</Text>
-                    </View>
-                ):(
-                  <View style = {styles.sender}>
-                  <Avatar
-             rounded
-             source={{
-               uri: friend.profileImage,
-             }}
-           />
-           <Text style={styles.senderText}>{data.message}</Text>
-                 </View>
-                )
-              ))}
-              <Avatar
-                rounded
-                source={{
-                  uri: friend.profileImage,
-                }}
-              />
-              <Text>{friend.username}</Text>
+              <Text>{auth.currentUser.displayName}</Text> */}
             </ScrollView>
             <View style={styles.footer}>
               {/* <Avatar
@@ -131,6 +165,7 @@ const ChatScreen = ({ navigation, route }) => {
                 value={input}
                 onChangeText={(text) => setInput(text)}
                 onSubmitEditing={sendMessage}
+                textInputProps={{autoFocus: true}}
               />
 
               <TouchableOpacity activeOpacity={0.5} onPress={sendMessage}>
@@ -166,24 +201,29 @@ const styles = StyleSheet.create({
     color: "grey",
     borderRadius: 30,
   },
-  reciever:{
-    padding:15,
-    backgroundColor:'#ECECEC',
-    alignSelf:'flex-end',
-    borderRadius:20,
-
-
+  reciever: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-end",
+    borderRadius: 20,
+    marginRight: 15,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
   },
-  sender:{
- padding:15,
-    backgroundColor:'#ECECEC',
-    alignSelf:'flex-start',
-    borderRadius:20,
+  sender: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-start",
+    borderRadius: 20,
+    margin: 15,
+    maxWidth: "80%",
+    position: "relative",
   },
-  recieverText:{
-
+  recieverText: {
+    paddingRight:30
   },
-  senderText:{
-
-  }
+  senderText: {
+    paddingLeft:30
+  },
 });
