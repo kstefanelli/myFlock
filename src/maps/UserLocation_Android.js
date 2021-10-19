@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-import InitialLocation from './InitialLocation';
 
 function UserLocation_Android({ navigation }) {
 	const [location, setLocation] = useState(null);
@@ -22,7 +21,7 @@ function UserLocation_Android({ navigation }) {
 
 				let location = await Location.getCurrentPositionAsync({});
 				console.log('>> got location', location);
-				navigation.navigate('InitialLocation', {
+				navigation.navigate('Animated Marker', {
 					latitude: location.coords.latitude,
 					longitude: location.coords.longitude,
 				});
