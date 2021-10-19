@@ -8,14 +8,10 @@ import UserLocation_Android from '../maps/UserLocation_Android';
 import ChatScreen from '../screens/ChatScreen';
 import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
-<<<<<<< HEAD
 import NestView from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
 import encode from '../maps/util/encode';
 import marker_animate from '../maps/marker_animate';
-=======
-import marker from '../maps/marker';
->>>>>>> 94644826d5c191800f70af4cf126eb9623872a67
 
 const Drawer = createDrawerNavigator();
 
