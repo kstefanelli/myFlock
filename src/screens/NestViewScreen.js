@@ -26,7 +26,7 @@ const NestView = ({navigation}) => {
       );
     });
     return unsubscribe;
-  }, [chats]);
+  }, []);
 
   const enterChat = (id, chatName) => {
     // navigation.navigate("Chat", {
