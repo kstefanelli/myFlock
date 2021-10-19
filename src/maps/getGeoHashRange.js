@@ -1,3 +1,5 @@
+const geohash = require('ngeohash');
+
 const getGeohashRange = (
 	latitude,
 	longitude,
@@ -13,12 +15,11 @@ const getGeohashRange = (
 	const upperLon = longitude + lon * distance;
 
 	const lower = geohash.encode(lowerLat, lowerLon);
-	const upper = geohash.encode(greaterLat, greaterLon);
+	const upper = geohash.encode(lowerLon, upperLon);
 
 	return {
 		lower,
 		upper,
 	};
 };
-
-export default getGeohashRange;
+module.exports = getGeohashRange;
