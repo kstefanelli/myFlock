@@ -41,11 +41,11 @@ const ProfileView = () => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#1F142E',
-    borderColor: '#bf90b1',
+	backgroundColor: '#1f142e',
+    borderColor: '#1f142e',
     borderWidth: 5,
     width: 200,
-    margin: 10,
+    margin: 5,
   },
   imagestyle: {
     alignItems: 'flex-end',
