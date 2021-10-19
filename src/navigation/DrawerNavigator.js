@@ -10,8 +10,7 @@ import LoginScreen from '../screens/Login';
 import RegisterScreen from '../screens/RegisterScreen';
 import NestView from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
-import marker from '../maps/marker';
-import encode from '../maps/encode';
+import encode from '../maps/util/encode';
 import marker_animate from '../maps/marker_animate';
 
 const Drawer = createDrawerNavigator();
@@ -31,7 +30,7 @@ function DrawerNavigator() {
 			<Drawer.Screen name="Register" component={RegisterScreen} />
 			<Drawer.Screen name="Nest View" component={NestView} />
 			<Drawer.Screen name="Add a Chat" component={AddChatScreen} />
-			<Drawer.Screen name="allMarker" component={marker_animate} />
+			<Drawer.Screen name="Marker" component={marker_animate} />
 			<Drawer.Screen name="encode" component={encode} />
 		</Drawer.Navigator>
 	);

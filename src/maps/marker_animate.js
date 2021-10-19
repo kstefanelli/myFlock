@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
-import getGeohashRange from './getGeoHashRange';
+import getNearbyLocations from './getNearbyLocations';
 
 const markerToAnimate = () => {
 	const mapView = React.createRef();
@@ -21,43 +21,13 @@ const markerToAnimate = () => {
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 	ref = { mapView };
 
-	let nearbyUsers = [
-		//Seattle Ron
-		{
-			latitude: 47.62818032,
-			longitude: -122.29212331,
-			geohash: '78qyyy6qm',
-		},
-		//Seattle Emre
-		{
-			latitude: 47.7330388,
-			longitude: -122.40371218,
-			geohash: 'y8rp93e9j',
-		},
-		//Seattle Carlos
-		{
-			latitude: 47.69599351,
-			longitude: -122.3785803,
-			geohash: 'y8rp2fc37',
-		},
-		//NYC Esther
-		{
-			latitude: 40.8150937,
-			longitude: -73.9112119,
-			geohash: 'txk81yht0',
-		},
-		//NYC Ruby
-		{
-			latitude: 40.64492082,
-			longitude: -73.84318539,
-			geohash: 'txhx0r4vy',
-		},
-	];
+	// let nearbyUsers = getNearbyLocations(mapRegion.latitude, mapRegion.longitude);
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
-		return nearbyUsers.map((element) => (
+		return getNearbyLocations(mapRegion.latitude, mapRegion.longitude).map((element, idx) => (
 			<Marker
+				key={idx}
 				pinColor="red"
 				coordinate={{ latitude: element.latitude, longitude: element.longitude }}
 			/>
@@ -67,7 +37,7 @@ const markerToAnimate = () => {
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
 	useEffect(() => {
-		const radius = 3000;
+		const radius = 5;
 		mapView.current.animateToRegion(
 			{
 				latitude: mapRegion.latitude,
