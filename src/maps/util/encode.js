@@ -35,6 +35,11 @@ const encode = () => {
 			longitude: -73.84318539,
 			geohash: 'dr5rpxjjc',
 		},
+		{
+			latitude: 40.68062402,
+			longitude: -73.95971607,
+			geohash: 'dr5rmj8jv',
+		},
 	];
 
 	//shorthand without return statement

@@ -8,17 +8,17 @@ const markerToAnimate = ({ route }) => {
 	console.log('marker_animate');
 	const { latitude, longitude } = route.params;
 
-	const [mapRegion, setmapRegion] = useState({
-		latitude,
-		longitude,
-		latitudeDelta: 0.0922,
-		longitudeDelta: 0.0421,
-	});
-
 	const { width, height } = Dimensions.get('window');
 	const ASPECT_RATIO = width / height;
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
+	const [mapRegion, setmapRegion] = useState({
+		latitude,
+		longitude,
+		latitudeDelta: LATITUDE_DELTA,
+		longitudeDelta: LONGITUDE_DELTA,
+	});
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
@@ -34,7 +34,7 @@ const markerToAnimate = ({ route }) => {
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
 	useEffect(() => {
-		const radius = 10;
+		const radius = 5;
 		mapView.current.animateToRegion(
 			{
 				latitude: mapRegion.latitude,
@@ -44,22 +44,7 @@ const markerToAnimate = ({ route }) => {
 			},
 			2000
 		);
-	}, [mapRegion, mapView.current]);
-
-	// Use the below code to zoom to particular location with radius.
-
-	//animateToRegion	region: Region, duration: Number (ms)
-	// const animateMap = (radius) => {
-	// 	return mapView.current.animateToRegion(
-	// 		{
-	// 			latitude: mapRegion.latitude,
-	// 			longitude: mapRegion.longitude,
-	// 			latitudeDelta: LATITUDE_DELTA * Number(radius / 15),
-	// 			longitudeDelta: LONGITUDE_DELTA * Number(radius / 15),
-	// 		},
-	// 		2000
-	// 	);
-	// };
+	}, [mapRegion]);
 
 	return (
 		<View style={styles.container}>

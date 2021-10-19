@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
-import InitialLocation from './InitialLocation';
 
 function UserLocation_Android({ navigation }) {
 	const [location, setLocation] = useState(null);

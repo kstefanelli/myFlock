@@ -59,6 +59,12 @@ let nearbyUsers = [
 		longitude: -73.84318539,
 		geohash: 'dr5rpxjjc',
 	},
+	//NYC Victoria
+	{
+		latitude: 40.68062402,
+		longitude: -73.95971607,
+		geohash: 'dr5rmj8jv',
+	},
 ];
 
 export default getNearbyLocations;
