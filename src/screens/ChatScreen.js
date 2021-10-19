@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState,useRef } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -23,6 +23,7 @@ const ChatScreen = ({ navigation, route }) => {
   // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const scrollViewRef = useRef();
   const sendMessage = () => {
     Keyboard.dismiss();
 
@@ -94,7 +95,11 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView>
+            <ScrollView  
+            ref={scrollViewRef}
+            onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+            >
+    
               {messages.map(({ id, data }) =>
                 (data.email === auth.currentUser.email ? (
                   <View key={id} style={styles.reciever}>
