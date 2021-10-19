@@ -14,8 +14,8 @@ const ProfileView = () => {
     <View style={styles.profileView}>
       {/* <Image style={styles.imagestyle} source={require('../../assets/myFlockIcons/Vector.png')} /> */}
 
-      <Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
-      <Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} />
+      {/* <Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
+      <Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} /> */}
       <>
         <Text style={{ fontWeight: 'bold' }}>About Me:</Text>
         <Text>{user.intro} </Text>
