@@ -131,7 +131,7 @@ const ChatScreen = ({ navigation, route }) => {
                         position: "absolute",
                       }}
                       source={{
-                        uri: auth.currentUser.photoURL,
+                        uri: data.photoURL,
                       }}
                     />
                     <Text style={styles.senderText}>{data.message}</Text>
