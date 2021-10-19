@@ -5,76 +5,78 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import {Icon} from 'react-native-elements'
 import ProfileView from '../screens/ProfileView';
 import NestViewScreen from '../screens/NestViewScreen';
-import UserLocation from '../maps/UserLocation'
+import UserLocation from '../maps/UserLocation';
 import AddChatScreen from '../screens/AddChat';
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
 //YOU WILL SPEND HOURS WITH A BLACK SCREEN AND NO CONSOLE.LOG NOT KNOWING WHAT HAPPENED
 function TabNavigator(props) {
-	const Tab = createBottomTabNavigator();
+  const Tab = createBottomTabNavigator();
 
-	return (
-		<Tab.Navigator
-			initialRouteName="Home"
-			activeColor="#1f142e"
+  return (
+    <Tab.Navigator
+      // initialRouteName="Home"
+      // activeColor="##1F142E"
 
-			inactiveColor="#564a57"
+      // inactiveColor="#bf90b1"
 
-			labeled={true}
-			barStyle={{
-				// backgroundColor: '#fff',
-				alignItems: 'center',
-			}}
+      // labeled={true}
+      // barStyle={{
+      // 	// backgroundColor: '#fff',
+      // 	alignItems: 'center',
+      // }}
 
-			options={{ headerShown: false }}
-			screenOptions={({ route }) => ({
-				tabBarIcon: ({ focused, color, size }) => {
-					let iconName;
-					if (route.name === 'Profile') {
-						iconName = focused ? 'user-alt' : 'user-alt';
-					} else if (route.name === 'Map') {
-						iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
-					} else if (route.name === 'Nest View') {
-						iconName = focused ? 'feather-alt' : 'feather-alt';
-					}
-					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
-				},
-			})}
-		>
-			<Tab.Screen
-				name="Profile"
-				component={ProfileView}
-				options={{
-					title: 'Profile',
-					headerRight: () => (
-						<Button
-							onPress={() => navigation.navigate('Edit Profile')}
-							title='Edit Profile'
-							color="#00cc00"
-						/>
-					),
-				}}
-			/>
-			<Tab.Screen name="Map" component={UserLocation} /> 
-			<Tab.Screen
-				name="Nest View"
-				component={NestViewScreen}
-				options={{
-					title: 'Nest View',
-					headerRight: () => (
-						<Button
-							onPress={() => navigation.navigate('Add a new chat')}
-							title='Add Chat'
-							color="#00cc00"
-						/>
-					),
-				}}
-			/>
-			
-
-		</Tab.Navigator>
-	);
+      options={{ headerShown: false }}
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          if (route.name === 'Profile') {
+            iconName = focused ? 'user-alt' : 'user-alt';
+          } else if (route.name === 'Map') {
+            iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
+          } else if (route.name === 'Nest View') {
+            iconName = focused ? 'feather-alt' : 'feather-alt';
+          }
+          return <Icon type="ionicon" name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#1F142E',
+        inactiveTintColor: '#bf90b1',
+      }}
+    >
+      <Tab.Screen
+        name="Profile"
+        component={ProfileView}
+        options={{
+          title: 'Profile',
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.navigate('Edit Profile')}
+              title="Edit Profile"
+              color="#1F142E"
+            />
+          ),
+        }}
+      />
+      <Tab.Screen name="Map" component={UserLocation} />
+      <Tab.Screen
+        name="Nest View"
+        component={NestViewScreen}
+        options={{
+          title: 'Nest View',
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.navigate('New Chat')}
+              title="New Chat"
+              color="#1F142E"
+            />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
 }
 
 export default TabNavigator;

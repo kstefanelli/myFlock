@@ -16,7 +16,7 @@ function DrawerNavigator() {
 	return (
 		<Drawer.Navigator
 			screenOptions={{
-				headerShown: true,
+				headerShown: false,
 			}}
 		>
 			<Drawer.Screen name="Tabs" component={TabNavigator} />
