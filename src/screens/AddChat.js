@@ -18,7 +18,7 @@ const AddChatScreen = ({navigation}) => {
         chatName: thisChatName,
       });
       navigation.navigate("ChatScreen",{chatName:thisChatName})
-      navigation.goBack();
+      // navigation.goBack();
     } catch (error) {
       alert(error);
     }

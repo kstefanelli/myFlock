@@ -24,24 +24,31 @@ const AddInterest = ({ navigation }) => {
           setMyInterest = user.interest;
         }
       });
-    }, [])
-      .then(
-        db
-          .collection("Users")
-          .update({ interest: [...user.interests, imyInterest] })
-      )
-      .catch((error) => alert(error.message));
+    }, []).then(
+      db
+        .collection("Users")
+        .where("email", "==", email)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (document) {
+            document.ref.update({
+              interests: [newInterest],
+            });
+          });
+        })
+    );
   };
+  // .catch((error) => alert(error.message))
 
-  //   db.collection('Users')
-  //     .where('email', '==', email)
-  //     .get()
-  //     .then(function (querySnapshot) {
-  //       querySnapshot.forEach(function (document) {
-  //         document.ref.update({
-  //           interests: [interests]/from state defined,
-  //         });
+  // db.collection('Users')
+  //   .where('email', '==', email)
+  //   .get()
+  //   .then(function (querySnapshot) {
+  //     querySnapshot.forEach(function (document) {
+  //       document.ref.update({
+  //         interests: [interests]
   //       });
+  //     });
   //
 
   const add = () => {
@@ -89,7 +96,7 @@ const AddInterest = ({ navigation }) => {
         <ScrollView>
           {filterdIntestests.map((interest, index) => (
             <TouchableOpacity key={index}>
-              <Text style={styles.interestTag} onPress={ addInterestToMyProfile }>
+              <Text style={styles.interestTag} onPress={addInterestToMyProfile}>
                 {interest}
               </Text>
               <View>

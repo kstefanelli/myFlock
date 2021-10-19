@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState} from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -17,45 +17,48 @@ import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { db, auth } from "../../firebase";
 import * as firebase from "firebase";
 
-
-
-
 const ChatScreen = ({ navigation, route }) => {
-
-  console.log("auth.currentUser.name",auth.currentUser.displayName)
+  console.log("auth.currentUser.name", auth.currentUser.displayName);
 
   // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const sendMessage = () => {
     Keyboard.dismiss();
-    db.collection("chats").doc(route.params.chatName).collection("messages").add({
-      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-      message: input,
-      displayName: auth.currentUser.displayName,
-      email: auth.currentUser.email,
-      photoUrl: auth.currentUser.photoURL,
-    });
 
+    db.collection("chats")
+      .doc(route.params.chatName)
+      .collection("messages")
+      .add({
+        timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+        message: input,
+        displayName: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+        photoUrl: auth.currentUser.photoURL,
+      });
+      
     setInput("");
   };
 
   useLayoutEffect(() => {
+  
     const unsubscribe = db
       .collection("chats")
-      .doc(route.params.id)
+      .doc(route.params.chatName)
       .collection("messages")
-      .orderBy("timestamp", "desc")
+      .orderBy("timeStamp", "asc")
       .onSnapshot((snapshot) =>
         setMessages(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map(doc => ({
             id: doc.id,
             data: doc.data(),
           }))
         )
       );
     return unsubscribe;
-  }, []);
+  }, [route]);
+
+
 
   // useLayoutEffect(() => {
   //   navigation.setOptions({
@@ -82,7 +85,7 @@ const ChatScreen = ({ navigation, route }) => {
   // }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 2, BackgroundColor: "white" }}>
+    <SafeAreaView style={{ flex: 1, BackgroundColor: "white" }}>
       <StatusBar style="light" />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -92,13 +95,23 @@ const ChatScreen = ({ navigation, route }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
             <ScrollView>
-              {messages.map(({ is, data }) =>
-                data.email === auth.currentUser.email ? (
-                  <View style={styles.reciever}>
+              {messages.map(({ id, data }) =>
+                (data.email === auth.currentUser.email ? (
+                  <View key={id} style={styles.reciever}>
                     <Avatar
                       rounded
+                      bottom={15}
+                      right={-5}
+                      size={30}
+                      position="absolute"
+                      containerStyle={{
+                        bottom: 15,
+                        right: -5,
+                        size: 30,
+                        position: "absolute",
+                      }}
                       source={{
-                        uri: auth.currentUser.profileImage,
+                        uri: auth.currentUser.photoURL,
                       }}
                     />
                     <Text style={styles.recieverText}>{data.message}</Text>
@@ -107,21 +120,31 @@ const ChatScreen = ({ navigation, route }) => {
                   <View style={styles.sender}>
                     <Avatar
                       rounded
+                      bottom={15}
+                      left={-5}
+                      size={30}
+                      position="absolute"
+                      containerStyle={{
+                        bottom: 15,
+                        left: -5,
+                        size: 30,
+                        position: "absolute",
+                      }}
                       source={{
-                        uri: auth.currentUser.profileImage,
+                        uri: auth.currentUser.photoURL,
                       }}
                     />
                     <Text style={styles.senderText}>{data.message}</Text>
                   </View>
-                )
+                ))
               )}
-              <Avatar
+              {/* <Avatar
                 rounded
                 source={{
-                  uri: auth.currentUser.profileImage,
+                  uri: auth.currentUser.photoURL,
                 }}
               />
-              <Text>{auth.currentUser.username}</Text>
+              <Text>{auth.currentUser.displayName}</Text> */}
             </ScrollView>
             <View style={styles.footer}>
               {/* <Avatar
@@ -136,6 +159,7 @@ const ChatScreen = ({ navigation, route }) => {
                 value={input}
                 onChangeText={(text) => setInput(text)}
                 onSubmitEditing={sendMessage}
+                textInputProps={{autoFocus: true}}
               />
 
               <TouchableOpacity activeOpacity={0.5} onPress={sendMessage}>
@@ -176,20 +200,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#ECECEC",
     alignSelf: "flex-end",
     borderRadius: 20,
-    marginRight:15,
-    marginBottom:20,
-    maxWidth:"80%",
-    position:'relative',
+    marginRight: 15,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
   },
   sender: {
     padding: 15,
     backgroundColor: "#ECECEC",
     alignSelf: "flex-start",
     borderRadius: 20,
-    margin:15,
-    maxWidth:"80%",
-    position:'relative',
+    margin: 15,
+    maxWidth: "80%",
+    position: "relative",
   },
-  recieverText: {},
-  senderText: {},
+  recieverText: {
+    paddingRight:30
+  },
+  senderText: {
+    paddingLeft:30
+  },
 });
