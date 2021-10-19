@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const firebaseConfig = {
+
   apiKey: "AIzaSyBJVzvYngL4hY2S3rgTso_0Qw2-37pv4yE",
   authDomain: "paw-dates-web.firebaseapp.com",
   projectId: "paw-dates-web",
@@ -10,6 +11,7 @@ const firebaseConfig = {
   messagingSenderId: "586225927786",
   appId: "1:586225927786:web:fba6025ee0a16392f26c13",
 	// measurementId: 'G-HMZV51336F',
+
 };
 
 let app;
