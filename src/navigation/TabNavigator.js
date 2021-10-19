@@ -2,12 +2,12 @@
 import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-elements'
+// import {Icon} from 'react-native-elements'
 import ProfileView from '../screens/ProfileView';
 import NestViewScreen from '../screens/NestViewScreen';
 import UserLocation from '../maps/UserLocation'
 import AddChatScreen from '../screens/AddChat';
-
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
 //YOU WILL SPEND HOURS WITH A BLACK SCREEN AND NO CONSOLE.LOG NOT KNOWING WHAT HAPPENED
@@ -31,14 +31,12 @@ function TabNavigator(props) {
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
-					if (route.name === 'home') {
-						iconName = focused ? 'home' : 'home';
-					} else if (route.name === 'map') {
-						iconName = focused ? 'map' : 'map-outline';
-					} else if (route.name === 'chat') {
-						iconName = focused ? 'chatbox' : 'chatbox-outline';
-					} else if (route.name === 'profile') {
-						iconName = focused ? 'person' : 'person';
+					if (route.name === 'Profile') {
+						iconName = focused ? 'user-alt' : 'user-alt';
+					} else if (route.name === 'Map') {
+						iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
+					} else if (route.name === 'Nest View') {
+						iconName = focused ? 'feather-alt' : 'feather-alt';
 					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 				},
@@ -58,7 +56,6 @@ function TabNavigator(props) {
 					),
 				}}
 			/>
-
 			<Tab.Screen name="Map" component={UserLocation} /> 
 			<Tab.Screen
 				name="Nest View"

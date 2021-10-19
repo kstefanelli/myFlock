@@ -19,7 +19,7 @@ const ProfileView = () => {
 			<Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
 			<Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} />
 			<>
-				<Text style={{fontWeight: 'bold'}}>Bio: </Text>
+				<Text style={{fontWeight: 'bold'}}>About Me:</Text>
 				<Text>{user.intro} </Text>
 			</>
 			<>
@@ -30,11 +30,11 @@ const ProfileView = () => {
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {user.interests.map((interest, index) => (
                     <View key={index} style={{alignItems: 'center'}}>
-                        <Text style={{color: '#1f142e'}}>{interest.toLowerCase()}, </Text>
+                        <Text style={{color: '#1f142e'}}>{interest}, </Text>
                     </View>
                 ))}
             </ScrollView>
-			<Text>Location: {user.location.name}</Text>
+			<Text>Location: {user.location.name} </Text> 
 			<Button buttonStyle={styles.button}  title="Log Out" />
 		</View>
 
