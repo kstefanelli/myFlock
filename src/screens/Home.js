@@ -11,8 +11,8 @@ const Home = (props) => {
 
 	return (
 		<Stack.Navigator options={{ headerShown: false }}>
-			<Stack.Screen name="Marker" component={marker_animate} />
 			<Stack.Screen name="User Location" component={UserLocation_Android} />
+			<Stack.Screen name="Animated Marker" component={marker_animate} />
 			<Stack.Screen name="Initial Location" component={InitialLocation} />
 		</Stack.Navigator>
 	);

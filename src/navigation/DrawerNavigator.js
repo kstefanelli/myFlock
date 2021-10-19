@@ -30,7 +30,7 @@ function DrawerNavigator() {
 			<Drawer.Screen name="Register" component={RegisterScreen} />
 			<Drawer.Screen name="Nest View" component={NestView} />
 			<Drawer.Screen name="Add a Chat" component={AddChatScreen} />
-			<Drawer.Screen name="Marker" component={marker_animate} />
+			<Drawer.Screen name="Animated Marker" component={marker_animate} />
 			<Drawer.Screen name="encode" component={encode} />
 		</Drawer.Navigator>
 	);

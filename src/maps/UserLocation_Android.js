@@ -22,7 +22,7 @@ function UserLocation_Android({ navigation }) {
 
 				let location = await Location.getCurrentPositionAsync({});
 				console.log('>> got location', location);
-				navigation.navigate('InitialLocation', {
+				navigation.navigate('Animated Marker', {
 					latitude: location.coords.latitude,
 					longitude: location.coords.longitude,
 				});

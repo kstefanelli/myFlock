@@ -3,14 +3,14 @@ import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import getNearbyLocations from './getNearbyLocations';
 
-const markerToAnimate = () => {
+const markerToAnimate = ({ route }) => {
 	const mapView = React.createRef();
+	console.log('marker_animate');
+	const { latitude, longitude } = route.params;
 
 	const [mapRegion, setmapRegion] = useState({
-		/* 		latitude: props.latitude,
-		longitude: props.longitude, */
-		latitude: 47.6038321,
-		longitude: -122.3300624,
+		latitude,
+		longitude,
 		latitudeDelta: 0.0922,
 		longitudeDelta: 0.0421,
 	});
@@ -19,9 +19,6 @@ const markerToAnimate = () => {
 	const ASPECT_RATIO = width / height;
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-	ref = { mapView };
-
-	// let nearbyUsers = getNearbyLocations(mapRegion.latitude, mapRegion.longitude);
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
@@ -37,7 +34,7 @@ const markerToAnimate = () => {
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
 	useEffect(() => {
-		const radius = 5;
+		const radius = 10;
 		mapView.current.animateToRegion(
 			{
 				latitude: mapRegion.latitude,
