@@ -53,6 +53,7 @@ function TabNavigator(props) {
 							title="Settings"
 							color="#1F142E"
 						/>
+
 					),
 				}}
 			/>
@@ -60,6 +61,8 @@ function TabNavigator(props) {
 			<Tab.Screen name="Map" component={UserLocation_Android} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
+			<Tab.Screen name="Home" component={Home} />
+			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 		</Tab.Navigator>
 	);
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useLayoutEffect, useState,useRef } from "react";
 import {
   KeyboardAvoidingView,
@@ -37,12 +38,12 @@ const ChatScreen = ({ navigation, route }) => {
         email: auth.currentUser.email,
         photoUrl: auth.currentUser.photoURL,
       });
-      
+
     setInput("");
   };
 
   useLayoutEffect(() => {
-  
+
     const unsubscribe = db
       .collection("chats")
       .doc(route.params.chatName)
@@ -95,11 +96,11 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView  
+            <ScrollView
             ref={scrollViewRef}
             onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
             >
-    
+
               {messages.map(({ id, data }) =>
                 (data.email === auth.currentUser.email ? (
                   <View key={id} style={styles.reciever}>
@@ -136,7 +137,7 @@ const ChatScreen = ({ navigation, route }) => {
                         position: "absolute",
                       }}
                       source={{
-                        uri: data.photoURL,
+                        uri: data.photoUrl,
                       }}
                     />
                     <Text style={styles.senderText}>{data.message}</Text>

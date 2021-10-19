@@ -1,11 +1,12 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
 import {Text, Avatar} from 'react-native-elements';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FontAwesome5} from '@expo/vector-icons';
 import {db} from '../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
 
 const NestView = ({navigation}) => {
   const [chats, setChats] = useState([]);
@@ -16,17 +17,20 @@ const NestView = ({navigation}) => {
     });
   }, [navigation]);
 
-  useEffect(() => {
-    const unsubscribe = db.collection('chats').onSnapshot((snapshot) => {
-      setChats(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      );
+
+useFocusEffect(
+    React.useCallback(() => {
+    console.log('usefocus triggered')
+    const unsubscribe = db.collection("chats").onSnapshot((snapshot)=> {
+      setChats(snapshot.docs.map(doc=> ({
+        data: doc.data(),
+      })))
     });
     return unsubscribe;
-  }, []);
+   }, [])
+   );
+
+
 
   const enterChat = (id, chatName) => {
     // navigation.navigate("Chat", {
