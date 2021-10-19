@@ -16,17 +16,6 @@ function TabNavigator(props) {
 
   return (
     <Tab.Navigator
-      // initialRouteName="Home"
-      // activeColor="##1F142E"
-
-      // inactiveColor="#bf90b1"
-
-      // labeled={true}
-      // barStyle={{
-      // 	// backgroundColor: '#fff',
-      // 	alignItems: 'center',
-      // }}
-
       options={{ headerShown: false }}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -37,6 +26,8 @@ function TabNavigator(props) {
             iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
           } else if (route.name === 'Nest View') {
             iconName = focused ? 'feather-alt' : 'feather-alt';
+          } else if (route.name === 'Chat') {
+            iconName = focused ? 'comment' : 'comment';
           }
           return <Icon type="ionicon" name={iconName} size={size} color={color} />;
         },
@@ -53,28 +44,16 @@ function TabNavigator(props) {
           title: 'Profile',
           headerRight: () => (
             <Button
-              onPress={() => navigation.navigate('Edit Profile')}
-              title="Edit Profile"
+              onPress={() => navigation.navigate('Settings')}
+              title="Settings"
               color="#1F142E"
             />
           ),
         }}
       />
       <Tab.Screen name="Map" component={UserLocation} />
-      <Tab.Screen
-        name="Nest View"
-        component={NestViewScreen}
-        options={{
-          title: 'Nest View',
-          headerRight: () => (
-            <Button
-              onPress={() => navigation.navigate('New Chat')}
-              title="New Chat"
-              color="#1F142E"
-            />
-          ),
-        }}
-      />
+      <Tab.Screen name="Nest View" component={NestViewScreen}/>
+	  <Tab.Screen name="Chat" component={AddChatScreen} />
     </Tab.Navigator>
   );
 }
