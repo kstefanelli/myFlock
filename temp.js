@@ -1,5 +1,5 @@
 {
-	/* <Stack.Navigator headerMode="none">
+	/* <Stack.Navigator headerShown="false">
 	<>
 		<Stack.Screen name="Onboard" component={Onboarding} />
 		<Stack.Screen name="HomePage" component={Home} />

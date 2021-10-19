@@ -26,7 +26,7 @@ const AddChatScreen = ({navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Add a new Chat',
+      title: 'Chat',
       headerBackTitle: 'Chats',
     });
   }, [navigation]);
