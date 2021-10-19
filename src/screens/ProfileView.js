@@ -12,21 +12,21 @@ const ProfileView = () => {
 
   return (
     <View style={styles.profileView}>
-      {/* <Image style={styles.imagestyle} source={require('../../assets/myFlockIcons/Vector.png')} /> */}
 
-      {/* <Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
-      <Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} /> */}
+
+      <Text style={styles.profileName}>Hello, {currentUser.displayName}!</Text>
+		<>
+        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Pronouns: {user.pronouns}</Text>
+		</>
+      <Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} />
       <>
-        <Text style={{ fontWeight: 'bold' }}>About Me:</Text>
+        <Text style={{ fontWeight: 'bold' }}>About You:</Text>
         <Text>{user.intro} </Text>
       </>
-      <Text style={{ fontWeight: 'bold' }}>Location: </Text>
+      <Text style={{ fontWeight: 'bold' }}>Your Location: </Text>
       <Text>{user.location.name} </Text>
-      <>
-        <Text style={{ fontWeight: 'bold' }}>Pronouns: </Text>
-        <Text>{user.pronouns} </Text>
-      </>
-      <Text style={{ fontWeight: 'bold' }}>Interests: </Text>
+
+      <Text style={{ fontWeight: 'bold' }}>Your Interests: </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {user.interests.map((interest, index) => (
           <View key={index} style={{ alignItems: 'center' }}>
