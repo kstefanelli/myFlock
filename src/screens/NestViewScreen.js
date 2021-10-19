@@ -26,7 +26,7 @@ useFocusEffect(
         data: doc.data(),
       })))
     });
-    return unsubscribe();
+    return unsubscribe;
    }, [])
    );
 

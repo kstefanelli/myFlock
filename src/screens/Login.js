@@ -39,6 +39,7 @@ const LoginScreen = ({navigation}) => {
         const errorMessage = error.message;
         alert(errorMessage);
       });
+      navigation.navigate('Home');
   };
 
   return (

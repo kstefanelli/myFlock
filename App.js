@@ -10,6 +10,7 @@ import Login from './src/screens/Login';
 import RegisterScreen from './src/screens/RegisterScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import AddInterest from './src/screens/AddInterest';
+import TabNavigator from './src/navigation/TabNavigator';
 
 const Stack = createStackNavigator();
 
@@ -22,14 +23,14 @@ function App() {
 			<NavigationContainer>
 				{isLoggedIn ? (
 					<>
-						<DrawerNavigator />
+						<TabNavigator />
 					</>
 				) : (
 					<Stack.Navigator headerShown="false">
 						<>
 							<Stack.Screen name="LogIn" component={Login} />
 							<Stack.Screen name="Register" component={RegisterScreen} />
-							<Stack.Screen name="Drawer" component={DrawerNavigator} />
+							{/* <Stack.Screen name="Drawer" component={DrawerNavigator} /> */}
 							<Stack.Screen name="Home" component={Home} />
 						</>
 					</Stack.Navigator>
