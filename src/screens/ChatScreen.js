@@ -21,6 +21,14 @@ import * as firebase from "firebase";
 const ChatScreen = ({ navigation, route }) => {
   console.log("auth.currentUser", auth.currentUser.email);
 
+  if(!route.params){
+    route.params={
+        chatName: Math.floor(Math.random()*10000).toString()
+      }
+    }
+    
+  
+
   // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -62,29 +70,29 @@ const ChatScreen = ({ navigation, route }) => {
 
 
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     title: "Chat",
-  //     headerBackTitleVisible: false,
-  //     headerTitleAlign: "left",
-  //     headerTitle: () => (
-  //       <View
-  //         style={{
-  //           flexDirection: "row",
-  //           alignContent: "center",
-  //         }}
-  //       >
-  //         <Avatar
-  //           rounded
-  //           source={{
-  //             uri: "http://media3.s-nbcnews.com/i/MSNBC/Components/Photo/_new/tdy-120822-joyce-carpati-02.jpg",
-  //           }}
-  //         />
-  //         <Text>test</Text>
-  //       </View>
-  //     ),
-  //   });
-  // }, [navigation]);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Chat",
+      headerBackTitleVisible: false,
+      headerTitleAlign: "left",
+      headerTitle: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            alignContent: "center",
+          }}
+        >
+          <Avatar
+            rounded
+            source={{
+              uri: auth.currentUser.photoURL,
+            }}
+          />
+          <Text style ={{marginLeft:10}}>{route.params.chatName}</Text>
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={{ flex: 1, BackgroundColor: "white" }}>

@@ -29,6 +29,7 @@ const NestView = ({navigation}) => {
         setChats(snapshot.docs.map(doc=> ({
           id: doc.id,
           data: doc.data(),
+
         })))
       });
       {noChat()}

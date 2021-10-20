@@ -3,15 +3,25 @@
 
 //DELETE once everything is connected-for testing purposes only!
 
-import React, {useLayoutEffect, useState} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {Button, Input} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {auth, db} from '../../firebase';
+import React, { useLayoutEffect, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
+  KeyboardAvoidingView,
+} from "react-native";
+import { Button, Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+import { db } from "../../firebase";
 import * as firebase from 'firebase';
 
-const AddChatScreen = ({navigation}) => {
-  const [thisChatName, setThisChatName] = useState('');
+
+const AddChatScreen = ({ navigation }) => {
+  const [thisChatName, setThisChatName] = useState("");
+
 
   const createChat = () => {
     db.collection('chats').doc(thisChatName).set(
@@ -34,22 +44,40 @@ const AddChatScreen = ({navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Chat',
-      headerBackTitle: 'Chats',
+      title: "Chat",
+      headerBackTitle: "Chats",
     });
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
-      <Input
-        placeholder="Enter a chat name"
-        type="text"
-        value={thisChatName}
-        onChangeText={(text) => setThisChatName(text)}
-        leftIcon={<Icon name="wechat" type="antdesign" size={24} color="#1f142e" />}
-      />
-      <Button buttonStyle={styles.button} onPress={createChat} title="Create new chat" />
-    </View>
+    
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{
+          flex: 1,
+        }}
+        keyboardVerticalOffset={90}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <Input
+            placeholder="Enter a chat name"
+            type="text"
+            value={thisChatName}
+            onChangeText={(text) => setThisChatName(text)}
+            leftIcon={
+              <Icon name="wechat" type="antdesign" size={24} color="#1f142e" />
+            }
+          />
+          <Button
+            buttonStyle={styles.button}
+            onPress={createChat}
+            title="Create new chat"
+          />
+            </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    
   );
 };
 
@@ -57,15 +85,15 @@ export default AddChatScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#E6E8DA',
+    backgroundColor: "#E6E8DA",
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: 10,
   },
   button: {
-    backgroundColor: '#1f142e',
-    borderColor: '#1f142e',
+    backgroundColor: "#1f142e",
+    borderColor: "#1f142e",
     borderWidth: 5,
     width: 200,
     margin: 5,
