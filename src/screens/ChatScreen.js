@@ -21,6 +21,14 @@ import * as firebase from "firebase";
 const ChatScreen = ({ navigation, route }) => {
   console.log("auth.currentUser", auth.currentUser.email);
 
+  if(!route.params){
+    route.params={
+        chatName: Math.floor(Math.random()*10000).toString()
+      }
+    }
+    
+  
+
   // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);

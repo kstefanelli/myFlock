@@ -2,7 +2,7 @@ import * as firebase from 'firebase';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const firebaseConfig = [
+const firebaseConfig = {
 
 	apiKey: "AIzaSyCCCbNKwN5wgJ8vCqgeqkl4d-roRkfVe8c",
   authDomain: "myflock-e10c3.firebaseapp.com",
