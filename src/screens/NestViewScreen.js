@@ -23,14 +23,14 @@ const NestView = ({navigation}) => {
     React.useCallback(() => {
     console.log('usefocus triggered');
     const unsubscribe = () => {
-      db.collection("chats").onSnapshot((snapshot)=> {
+      db.collection("chats").
+      where('parties', 'array-contains', auth.currentUser.email)
+      .onSnapshot((snapshot)=> {
         setChats(snapshot.docs.map(doc=> ({
           id: doc.id,
           data: doc.data(),
         })))
       });
-      filterChats();
-
     }
 
     return unsubscribe();
@@ -44,20 +44,10 @@ const NestView = ({navigation}) => {
     navigation.navigate("ChatScreen",{chatName:id})
   };
 
-  const filterChats = () => {
-    let arr = [];
-    chats.forEach(chat=> {
-      let emailsArray= chat.data.parties;
-      if (emailsArray.includes(auth.currentUser.email)){
-        arr.push(chat);
-      setFilteredChats(arr)}
-    })
-  };
-
   const noChat = () => {
 
 
-    if (filteredChats.length < 1) {
+    if (chats.length < 1) {
       return (
         <View
           style={{
@@ -81,7 +71,7 @@ const NestView = ({navigation}) => {
     } else {
       return (
         <View style={styles.eggContainer}>
-          {filteredChats.map(({id, data: {chatName}}) => (
+          {chats.map(({id, data: {chatName}}) => (
             <Avatar
               rounded
               source={{
