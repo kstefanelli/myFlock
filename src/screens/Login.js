@@ -12,7 +12,7 @@ const LoginScreen = ({navigation}) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        navigation.goBack();
+        navigation.navigate('Home');
       }
     });
 
@@ -20,25 +20,7 @@ const LoginScreen = ({navigation}) => {
   }, []);
 
   const signIn = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // Signed in
-        db.collection('Users')
-          .where('email', '==', email)
-          .get()
-          .then(function (querySnapshot) {
-            querySnapshot.forEach(function (document) {
-              document.ref.update({
-                isLoggedIn: true,
-              });
-            });
-          });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        alert(errorMessage);
-      });
+    auth.signInWithEmailAndPassword(email, password);
       navigation.navigate('Home');
   };
 

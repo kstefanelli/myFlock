@@ -6,9 +6,15 @@ import { Button } from 'react-native-elements';
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase';
 
-const ProfileView = () => {
+const ProfileView = ({navigation}) => {
   const user = USERS[0];
   var currentUser = auth.currentUser;
+
+  const logOutUser = () => {
+    auth.signOut().then(()=>{
+      navigation.navigate('Login')
+    })
+  };
 
   return (
     <View style={styles.profileView}>
@@ -34,7 +40,7 @@ const ProfileView = () => {
           </View>
         ))}
       </ScrollView>
-      <Button buttonStyle={styles.button} title="Log Out" />
+      <Button buttonStyle={styles.button} title="Log Out" onPress={logOutUser} />
     </View>
   );
 };
