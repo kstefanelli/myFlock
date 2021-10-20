@@ -1,22 +1,18 @@
 import React from 'react';
 import { Image, View, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../screens/Home';
 import AddInterest from '../screens/AddInterest';
 import LoginScreen from '../screens/Login';
+import Map from '../screens/Map';
 
 const StackNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-
-		<Stack.Navigator 
-		headerShown="false" 
-
-		options={{ gestureEnabled: false }}>
+		<Stack.Navigator headerShown="false" options={{ gestureEnabled: false }}>
 			<Stack.Screen
-				name="Home"
-				component={Home}
+				name="Map"
+				component={Map}
 				options={{
 					title: 'myFlock',
 					headerTitle: (props) => <LogoTitle {...props} />,

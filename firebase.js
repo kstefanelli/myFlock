@@ -3,13 +3,12 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCCCbNKwN5wgJ8vCqgeqkl4d-roRkfVe8c",
-  authDomain: "myflock-e10c3.firebaseapp.com",
-  projectId: "myflock-e10c3",
-  storageBucket: "myflock-e10c3.appspot.com",
-  messagingSenderId: "559175423203",
-  appId: "1:559175423203:web:32f1c4e5c0e64f794ee1d6",
-
+	apiKey: 'AIzaSyDsujUSleWYLpALXKZmI0h9ZAJLfXNOhwA',
+	authDomain: 'meowtalk-b16a3.firebaseapp.com',
+	projectId: 'meowtalk-b16a3',
+	storageBucket: 'meowtalk-b16a3.appspot.com',
+	messagingSenderId: '937916533462',
+	appId: '1:937916533462:web:3ea9f2fa7b95d4d1059777',
 };
 
 let app;

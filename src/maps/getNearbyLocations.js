@@ -1,6 +1,6 @@
 import getGeohashRange from './util/getGeoHashRange';
 
-function getNearbyLocations(latitude, longitude) {
+function getNearbyLocations(latitude, longitude, givenRadius) {
 	let stringCompare = (a, b) => {
 		if (a === b) {
 			return 0;
@@ -14,8 +14,7 @@ function getNearbyLocations(latitude, longitude) {
 	};
 	//lexicographical sort
 	let myLocations = [];
-	let dist = 2;
-	const range = getGeohashRange(latitude, longitude, dist);
+	const range = getGeohashRange(latitude, longitude, givenRadius);
 
 	myLocations = nearbyUsers.filter((location) => {
 		//return location.geohash >= range.lower && location.geohash <= range.upper
