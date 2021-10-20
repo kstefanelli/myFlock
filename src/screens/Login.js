@@ -16,38 +16,21 @@ const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged((authUser) => {
-			if (authUser) {
-				navigation.goBack();
-			}
-		});
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        navigation.navigate('Home');
+      }
+    });
 
 		return unsubscribe;
 	}, []);
 
-	const signIn = () => {
-		auth
-			.signInWithEmailAndPassword(email, password)
-			.then((userCredential) => {
-				// Signed in
-				db.collection('Users')
-					.where('email', '==', email)
-					.get()
-					.then(function (querySnapshot) {
-						querySnapshot.forEach(function (document) {
-							document.ref.update({
-								isLoggedIn: true,
-							});
-						});
-					});
-			})
-			.catch((error) => {
-				const errorMessage = error.message;
-				alert(errorMessage);
-			});
-		navigation.navigate('Map');
-	};
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(email, password);
+      navigation.navigate('Home');
+  };
 
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>

@@ -1,15 +1,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect, useEffect} from 'react';
 import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
 import {Text, Avatar} from 'react-native-elements';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FontAwesome5} from '@expo/vector-icons';
-import {db} from '../../firebase';
+import {auth, db} from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
+import EggItem from '../components/EggItem';
 
 const NestView = ({navigation}) => {
   const [chats, setChats] = useState([]);
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -17,28 +19,35 @@ const NestView = ({navigation}) => {
     });
   }, [navigation]);
 
-
-useFocusEffect(
+  useFocusEffect(
     React.useCallback(() => {
-    console.log('usefocus triggered')
-    const unsubscribe = db.collection("chats").onSnapshot((snapshot)=> {
-      setChats(snapshot.docs.map(doc=> ({
-        data: doc.data(),
-      })))
-    });
-    return unsubscribe;
+    console.log('usefocus triggered');
+    const unsubscribe = () => {
+      db.collection("chats").
+      where('parties', 'array-contains', auth.currentUser.email)
+      .onSnapshot((snapshot)=> {
+        setChats(snapshot.docs.map(doc=> ({
+          id: doc.id,
+          data: doc.data(),
+        })))
+      });
+      {noChat()}
+    }
+
+    return unsubscribe();
    }, [])
    );
 
 
 
-  const enterChat = (id, chatName) => {
-    // navigation.navigate("Chat", {
-    //   id, chatName
-    // })
+
+  const enterChat = (id) => {
+    navigation.navigate("ChatScreen",{chatName:id})
   };
 
   const noChat = () => {
+
+
     if (chats.length < 1) {
       return (
         <View
@@ -63,19 +72,11 @@ useFocusEffect(
     } else {
       return (
         <View style={styles.eggContainer}>
-          {chats.map(({id, data: {chatName}}) => (
-            <Avatar
-              rounded
-              source={{
-                uri: 'https://media.istockphoto.com/photos/buff-orpington-hen-picture-id1222034813?s=612x612',
-              }}
-              key={id}
-              size={72}
-              borderRadius="10"
-              borderWidth="5"
-              borderColor="#e8984e"
-              onPress={() => enterChat(id, chatName)}
-            />
+          {chats.map(({id, data:{photos}}) => (
+            <EggItem key ={id}
+            id={id}
+            photos={photos}
+            enterChat={enterChat} />
           ))}
         </View>
       );
