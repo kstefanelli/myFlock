@@ -31,25 +31,14 @@ const AddInterest = ({ navigation }) => {
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (document) {
-            document.ref.update({
-              interests: [newInterest],
+            document.update({
+              interests: [...user.interests,newInterest],
             });
           });
         })
     );
   };
-  // .catch((error) => alert(error.message))
 
-  // db.collection('Users')
-  //   .where('email', '==', email)
-  //   .get()
-  //   .then(function (querySnapshot) {
-  //     querySnapshot.forEach(function (document) {
-  //       document.ref.update({
-  //         interests: [interests]
-  //       });
-  //     });
-  //
 
   const add = () => {
     // add interest in firebase
