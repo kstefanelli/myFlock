@@ -8,6 +8,7 @@ import { auth, db } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
 
+
 const ProfileView = () => {
 	//this user alternative is to pull from dummy data to display a profile
 	//   const user = USERS[0];
@@ -30,6 +31,13 @@ const ProfileView = () => {
     return unsubscribe();
    }, [])
    );
+
+
+  const logOutUser = () => {
+    auth.signOut().then(()=>{
+      navigation.navigate('Login')
+    })
+  };
 
   return (
     <View style={styles.profileView}>
@@ -55,7 +63,7 @@ const ProfileView = () => {
           </View>
         ))}
       </ScrollView>
-      <Button buttonStyle={styles.button} title="Log Out" />
+      <Button buttonStyle={styles.button} title="Log Out" onPress={logOutUser} />
     </View>
   );
 };
