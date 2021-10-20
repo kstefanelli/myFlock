@@ -12,6 +12,7 @@ import NestView from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
 import encode from '../maps/util/encode';
 import marker_animate from '../maps/marker_animate';
+import AddInterest from '../screens/AddInterest';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,7 +20,7 @@ function DrawerNavigator() {
 	return (
 		<Drawer.Navigator
 			screenOptions={{
-				headerShown: false,
+				headerShown: true,
 			}}
 		>
 			<Drawer.Screen name="Tabs" component={TabNavigator} />
@@ -32,6 +33,7 @@ function DrawerNavigator() {
 			<Drawer.Screen name="Add a Chat" component={AddChatScreen} />
 			<Drawer.Screen name="Animated Marker" component={marker_animate} />
 			<Drawer.Screen name="encode" component={encode} />
+			<Drawer.Screen name="addInterest" component={AddInterest} />
 		</Drawer.Navigator>
 	);
 }
