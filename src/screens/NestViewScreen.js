@@ -7,17 +7,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {FontAwesome5} from '@expo/vector-icons';
 import {auth, db} from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
+import EggItem from '../components/EggItem';
 
 const NestView = ({navigation}) => {
   const [chats, setChats] = useState([]);
-  const [filteredChats, setFilteredChats]= useState([]);
+
 
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Nest View',
     });
   }, [navigation]);
-
 
   useFocusEffect(
     React.useCallback(() => {
@@ -71,19 +71,11 @@ const NestView = ({navigation}) => {
     } else {
       return (
         <View style={styles.eggContainer}>
-          {chats.map(({id, data: {chatName}}) => (
-            <Avatar
-              rounded
-              source={{
-                uri: 'https://media.istockphoto.com/photos/buff-orpington-hen-picture-id1222034813?s=612x612',
-              }}
-              key={id}
-              size={72}
-              borderRadius="10"
-              borderWidth="5"
-              borderColor="#e8984e"
-              onPress={() => {enterChat(id, chatName)}}
-            />
+          {chats.map(({id, data:{photos}}) => (
+            <EggItem key ={id}
+            id={id}
+            photos={photos}
+            enterChat={enterChat} />
           ))}
         </View>
       );
