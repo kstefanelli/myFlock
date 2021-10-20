@@ -5,36 +5,65 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'rea
 import { Button } from 'react-native-elements';
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
+
+
 
 const ProfileView = () => {
-  const user = USERS[0];
-  var currentUser = auth.currentUser;
+	//this user alternative is to pull from dummy data to display a profile
+	//   const user = USERS[0];
+  //line 14 might not be enough. It used to work, but now, when we open the app, it initially doesn't (async authorization?). If you comment out all calls to user and then comment it back in it suddenly works. Except there must be another layert of access to get to user features not included in auth. pronouns, bio, interests (again, used to work :( ))
+	const [userData, setUserData] = useState([])
+
+  useFocusEffect(
+    React.useCallback(() => {
+    console.log('usefocus triggered2');
+    const unsubscribe = () => {
+      db.collection('Users')
+      .where('email', ''=='', auth.currentUser.email)
+        .onSnapshot((snapshot)=> {
+          setUserData(snapshot.docs.map(doc=> ({
+            id: doc.id,
+            data: doc.data(),
+          })))
+        });
+      }
+    return unsubscribe();
+   }, [])
+   );
+
+
+  const logOutUser = () => {
+    auth.signOut().then(()=>{
+      navigation.navigate('Login')
+    })
+  };
 
   return (
     <View style={styles.profileView}>
-      {/* <Image style={styles.imagestyle} source={require('../../assets/myFlockIcons/Vector.png')} /> */}
+		<Text style={styles.profileName}>Hello, {userData.displayName}! </Text>
 
-      {/* <Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
-      <Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} /> */}
+		<>
+        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData.pronouns})</Text>
+		</>
+      <Image source={{ uri: userData.photoURL }} style={styles.profileImage} />
       <>
-        <Text style={{ fontWeight: 'bold' }}>About Me:</Text>
-        <Text>{user.intro} </Text>
+        <Text style={{ fontWeight: 'bold' }}>About You:</Text>
+        <Text>{userData.bio} </Text>
       </>
-      <Text style={{ fontWeight: 'bold' }}>Location: </Text>
-      <Text>{user.location.name} </Text>
-      <>
-        <Text style={{ fontWeight: 'bold' }}>Pronouns: </Text>
-        <Text>{user.pronouns} </Text>
-      </>
-      <Text style={{ fontWeight: 'bold' }}>Interests: </Text>
+	{/*the majority of our database users do not have location information, so if I call name from this array, it does not work. For now, I don't think there's a workaround for displaying location name*/}
+    {/* <Text style={{ fontWeight: 'bold' }}>Your Location: </Text> */}
+    {/* <Text>{currentUser.location.name} </Text> */}
+
+      <Text style={{ fontWeight: 'bold' }}>Your Interests: </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {user.interests.map((interest, index) => (
+        {userData.interests.map((interest, index) => (
           <View key={index} style={{ alignItems: 'center' }}>
             <Text style={{ color: '#1f142e' }}>{interest}, </Text>
           </View>
         ))}
       </ScrollView>
-      <Button buttonStyle={styles.button} title="Log Out" />
+      <Button buttonStyle={styles.button} title="Log Out" onPress={logOutUser} />
     </View>
   );
 };

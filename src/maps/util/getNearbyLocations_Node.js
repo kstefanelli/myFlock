@@ -3,7 +3,7 @@ const getGeohashRange = require('./getGeoHashRange');
 const latitude = 47.61909431141428;
 const longitude = -122.34105623381305;
 
-function getNearbyLocations(latitude, longitude) {
+function getNearbyLocations(latitude, longitude, radius) {
 	let stringCompare = (a, b) => {
 		if (a === b) {
 			return 0;
@@ -17,10 +17,7 @@ function getNearbyLocations(latitude, longitude) {
 	};
 	//lexicographical sort
 	let myLocations = [];
-	let dist = 2;
-	const range = getGeohashRange(latitude, longitude, dist);
-	console.log(range);
-	console.log('distance', dist);
+	const range = getGeohashRange(latitude, longitude, radius);
 
 	myLocations = nearbyUsers.filter((location) => {
 		//return location.geohash >= range.lower && location.geohash <= range.upper

@@ -22,11 +22,13 @@ const AddChatScreen = ({ navigation }) => {
 
   const createChat = async () => {
     try {
-      await db.collection("chats").add({
-        chatName: thisChatName,
-      });
-      navigation.navigate("ChatScreen", { chatName: thisChatName });
-      // navigation.goBack();
+
+      await db.collection('chats').doc(thisChatName).update({
+        parties: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email),
+        photos: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.photoURL)
+      }, {merge:true});
+      navigation.navigate("ChatScreen",{chatName:thisChatName})
+      
     } catch (error) {
       alert(error);
     }

@@ -1,47 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { auth, db } from '../../../firebase';
 
 const NearbyUsers = ({ route }) => {
-	const { latitude, longitude } = route.params;
 	const [nearbyUsers, setNearbyUsers] = useState([]);
-
-	/* 	const [mapRegion, setmapRegion] = useState({
-		latitude,
-		longitude,
-		latitudeDelta: 0.0922,
-		longitudeDelta: 0.0421,
-	}); */
-
-	const range = getGeohashRange(latitude, longitude, 10); //return a hash
+	const location = 'New York City';
 	//return hashes that meet criteria
-	useLayoutEffect(() => {
+
+	useEffect(() => {
 		const unsubscribe = db
-			.collection('UserLocation')
-			/* .where('geohash', '>=', range.lower)
-			.where('geohash', '<=', range.upper) */
-			.onSnapshot((snapshot) => {
-				//setNearbyUsers to an array of object elements and map out the following properties
-				//[{},{}]
+			.collection('Users')
+			.where('location', '===', location)
+			.get()
+			.then((snapshot) => {
 				setNearbyUsers(
 					snapshot.docs.map((doc) => ({
-						userId: doc.id,
-						latitude: doc.latitude,
-						longitude: doc.longitude,
+						id: doc.id,
+						data: doc.data(),
+						return: { id, ...data },
 					}))
 				);
-				console.log(snapshot.docs);
 			});
 		return unsubscribe;
 	}, []);
 
 	return (
 		<View style={styles.container}>
-			{nearbyUsers.map((marker) => {
-				<Text>
-					{latitude}, {longitude}
-				</Text>;
-			})}
+			<Text>{JSON.stringify(nearbyUsers)}</Text>
 		</View>
 	);
 };

@@ -1,29 +1,55 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ListItem, Avatar} from 'react-native-elements';
+import {auth} from '../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
 
-const EggItem = ({id, chatName, enterChat}) => {
+const EggItem = ({id, photos, enterChat}) => {
+  const [eggPicture, setEggPicture] = useState("")
+  console.log('egg photos', photos)
+
+
+
+useFocusEffect(
+  React.useCallback(() => {
+  const unsubscribe = () => {
+    if(photos !== undefined) {
+      for (let i =0; i<photos.length; i++){
+        let pic = photos[i];
+        if (pic !==undefined && pic !== auth.currentUser.photoURL){setEggPicture(pic); break}
+        else {
+          setEggPicture("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)"
+        )
+      }
+    }
+    }
+    else {
+      setEggPicture("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)"
+        )
+    }
+    };
+
+  return unsubscribe();
+ }, [])
+ );
+
   return (
-    <View >
-      <ListItem onPress={()=>enterChat(id, chatName)}
-      key ={id}
-      bottomDivider>
-        <Avatar
-          rounded
-          source={{
-            uri: 'https://media.istockphoto.com/photos/buff-orpington-hen-picture-id1222034813?s=612x612',
-          }}
-        />
-        <ListItem.Content>
-          <ListItem.Title style={{fontWeight: '800', color: '#354A18'}}>{chatName}</ListItem.Title>
-          <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail"
-          style={{color: '#354A18'}}>
-            This is a test subtitle. Chickens. Chickens. Chickens!!!!!
-          </ListItem.Subtitle>
-        </ListItem.Content>
-      </ListItem>
-    </View>
+    <>
+     <Avatar
+              rounded
+              source={{
+                uri: eggPicture
+              }}
+              key={id}
+              size={72}
+              borderRadius="10"
+              borderWidth="5"
+              borderColor="#e8984e"
+              onPress={() => {enterChat(id)}}
+            />
+    </>
+
   );
 };
 
@@ -31,5 +57,4 @@ const styles = StyleSheet.create({
 });
 
 export default EggItem;
-
 
