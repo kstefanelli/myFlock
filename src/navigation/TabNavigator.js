@@ -29,6 +29,9 @@ function TabNavigator(props) {
 					} else if (route.name === 'Chat') {
 						iconName = focused ? 'comment' : 'comment';
 					}
+					else if (route.name === 'ChatScreen') {
+						iconName = focused ? 'comment' : 'comment';
+					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 				},
 			})}
@@ -54,6 +57,7 @@ function TabNavigator(props) {
 			<Tab.Screen name="Map" component={Map} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
+			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 		</Tab.Navigator>
 	);
 }
