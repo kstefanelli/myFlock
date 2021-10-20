@@ -16,21 +16,21 @@ const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        navigation.navigate('Home');
-      }
-    });
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((authUser) => {
+			if (authUser) {
+				navigation.navigate('Tab');
+			}
+		});
 
 		return unsubscribe;
 	}, []);
 
-  const signIn = () => {
-    auth.signInWithEmailAndPassword(email, password);
-      navigation.navigate('Home');
-  };
+	const signIn = () => {
+		auth.signInWithEmailAndPassword(email, password);
+
+		navigation.navigate('Tab');
+	};
 
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
