@@ -16,6 +16,7 @@ const AddChatScreen = ({navigation}) => {
     try {
       await db.collection('chats').doc(thisChatName).set({
         parties: [auth.currentUser.email],
+        photos: [auth.currentUser.photoURL],
       });
       navigation.navigate("ChatScreen",{chatName:thisChatName})
 
