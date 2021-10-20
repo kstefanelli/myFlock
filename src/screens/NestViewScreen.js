@@ -31,6 +31,7 @@ const NestView = ({navigation}) => {
           data: doc.data(),
         })))
       });
+      {noChat()}
     }
 
     return unsubscribe();
