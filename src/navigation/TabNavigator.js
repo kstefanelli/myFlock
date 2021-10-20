@@ -11,8 +11,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Map from '../screens/Map';
 import NearbyUsers from '../maps/util/NearbyUsers';
 
-//whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
-//YOU WILL SPEND HOURS WITH A BLACK SCREEN AND NO CONSOLE.LOG NOT KNOWING WHAT HAPPENED
 function TabNavigator(props) {
 	const Tab = createBottomTabNavigator();
 
@@ -53,9 +51,7 @@ function TabNavigator(props) {
 					),
 				}}
 			/>
-
 			<Tab.Screen name="Map" component={Map} />
-			<Tab.Screen name="NearbyUsers" component={NearbyUsers} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
