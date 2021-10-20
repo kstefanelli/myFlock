@@ -10,11 +10,14 @@ import ChatScreen from './src/screens/ChatScreen';
 import AddInterest from './src/screens/AddInterest';
 import TabNavigator from './src/navigation/TabNavigator';
 import Map from './src/screens/Map';
+import {auth,db} from './firebase'
 
 const Stack = createStackNavigator();
 
 function App() {
-	const isLoggedIn = true;
+
+	const isLoggedIn = true
+	// auth.currentUser? true: false;
 
 	return (
 		<>

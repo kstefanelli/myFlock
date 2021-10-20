@@ -15,7 +15,7 @@ import {
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { db } from "../../firebase";
+import { auth,db } from "../../firebase";
 import * as firebase from 'firebase';
 
 

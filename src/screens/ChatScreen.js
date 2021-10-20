@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useLayoutEffect, useState,useRef } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
   StyleSheet,
   Text,
   View,
   TextInput,
   Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
