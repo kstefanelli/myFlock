@@ -40,7 +40,7 @@ function TabNavigator(props) {
 			<Tab.Screen
 				name="Profile"
 				component={ProfileView}
-				options={{
+				/* options={{
 					title: 'Profile',
 					headerRight: () => (
 						<Button
@@ -49,7 +49,7 @@ function TabNavigator(props) {
 							color="#1F142E"
 						/>
 					),
-				}}
+				}} */
 			/>
 			<Tab.Screen name="Map" component={Map} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />

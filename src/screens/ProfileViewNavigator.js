@@ -13,7 +13,7 @@ const ProfileViewNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator headerShown="false">
+		<Stack.Navigator options={{ headerShown: false }}>
 			<>
 				<Stack.Screen name="LogIn" component={LoginScreen} />
 				<Stack.Screen name="Register" component={RegisterScreen} />

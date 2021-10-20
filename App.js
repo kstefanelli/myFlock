@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './src/navigation/TabNavigator';
 import { auth, db } from './firebase';
+import ProfileViewNavigator from './src/screens/ProfileViewNavigator';
 
 const Stack = createStackNavigator();
 
