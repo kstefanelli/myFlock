@@ -20,7 +20,7 @@ const LoginScreen = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        navigation.navigate('HomeNest View');
+        navigation.navigate('Home');
       }
     });
 
@@ -29,7 +29,7 @@ const LoginScreen = ({ navigation }) => {
 
   const signIn = () => {
     auth.signInWithEmailAndPassword(email, password);
-      navigation.navigate('Nest View');
+      navigation.navigate('Home');
   };
 
 	return (

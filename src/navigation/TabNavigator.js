@@ -58,7 +58,7 @@ function TabNavigator(props) {
 			<Tab.Screen name="NearbyUsers" component={NearbyUsers} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
-			<Tab.Screen name="ChatRoom" component={ChatScreen} />
+			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 		</Tab.Navigator>
 	);
 }

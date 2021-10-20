@@ -16,6 +16,7 @@ import {
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { auth,db } from "../../firebase";
+import * as firebase from 'firebase';
 
 
 const AddChatScreen = ({ navigation }) => {
