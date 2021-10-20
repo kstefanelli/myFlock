@@ -61,29 +61,29 @@ const ChatScreen = ({ navigation, route }) => {
 
 
 
-  // useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     title: "Chat",
-  //     headerBackTitleVisible: false,
-  //     headerTitleAlign: "left",
-  //     headerTitle: () => (
-  //       <View
-  //         style={{
-  //           flexDirection: "row",
-  //           alignContent: "center",
-  //         }}
-  //       >
-  //         <Avatar
-  //           rounded
-  //           source={{
-  //             uri: "http://media3.s-nbcnews.com/i/MSNBC/Components/Photo/_new/tdy-120822-joyce-carpati-02.jpg",
-  //           }}
-  //         />
-  //         <Text>test</Text>
-  //       </View>
-  //     ),
-  //   });
-  // }, [navigation]);
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Chat",
+      headerBackTitleVisible: false,
+      headerTitleAlign: "left",
+      headerTitle: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            alignContent: "center",
+          }}
+        >
+          <Avatar
+            rounded
+            source={{
+              uri: auth.currentUser.photoURL,
+            }}
+          />
+          <Text style ={{marginLeft:10}}>{route.params.chatName}</Text>
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={{ flex: 1, BackgroundColor: "white" }}>
