@@ -9,8 +9,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 
-const ProfileView = () => {
-  if(!auth){
+const ProfileView = ({navigation}) => {
+  if(!auth.currentUser){
   return <Text>Please Login or Sign Up!</Text>
   }else{
 	//this user alternative is to pull from dummy data to display a profile
@@ -37,9 +37,8 @@ const ProfileView = () => {
 
 
   const logOutUser = () => {
-    auth.signOut().then(()=>{
-      navigation.navigate('Login')
-    })
+    auth.signOut();
+    navigation.navigate('Login')
   };
 
   return (
