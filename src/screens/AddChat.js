@@ -7,13 +7,16 @@ import React, {useLayoutEffect, useState} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {Button, Input} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {db} from '../../firebase';
+import {auth, db} from '../../firebase';
 
 const AddChatScreen = ({navigation}) => {
   const [thisChatName, setThisChatName] = useState('');
 
   const createChat = async () => {
     try {
+      await db.collection('chats').doc(thisChatName).set({
+        parties: [auth.currentUser.email],
+      });
       navigation.navigate("ChatScreen",{chatName:thisChatName})
 
     } catch (error) {
