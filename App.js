@@ -3,12 +3,15 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './src/navigation/TabNavigator';
-import ProfileViewNavigator from './src/screens/ProfileViewNavigator';
+import {auth,db} from './firebase'
+
 
 const Stack = createStackNavigator();
 
 function App() {
-	const isLoggedIn = false;
+	const isLoggedIn = true
+	// auth.currentUser? true: false;
+
 
 	return (
 		<>

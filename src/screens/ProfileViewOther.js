@@ -6,7 +6,7 @@ import { Button } from 'react-native-elements'
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
 
-const ProfileView = () => {
+const ProfileViewOther = () => {
 
 //line 12 needs to be connected to the database 'Users'
 	// var viewedUser = match user by email;
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ProfileView;
+export default ProfileViewOther;

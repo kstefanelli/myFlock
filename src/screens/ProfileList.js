@@ -12,9 +12,9 @@ const ProfileList =({users}) => {
     return (
         <View>
             {users.map(({id, data: {displayName}}) => (
-                <Avatar rounded source={{uri: user.imageURL}}
+                <Avatar rounded source={{uri: user.imageURL}} />
             ))}
-            <Text></Text>
+            // <Text></Text>
         </View>
     )
 }
