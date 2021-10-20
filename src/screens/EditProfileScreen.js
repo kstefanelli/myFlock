@@ -11,8 +11,8 @@ const EditProfileScreen = ({navigation}) => {
 	const [imageUrl, setImageUrl] = useState('');
 	const [bio, setBio] = useState('');
 
-
-
+//button on line 51 needs to be hooked up with more logic on line 16, defining submit
+//touchable opacity link needs to be added to stack navigator
 	const submit = () => {};
 
 	return (
@@ -49,6 +49,7 @@ const EditProfileScreen = ({navigation}) => {
 			</View>
 
 			<Button buttonStyle={styles.button} onPress={submit} title="Submit" />
+
 			<TouchableOpacity
 				style={{alignItems: 'center',justifyContent: 'center', marginTop: 5}}
 				onPress={() => navigation.navigate('AddInterest')}>

@@ -1,41 +1,41 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import { Button } from 'react-native-elements'
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
 
 const ProfileView = () => {
 
-
-	// var viewedUser = auth.currentUser;
+//line 12 needs to be connected to the database 'Users'
+	// var viewedUser = match user by email;
 
 
 	return (
 		<View style={styles.profileView}>
-			{/* <Image style={styles.imagestyle} source={require('../../assets/myFlockIcons/Vector.png')} /> */}
 
-			<Text style={styles.profileName}>Meet {currentUser.displayName}!</Text>
-			<Image source={{ uri: currentUser.photoURL }} style={styles.profileImage} />
+			<Text style={styles.profileName}>Meet {viewedUser.displayName}!</Text>
+			<Image source={{ uri: viewedUser.photoURL }} style={styles.profileImage} />
 			<>
 				<Text style={{fontWeight: 'bold'}}>Bio: </Text>
-				<Text>{user.intro} </Text>
+				<Text>{viewedUser.bio} </Text>
 			</>
 			<>
 				<Text style={{fontWeight: 'bold'}}>Pronouns: </Text>
-				<Text>{user.pronouns} </Text>
+				<Text>{viewedUser.pronouns} </Text>
 			</>
 			<Text style={{fontWeight: 'bold'}}>Interests: </Text>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                {user.interests.map((interest, index) => (
+                {viewedUser.interests.map((interest, index) => (
                     <View key={index} style={{alignItems: 'center'}}>
                         <Text style={{color: '#1f142e'}}>{interest.toLowerCase()}, </Text>
                     </View>
                 ))}
             </ScrollView>
-			<Text>Location: {user.location.name}</Text>
-			<Button buttonStyle={styles.button}  title="Log Out" />
+			{/* This next line commented out for the same reason as it is in profileView */}
+			{/* <Text>Location: {viewedUser.location.name}</Text> */}
+			<Button buttonStyle={styles.button}  title="Start Chatting" />
 		</View>
 
 	);

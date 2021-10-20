@@ -1,3 +1,4 @@
+//this is an unused file since we navigate directly to individual profiles via pins on map
 import React, {useState} from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 
