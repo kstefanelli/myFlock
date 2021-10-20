@@ -36,7 +36,7 @@ const ProfileView = () => {
 		<Text style={styles.profileName}>Hello, {userData.displayName}! </Text>
 
 		<>
-        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>Pronouns: {userData.pronouns}</Text>
+        <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData.pronouns})</Text>
 		</>
       <Image source={{ uri: userData.photoURL }} style={styles.profileImage} />
       <>

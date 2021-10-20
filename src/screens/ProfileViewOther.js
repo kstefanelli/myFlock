@@ -22,8 +22,8 @@ const ProfileView = () => {
 				<Text>{viewedUser.bio} </Text>
 			</>
 			<>
-				<Text style={{fontWeight: 'bold'}}>Pronouns: </Text>
-				<Text>{viewedUser.pronouns} </Text>
+
+				<Text>({viewedUser.pronouns}) </Text>
 			</>
 			<Text style={{fontWeight: 'bold'}}>Interests: </Text>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
