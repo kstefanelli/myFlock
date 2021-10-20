@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native'
 
 import {Avatar, Button, Image, TouchableOpacity} from 'react-native-elements'
 import {auth, db} from '../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
 
 const users = db.users;
 
