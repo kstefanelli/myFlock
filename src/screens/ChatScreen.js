@@ -19,7 +19,6 @@ import { db, auth } from "../../firebase";
 import * as firebase from "firebase";
 
 const ChatScreen = ({ navigation, route }) => {
-  console.log("auth.currentUser", auth.currentUser.email);
 
   if(!route.params){
     route.params={
@@ -72,7 +71,7 @@ const ChatScreen = ({ navigation, route }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Chat",
+      title: "Chats",
       headerBackTitleVisible: false,
       headerTitleAlign: "left",
       headerTitle: () => (
