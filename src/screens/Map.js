@@ -6,7 +6,7 @@ import InitialLocation from '../maps/InitialLocation';
 import { createStackNavigator } from '@react-navigation/stack';
 import marker_animate from '../maps/marker_animate';
 
-const Home = (props) => {
+const Map = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
@@ -27,4 +27,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Home;
+export default Map;

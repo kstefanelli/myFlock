@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useLayoutEffect, useState,useRef } from "react";
 import {
   KeyboardAvoidingView,
@@ -18,7 +19,7 @@ import { db, auth } from "../../firebase";
 import * as firebase from "firebase";
 
 const ChatScreen = ({ navigation, route }) => {
-  console.log("auth.currentUser.name", auth.currentUser.displayName);
+  console.log("auth.currentUser", auth.currentUser.email);
 
   // const auth.currentUser = route.params.user;
   const [input, setInput] = useState("");
@@ -37,12 +38,12 @@ const ChatScreen = ({ navigation, route }) => {
         email: auth.currentUser.email,
         photoUrl: auth.currentUser.photoURL,
       });
-      
+
     setInput("");
   };
 
   useLayoutEffect(() => {
-  
+
     const unsubscribe = db
       .collection("chats")
       .doc(route.params.chatName)
@@ -95,11 +96,11 @@ const ChatScreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView  
+            <ScrollView
             ref={scrollViewRef}
             onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
             >
-    
+
               {messages.map(({ id, data }) =>
                 (data.email === auth.currentUser.email ? (
                   <View key={id} style={styles.reciever}>

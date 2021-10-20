@@ -4,15 +4,12 @@ import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import {Icon} from 'react-native-elements'
 import ProfileView from '../screens/ProfileView';
-
-import Home from '../screens/Home';
 import ChatScreen from '../screens/ChatScreen';
-
 import NestViewScreen from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import markerToAnimate from '../maps/marker_animate';
-import UserLocation_Android from '../maps/UserLocation_Android';
+import Map from '../screens/Map';
+import NearbyUsers from '../maps/util/NearbyUsers';
 
 //whatever you do, MAKE SURE YOU ADD A PERIOD IN BETWEEN TAB.NAVIGATOR ELSE IT WILL NOT COMPILE
 //YOU WILL SPEND HOURS WITH A BLACK SCREEN AND NO CONSOLE.LOG NOT KNOWING WHAT HAPPENED
@@ -57,9 +54,11 @@ function TabNavigator(props) {
 				}}
 			/>
 
-			<Tab.Screen name="Map" component={UserLocation_Android} />
+			<Tab.Screen name="Map" component={Map} />
+			<Tab.Screen name="NearbyUsers" component={NearbyUsers} />
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
+			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 		</Tab.Navigator>
 	);
 }

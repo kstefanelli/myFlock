@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native';
@@ -26,11 +27,10 @@ const register = () => {
       .add({
         name: name,
         email: email,
-        imageUrl: imageUrl,
+        imageUrl: imageUrl || 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200',
         age: 0,
         bio: "",
         interests: [],
-        isLoggedIn: false,
         location: []
       })
       )
