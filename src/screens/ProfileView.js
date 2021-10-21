@@ -50,11 +50,13 @@ const ProfileView = ({ navigation }) => {
 			</>
 			<Image source={{ uri: userData[0].data.imageUrl }} style={styles.profileImage} />
 			<>
+
 				<Text style={{ fontWeight: 'bold' }}>About You:</Text>
 				<Text style={{marginLeft: 10, marginRight: 10}}>{userData[0].data.bio} </Text>
 			</>
 
-			<Text style={{ fontWeight: 'bold' }}>Your Interests: </Text>
+
+			<Text style={{ fontWeight: 'bold' }}>Interests: </Text>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 				{userData[0].data.interests.map((interest, index) => (
 					<View key={index} style={{ alignItems: 'center' }}>
@@ -97,9 +99,8 @@ const styles = StyleSheet.create({
 	},
 	profileName: {
 		color: '#1f142e',
-		fontStyle: 'italic',
 		fontWeight: '800',
-		fontSize: 20,
+		fontSize: 25,
 		marginTop: 10,
 		marginBottom: 15,
 	},
