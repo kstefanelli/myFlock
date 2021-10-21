@@ -34,7 +34,7 @@ const EggItem = ({id, photos, enterChat, navigation}) => {
    );
 
    useEffect(() => {
-     console.log('setting chats in nestview')
+    //  console.log('setting chats in nestview')
 		const unsubscribe = db
 			.collection('chats')
 			.doc(id)

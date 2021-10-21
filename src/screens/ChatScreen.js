@@ -19,7 +19,7 @@ import { db, auth } from '../../firebase';
 import * as firebase from 'firebase';
 
 const ChatScreen = ({ navigation, route }) => {
-	console.log('auth.currentUser', auth.currentUser.email);
+	// console.log('auth.currentUser', auth.currentUser.email);
 
 	if (!route.params) {
 		route.params = {
