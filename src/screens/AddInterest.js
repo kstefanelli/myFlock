@@ -66,7 +66,7 @@ const AddInterest = ({ navigation }) => {
       <StatusBar style="default" />
       <View style={styles.inputInterest}>
         <Input
-          placeholder="Type your intrest here..."
+          placeholder="Type your interest here..."
           autoFocus
           type="text"
           value={newInterest}
