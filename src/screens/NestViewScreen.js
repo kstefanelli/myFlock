@@ -75,7 +75,7 @@ const NestViewScreen = ({navigation}) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Nest View"
+      title: "Messages"
     })
   }, [navigation])
 

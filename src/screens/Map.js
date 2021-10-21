@@ -10,7 +10,7 @@ const Map = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator options={{ headerShown: false }}>
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			<Stack.Screen name="User Location" component={UserLocation_Android} />
 			<Stack.Screen name="Animated Marker" component={marker_animate} />
 			<Stack.Screen name="Initial Location" component={InitialLocation} />

@@ -16,20 +16,19 @@ function TabNavigator(props) {
 
 	return (
 		<Tab.Navigator
-			options={{ headerShown: false }}
-			screenOptions={({ route }) => ({
+			screenOptions={
+				{headerShown: false }, 
+				({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === 'Profile') {
 						iconName = focused ? 'user-alt' : 'user-alt';
 					} else if (route.name === 'Map') {
 						iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
-					} else if (route.name === 'Nest View') {
+					} else if (route.name === 'Messages') {
 						iconName = focused ? 'feather-alt' : 'feather-alt';
-					} else if (route.name === 'Chat') {
-						iconName = focused ? 'comment' : 'comment';
 					}
-					else if (route.name === 'ChatScreen') {
+					else if (route.name === 'Chat') {
 						iconName = focused ? 'comment' : 'comment';
 					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
@@ -55,9 +54,9 @@ function TabNavigator(props) {
 				}} */
 			/>
 			<Tab.Screen name="Map" component={Map} />
-			<Tab.Screen name="Nest View" component={NestViewScreen} />
-			<Tab.Screen name="Chat" component={AddChatScreen} />
-			<Tab.Screen name="ChatScreen" component={ChatScreen} />
+			<Tab.Screen name="Messages" component={NestViewScreen} />
+			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
+			<Tab.Screen name="Chat" component={ChatScreen} />
 		</Tab.Navigator>
 	);
 }
