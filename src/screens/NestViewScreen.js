@@ -15,7 +15,7 @@ const NestViewScreen = ({navigation}) => {
 
   useFocusEffect(
     React.useCallback(() => {
-    console.log('usefocus triggered');
+    // console.log('usefocus triggered');
     const unsubscribe = () => {
       db.collection("chats").
       where('parties', 'array-contains', auth.currentUser.email)

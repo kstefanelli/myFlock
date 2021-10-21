@@ -19,7 +19,7 @@ const StackNavigator = (props) => {
 					headerRight: () => (
 						<Button
 							onPress={() => navigation.navigate('AddInterest')}
-							title="terest"
+							title="interest"
 							color="#00cc00"
 						/>
 					),
