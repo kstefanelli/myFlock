@@ -16,8 +16,9 @@ function TabNavigator(props) {
 
 	return (
 		<Tab.Navigator
-			options={{ headerShown: false }}
-			screenOptions={{ headerShown: false }, ({ route }) => ({
+			screenOptions={
+				{headerShown: false }, 
+				({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === 'Profile') {
