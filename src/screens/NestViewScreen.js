@@ -1,23 +1,17 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, {useState, useLayoutEffect, useEffect} from 'react';
-import {StyleSheet, View, ScrollView, TouchableOpacity} from 'react-native';
+import React, {useState, useLayoutEffect, useEffect} from 'react'
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
 import {Text, Avatar} from 'react-native-elements';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import EggItem from '../components/EggItem'
 import {FontAwesome5} from '@expo/vector-icons';
-import {auth, db} from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
-import EggItem from '../components/EggItem';
-
-const NestView = ({navigation}) => {
-  const [chats, setChats] = useState([]);
+import { auth, db } from '../../firebase';
 
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: 'Nest View',
-    });
-  }, [navigation]);
+const NestViewScreen = ({navigation}) => {
+  const [chats, setChats] = useState([])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -34,13 +28,9 @@ const NestView = ({navigation}) => {
       });
       {noChat()}
     }
-
     return unsubscribe();
-   }, [])
-   );
-
-
-
+  }, [])
+  );
 
   const enterChat = (id) => {
     navigation.navigate("ChatScreen",{chatName:id})
@@ -48,8 +38,7 @@ const NestView = ({navigation}) => {
 
   const noChat = () => {
 
-
-    if (chats.length < 1) {
+    if (chats.length < 1 ) {
       return (
         <View
           style={{
@@ -84,49 +73,54 @@ const NestView = ({navigation}) => {
     }
   };
 
-  return (
-    <SafeAreaView style={styles.container} >
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Nest View"
+    })
+  }, [navigation])
 
-        <Text h2 style={{marginTop: 50, marginBottom: 30, textAlign: 'center'}}>
+  return (
+    <SafeAreaView style={{backgroundColor: "#E6E8DA"}} >
+      <ScrollView style={styles.container}>
+      <Text h2 style={{marginTop: 10, marginBottom: 10, textAlign: 'center'}}>
           Birds of a Feather
         </Text>
 
         <View
           style={{
-            marginBottom: 50,
+            marginBottom: 10,
             borderBottomColor: '#e8984e',
             borderBottomWidth: 5,
           }}
         />
+        {/* {chats.map(({id, data: {chatName}})=> (
+          <EggItem key ={id}
+          id={id}
+          chatName={chatName}
+          enterChat={enterChat} />
+        ))} */}
         {noChat()}
 
         <View
           style={{
-            marginTop: 50,
+            marginTop: 10,
             borderBottomColor: '#e8984e',
             borderBottomWidth: 5,
           }}
         />
 
-        <Text h2 style={{marginTop: 30, marginBottom: 50, textAlign: 'center'}}>
+        <Text h2 style={{marginTop: 10, marginBottom: 10, textAlign: 'center'}}>
           Flock Together
         </Text>
-
+      </ScrollView>
     </SafeAreaView>
-  );
-};
+  )
+}
+
+export default NestViewScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    backgroundColor: '#E6E8DA',
-    height: '100%',
-  },
-  eggContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-evenly',
-  },
-});
-
-export default NestView;
+  container:{
+    height: "100%"
+  }
+})
