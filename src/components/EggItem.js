@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ListItem, Avatar} from 'react-native-elements';
-import {auth} from '../../firebase';
+import {auth, db} from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const EggItem = ({id, photos, enterChat}) => {
+const EggItem = ({id, photos, enterChat, navigation}) => {
   const [eggPicture, setEggPicture] = useState("")
+  const [chatMessages, setChatMessages] = useState("")
 
   useFocusEffect(
     React.useCallback(() => {
@@ -32,6 +33,24 @@ const EggItem = ({id, photos, enterChat}) => {
    }, [])
    );
 
+   useEffect(() => {
+     console.log('setting chats in nestview')
+		const unsubscribe = db
+			.collection('chats')
+			.doc(id)
+			.collection('messages')
+			.orderBy('timeStamp', 'desc')
+			.onSnapshot((snapshot) =>
+				setChatMessages(
+					snapshot.docs.map((doc) => ({
+						data: doc.data(),
+					}))
+				)
+			);
+		return unsubscribe;
+	}, [navigation]);
+
+
   return (
     <View >
       <ListItem
@@ -50,8 +69,7 @@ const EggItem = ({id, photos, enterChat}) => {
           <ListItem.Title style={{fontWeight: '800', color: '#354A18'}}>{id}</ListItem.Title>
           <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail"
           style={{color: '#354A18'}}>
-            This is a test subtitle. I love cats. Dogs are your best friend but cats don't tell
-            people where the bodies are buried.
+            {chatMessages?.[0]?.data.message}
           </ListItem.Subtitle>
         </ListItem.Content>
       </ListItem>

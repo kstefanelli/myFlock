@@ -38,8 +38,7 @@ const NestViewScreen = ({navigation}) => {
 
   const noChat = () => {
 
-
-    if (chats.length < 1) {
+    if (chats.length < 1 ) {
       return (
         <View
           style={{
