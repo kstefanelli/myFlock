@@ -16,8 +16,9 @@ function TabNavigator(props) {
 
 	return (
 		<Tab.Navigator
-			options={{ headerShown: false }}
-			screenOptions={({ route }) => ({
+			screenOptions={
+				{headerShown: false }, 
+				({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === 'Profile') {
@@ -26,8 +27,6 @@ function TabNavigator(props) {
 						iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
 					} else if (route.name === 'Messages') {
 						iconName = focused ? 'feather-alt' : 'feather-alt';
-					} else if (route.name === 'Chat') {
-						iconName = focused ? 'comment' : 'comment';
 					}
 					else if (route.name === 'ChatScreen') {
 						iconName = focused ? 'comment' : 'comment';
@@ -58,6 +57,7 @@ function TabNavigator(props) {
 			<Tab.Screen name="Messages" component={NestViewScreen} />
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
+
 		</Tab.Navigator>
 	);
 }

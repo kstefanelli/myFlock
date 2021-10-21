@@ -64,7 +64,7 @@ const AddInterest = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar style="default" />
-      <View style={styles.inputInterest}>
+      {/* <View style={styles.inputInterest}>
         <Input
           placeholder="Type your interest here..."
           autoFocus
@@ -79,7 +79,7 @@ const AddInterest = ({ navigation }) => {
         containerStyle={styles.button}
         type="outline"
         onPress={add}
-      />
+      /> */}
 
       <View style={styles.interestTagContainer}>
         <ScrollView>

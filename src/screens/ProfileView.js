@@ -50,14 +50,14 @@ const ProfileView = ({ navigation }) => {
 			</>
 			<Image source={{ uri: userData.photoURL }} style={styles.profileImage} />
 			<>
-				<Text style={{ fontWeight: 'bold' }}>About You:</Text>
+				<Text style={{ fontWeight: 'bold' }}>About:</Text>
 				<Text>{userData.bio} </Text>
 			</>
 			{/*the majority of our database users do not have location information, so if I call name from this array, it does not work. For now, I don't think there's a workaround for displaying location name*/}
-			{/* <Text style={{ fontWeight: 'bold' }}>Your Location: </Text> */}
-			{/* <Text>{currentUser.location.name} </Text> */}
+			<Text style={{ fontWeight: 'bold' }}>Location: </Text>
+			<Text>{userData.location.name} </Text>
 
-			<Text style={{ fontWeight: 'bold' }}>Your Interests: </Text>
+			<Text style={{ fontWeight: 'bold' }}>Interests: </Text>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
 				{userData.interests.map((interest, index) => (
 					<View key={index} style={{ alignItems: 'center' }}>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 	profileName: {
 		color: '#1f142e',
 		fontWeight: '800',
-		fontSize: 20,
+		fontSize: 25,
 		marginTop: 10,
 		marginBottom: 15,
 	},
