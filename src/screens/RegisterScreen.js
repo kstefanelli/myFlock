@@ -83,7 +83,6 @@ const register = () => {
       <View style={{ height: 100 }} />
     </KeyboardAvoidingView>
 
-
   );
 };
 
