@@ -39,7 +39,7 @@ function TabNavigator(props) {
 				inactiveTintColor: '#bf90b1',
 			}}
 		>
-			<Tab.Screen
+			<Tab.Screen options={{headerShown: false}}
 				name="Profile"
 				component={ProfileView}
 				/* options={{
@@ -53,8 +53,8 @@ function TabNavigator(props) {
 					),
 				}} */
 			/>
-			<Tab.Screen name="Map" component={Map} />
-			<Tab.Screen name="Messages" component={NestViewScreen} />
+			<Tab.Screen options={{headerShown: false}} name="Map" component={Map} />
+			<Tab.Screen options={{headerShown: false}} name="Messages" component={NestViewScreen} />
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 
