@@ -2,32 +2,37 @@ import React, { useState, useEffect } from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { auth, db } from '../../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
 
 const NearbyUsers = ({ route }) => {
 	const [nearbyUsers, setNearbyUsers] = useState([]);
-	const location = 'New York City';
-	//return hashes that meet criteria
+	const location = 'Seattle';
 
-	useEffect(() => {
-		const unsubscribe = db
-			.collection('Users')
-			.where('location', '===', location)
-			.get()
-			.then((snapshot) => {
-				setNearbyUsers(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						data: doc.data(),
-						return: { id, ...data },
-					}))
-				);
-			});
-		return unsubscribe;
-	}, []);
-
+	if (!auth.currentUser) {
+		return <Text>Please Login or Sign Up!</Text>;
+	} else {
+		useFocusEffect(
+			React.useCallback(() => {
+				console.log('useEffect NearbyUsers');
+				const unsubscribe = db
+					.collection('Users')
+					.where('location', '==', location)
+					.onSnapshot((snapshot) => {
+						setNearbyUsers(
+							snapshot.docs.map((doc) => ({
+								id: doc.id,
+								data: doc.data(),
+							}))
+						);
+					});
+				return unsubscribe;
+			}, [])
+		);
+	}
+	console.log(nearbyUsers, 'nearbyUsers');
 	return (
 		<View style={styles.container}>
-			<Text>{JSON.stringify(nearbyUsers)}</Text>
+			<Text>This is the return {nearbyUsers.location}</Text>
 		</View>
 	);
 };

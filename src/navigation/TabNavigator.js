@@ -28,8 +28,7 @@ function TabNavigator(props) {
 						iconName = focused ? 'feather-alt' : 'feather-alt';
 					} else if (route.name === 'Chat') {
 						iconName = focused ? 'comment' : 'comment';
-					}
-					else if (route.name === 'ChatScreen') {
+					} else if (route.name === 'ChatScreen') {
 						iconName = focused ? 'comment' : 'comment';
 					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
@@ -58,6 +57,7 @@ function TabNavigator(props) {
 			<Tab.Screen name="Nest View" component={NestViewScreen} />
 			<Tab.Screen name="Chat" component={AddChatScreen} />
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
+			<Tab.Screen name="Nearby User" component={NearbyUsers} />
 		</Tab.Navigator>
 	);
 }
