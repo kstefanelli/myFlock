@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
 	},
 	reciever: {
 		padding: 15,
-		backgroundColor: '#ECECEC',
+		backgroundColor: '#bf90b1',
 		alignSelf: 'flex-end',
 		borderRadius: 20,
 		marginRight: 15,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
 	},
 	sender: {
 		padding: 15,
-		backgroundColor: '#ECECEC',
+		backgroundColor: '#e8984e',
 		alignSelf: 'flex-start',
 		borderRadius: 20,
 		margin: 15,
