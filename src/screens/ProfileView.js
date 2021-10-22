@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -55,10 +55,10 @@ const ProfileView = ({ navigation }) => {
         <Text style={{marginLeft: 10, marginRight: 10}}>{userData?.[0]?.data?.bio} </Text>
       </>
       <Text style={{ fontWeight: 'bold' }}>Interests: </Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{marginLeft: 20, marginRight: 20}}>
         {userData?.[0]?.data?.interests.map((interest, index) => (
           <View key={index} style={{ alignItems: 'center' }}>
-            <Text style={{ color: '#1F142E', marginTop: 15 }}> *{interest}* </Text>
+            <Text style={{ color: '#1F142E', marginTop: 15 }}> *{interest.toLowerCase()}* </Text>
           </View>
         ))}
       </ScrollView>
