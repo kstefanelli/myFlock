@@ -9,7 +9,7 @@ import TabNavigator from '../navigation/TabNavigator';
 
 //ProfileView will show Tabs
 //showTabNavigator --> home will be Profile
-const ProfileViewNavigator = (props) => {
+const LogInNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ProfileViewNavigator;
+export default LogInNavigator;

@@ -5,21 +5,21 @@ import { KeyboardAvoidingView, StyleSheet, TouchableOpacity, View } from 'react-
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 
-const EditProfileScreen = ({navigation}) => {
+const EditProfileScreen = ({ navigation }) => {
 	const [displayName, setDisplayName] = useState('');
 	const [pronouns, setPronouns] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [bio, setBio] = useState('');
 
-//button on line 51 needs to be hooked up with more logic on line 16, defining submit
-//touchable opacity link needs to be added to stack navigator
+	//button on line 51 needs to be hooked up with more logic on line 16, defining submit
+	//touchable opacity link needs to be added to stack navigator
 	const submit = () => {};
 
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<StatusBar style="light" />
 			<Text style={styles.topTitle}>Shake your tail-feathers</Text>
-			<Text style={{marginBottom: 15}}>Update your profile here!</Text>
+			<Text style={{ marginBottom: 15 }}>Update your profile here!</Text>
 			<View style={styles.inputContainer}>
 				<Input
 					placeholder="Display Name"
@@ -43,17 +43,17 @@ const EditProfileScreen = ({navigation}) => {
 				/>
 
 				<Input placeholder="Bio" type="text" value={bio} onChangeText={(text) => setBio(text)} />
-
-
-
 			</View>
 
 			<Button buttonStyle={styles.button} onPress={submit} title="Submit" />
 
 			<TouchableOpacity
-				style={{alignItems: 'center',justifyContent: 'center', marginTop: 5}}
-				onPress={() => navigation.navigate('AddInterest')}>
-					<Text style={{fontSize: 20, color: '#e8984e', textDecorationLine: 'underline'}}>Add Interests</Text>
+				style={{ alignItems: 'center', justifyContent: 'center', marginTop: 5 }}
+				onPress={() => navigation.navigate('Add Interest')}
+			>
+				<Text style={{ fontSize: 20, color: '#e8984e', textDecorationLine: 'underline' }}>
+					Add Interests
+				</Text>
 			</TouchableOpacity>
 			<View style={{ height: 100 }} />
 		</KeyboardAvoidingView>
@@ -62,7 +62,6 @@ const EditProfileScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
 	container: {
-
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 8,
 		fontSize: 25,
-		color: '#1f142e'
+		color: '#1f142e',
 	},
 	inputContainer: {
 		width: 300,
@@ -90,8 +89,8 @@ const styles = StyleSheet.create({
 export default EditProfileScreen;
 
 //note for Audrey useEffect(() => {
-    // auth.onAuthStateChanged((authUser) => {
-	// 	if (authUser) {
-	// 	  setIsLoggedIn(false)
-		//   alert('You have been logged out of myFlock!')
-		//   redirect to login;
+// auth.onAuthStateChanged((authUser) => {
+// 	if (authUser) {
+// 	  setIsLoggedIn(false)
+//   alert('You have been logged out of myFlock!')
+//   redirect to login;
