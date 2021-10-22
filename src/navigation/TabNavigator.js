@@ -34,10 +34,10 @@ function TabNavigator(props) {
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 				},
 			})}
-			tabBarOptions={{
-				activeTintColor: '#1F142E',
-				inactiveTintColor: '#bf90b1',
-			}}
+			// tabBarOptions={{
+			// 	activeTintColor: '#1F142E',
+			// 	inactiveTintColor: '#bf90b1',
+			// }}
 		>
 			<Tab.Screen options={{headerShown: false}}
 				name="Profile"

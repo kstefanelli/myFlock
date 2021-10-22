@@ -3,7 +3,6 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabNavigator from './TabNavigator';
 import { View, StyleSheet, Text } from 'react-native';
-import InitialLocation from '../maps/InitialLocation';
 import UserLocation_Android from '../maps/UserLocation_Android';
 import ChatScreen from '../screens/ChatScreen';
 import LoginScreen from '../screens/Login';
@@ -25,7 +24,6 @@ function DrawerNavigator() {
 		>
 			<Drawer.Screen name="Tabs" component={TabNavigator} />
 			<Drawer.Screen name="UserLocation_Android" component={UserLocation_Android} />
-			<Drawer.Screen name="InitialLocation" component={InitialLocation} />
 			<Drawer.Screen name="Chat" component={ChatScreen} />
 			<Drawer.Screen name="Login" component={LoginScreen} />
 			<Drawer.Screen name="Register" component={RegisterScreen} />
