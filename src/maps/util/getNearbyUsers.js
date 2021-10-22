@@ -54,6 +54,7 @@ const getNearbyUsers = ({ route }) => {
 		location: objElement.data.location,
 		latitude: objElement.data.latitude,
 		longitude: objElement.data.longitude,
+		image: objElement.data.imageUrl,
 	}));
 
 	const AnimateMarker = () => {
