@@ -40,11 +40,11 @@ const LoginScreen = ({ navigation }) => {
 			</Text>
 			<Image
 				source={require('../../assets/supplementary_images/bird.png')}
-				style={{ height: 160, width: 160, marginBottom: 25, marginTop: 25 }}
+				style={{ height: 160, width: 160, marginBottom: 10, marginTop: 10 }}
 			/>
 
 			<View style={styles.inputContainer}>
-				<Text h3 style={{ marginBottom: 25 }}>
+				<Text h3 style={{ marginBottom: 10 }}>
 					Log in to find out where your peeps are at...
 				</Text>
 				<Input

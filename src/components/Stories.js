@@ -23,7 +23,7 @@ const Stories = ({ interest, navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("ChatScreen",{user:story,id:index})}>
             <View key={index} style={{ alignItems: "center" }}>
               <Image
-                source={{ uri: story.profileImage }}
+                source={{uri: this.props.url !=="" ? this.props.url : undefined }}
                 style={styles.story}
               />
               <Text style={{ color: "white" }}>

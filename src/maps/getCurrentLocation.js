@@ -3,7 +3,7 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 
-function UserLocation_Android({ navigation }) {
+function getCurrentLocation({ navigation }) {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 
@@ -20,7 +20,7 @@ function UserLocation_Android({ navigation }) {
 				}
 
 				let location = await Location.getCurrentPositionAsync({});
-				navigation.navigate('Animated Marker', {
+				navigation.navigate('Find Nearby Users', {
 					latitude: location.coords.latitude,
 					longitude: location.coords.longitude,
 				});
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default UserLocation_Android;
+export default getCurrentLocation;
