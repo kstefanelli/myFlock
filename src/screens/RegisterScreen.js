@@ -30,8 +30,9 @@ const register = () => {
         imageUrl: imageUrl || 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200',
         age: 0,
         bio: "",
+        pronouns: pronouns,
         interests: [],
-        location: []
+        location: "",
       })
       )
       .catch((error) => alert(error.message));
