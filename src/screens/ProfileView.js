@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
-// import { logOutUser } from '../auth/logOutUser';
+
+
 import { auth, db } from '../../firebase';
-import { useFocusEffect } from '@react-navigation/native';
+
+import EditProfileScreen from './EditProfileScreen';
+
 const ProfileView = ({ navigation }) => {
-  //this user alternative is to pull from dummy data to display a profile
-  // auth.currentUser
 
   let currentEmail;
   const [userData, setUserData] = useState({});
@@ -43,6 +44,7 @@ const ProfileView = ({ navigation }) => {
     if (!isLoading)
     {return (
       <>
+
       <Text style={styles.profileName}>Hello, {userData?.[0]?.data?.name}! </Text>
       <>
         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData?.[0]?.data?.pronouns})</Text>
@@ -73,6 +75,11 @@ const ProfileView = ({ navigation }) => {
   return (
     <View style={styles.profileView}>
     {showProfile()}
+		<TouchableOpacity
+				style={{alignItems: 'center',justifyContent: 'center', marginTop: 5}}
+				onPress={() => navigation.navigate('EditProfileScreen')}>
+					<Text style={{fontSize: 20, color: '#e8984e', textDecorationLine: 'underline'}}>Edit Your Profile</Text>
+		</TouchableOpacity>
       <Button buttonStyle={styles.button} title='Log Out' onPress={logOutUser} />
     </View>
   );
