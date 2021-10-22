@@ -16,6 +16,7 @@ function getNearbyLocations(latitude, longitude, givenRadius) {
 	let myLocations = [];
 	const range = getGeohashRange(latitude, longitude, givenRadius);
 
+	//this is the Node.js conditional equivalent to the Firestore query
 	myLocations = nearbyUsers.filter((location) => {
 		//return location.geohash >= range.lower && location.geohash <= range.upper
 		return (
