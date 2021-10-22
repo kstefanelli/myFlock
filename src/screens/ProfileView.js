@@ -3,65 +3,64 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
-import { USERS } from '../../data/users';
+import { logOutUser } from '../auth/logOutUser'
 import { auth, db } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
-const ProfileView = ({ navigation }) => {
-	/* if (!auth.currentUser) {
-		return <Text>Please Login or Sign Up!</Text>;
-	} else { */
-	//this user alternative is to pull from dummy data to display a profile
-	const userData = USERS[0];
-	//line 14 might not be enough. It used to work, but now, when we open the app, it initially doesn't (async authorization?). If you comment out all calls to user and then comment it back in it suddenly works. Except there must be another layert of access to get to user features not included in auth. pronouns, bio, interests (again, used to work :( ))
-	/* 	const [userData, setUserData] = useState([]);
-	 */
-	/* 	useFocusEffect(
-		React.useCallback(() => {
-			console.log('usefocus triggered2');
-			const unsubscribe = () => {
-				db.collection('Users')
-					.where('email', '' == '', auth.currentUser.email)
-					.onSnapshot((snapshot) => {
-						setUserData(
-							snapshot.docs.map((doc) => ({
-								id: doc.id,
-								data: doc.data(),
-							}))
-						);
-					});
-			};
-			return unsubscribe();
-		}, [])
-	); */
 
-	const logOutUser = () => {
-		auth.signOut().then(() => {
-			navigation.navigate('Login');
-		});
-	};
+const ProfileView = ({ navigation }) => {
+
+	//this user alternative is to pull from dummy data to display a profile
+  auth.currentUser
+  const userAuth = auth.currentUser
+  const currentEmail = auth.currentUser.email.charAt(0).toUpperCase()+auth.currentUser.email.slice(1)
+
+
+	const [userData, setUserData] = useState({});
+  // const fetchUserbyEmail = async(email) => {
+  //   const result = await db.collection('Users').where('email', '==', email).get();
+  //   // return result.docs.map((ref) => ({uid: ref.id, ...ref.data()}))
+  //   return result
+  // }
+
+
+  useEffect(() => {
+    console.log("effect triggered");
+    const unsubscribe = () => {
+      db.collection('Users')
+      .where('email', '==', currentEmail)
+        .onSnapshot((snapshot)=> {
+          setUserData(snapshot.docs.map(doc=> ({
+            id: doc.id,
+            data: doc.data(),
+          })))
+        });
+      }
+    return unsubscribe()
+  },[])
+
+  console.log("Here's our test", userData[0].data.pronouns)
 
 	return (
 		<View style={styles.profileView}>
-			<Text style={styles.profileName}>Hello, {userData.displayName}! </Text>
+			<Text style={styles.profileName}>Hello, {userAuth.displayName}! </Text>
 
 			<>
-				<Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData.pronouns})</Text>
+				<Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData[0].data.pronouns})</Text>
 			</>
-			<Image source={{ uri: userData.photoURL }} style={styles.profileImage} />
+			<Image source={{ uri: userData[0].data.imageUrl }} style={styles.profileImage} />
 			<>
-				<Text style={{ fontWeight: 'bold' }}>About:</Text>
-				<Text>{userData.bio} </Text>
+
+				<Text style={{ fontWeight: 'bold' }}>About You:</Text>
+				<Text style={{marginLeft: 10, marginRight: 10}}>{userData[0].data.bio} </Text>
 			</>
-			{/*the majority of our database users do not have location information, so if I call name from this array, it does not work. For now, I don't think there's a workaround for displaying location name*/}
-			<Text style={{ fontWeight: 'bold' }}>Location: </Text>
-			<Text>{userData.location.name} </Text>
+
 
 			<Text style={{ fontWeight: 'bold' }}>Interests: </Text>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
-				{userData.interests.map((interest, index) => (
+				{userData[0].data.interests.map((interest, index) => (
 					<View key={index} style={{ alignItems: 'center' }}>
-						<Text style={{ color: '#1f142e' }}>{interest}, </Text>
+						<Text style={{ color: '#1f142e' }}> *{interest}* </Text>
 					</View>
 				))}
 			</ScrollView>
@@ -107,4 +106,6 @@ const styles = StyleSheet.create({
 	},
 });
 
+
 export default ProfileView;
+
