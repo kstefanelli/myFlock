@@ -13,8 +13,6 @@ const AnimatedMarker = (props) => {
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-	console.log('deltas= ', LATITUDE_DELTA, LONGITUDE_DELTA);
-
 	const initialMapRegion = {
 		latitude: 47.7330388,
 		longitude: -122.40371218,
@@ -40,7 +38,7 @@ const AnimatedMarker = (props) => {
 	}, [latitude, longitude]);
 
 	const nearbyUsersLocation = props.nearbyUsersLocation;
-	//console.log('>>>', nearbyUsersLocation);
+	console.log('AnimatedMarker', nearbyUsersLocation);
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
@@ -71,7 +69,7 @@ const AnimatedMarker = (props) => {
 	return (
 		<View style={styles.container}>
 			<MapView
-				style={{ alignSelf: 'stretch', height: '100%' }}
+				style={styles.container}
 				initialRegion={mapRegion}
 				showsUserLocation={true}
 				onRegionChangeComplete={(region) => setmapRegion(region)}
@@ -95,10 +93,13 @@ export default AnimatedMarker;
 
 const styles = StyleSheet.create({
 	container: {
+		alignSelf: 'stretch',
 		flex: 1,
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
+		width: Dimensions.get('window').width,
+		height: Dimensions.get('window').height,
 	},
 	map: {
 		width: Dimensions.get('window').width,

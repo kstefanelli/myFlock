@@ -20,15 +20,33 @@ const getNearbyUsers = ({ route }) => {
 	//param passed from getCurrentLocation
 	const range = getGeohashRange(latitude, longitude, givenRadius);
 
+	/* 	const getMyUserData = async () => {
+		try {
+			const documentShot = (snapshot) => {
+				const user = snapshot.data()
+				const interests = user.interests;
+	
+		  const userData = documentSnapshot.data();
+		  setUser(userData);
+		} catch {
+		}
+	  }; */
 	if (!auth.currentUser) {
 		return <Text>Please login or sign up to see the map!</Text>;
 	} else {
 		useFocusEffect(
 			React.useCallback(() => {
+				db.collection('Users')
+					.doc(currentUserId)
+					.get()
+					.then(async (snapshot) => {
+						const user = snapshot.data;
+						const interests = user.interests;
+					});
 				console.log('useEffect');
 				const unsubscribe = db
 					.collection('Users')
-					.where('location', '==', 'New York City')
+					.where('location', '==', 'Seattle')
 					.onSnapshot((snapshot) => {
 						setNearbyUsersData(
 							snapshot.docs.map((doc) => ({
@@ -43,17 +61,27 @@ const getNearbyUsers = ({ route }) => {
 	}
 
 	const nearbyUsersLocationArr = NearbyUsersData.map((objElement) => ({
+		name: objElement.data.name,
+		interests: objElement.data.interests,
 		location: objElement.data.location,
 		latitude: objElement.data.latitude,
 		longitude: objElement.data.longitude,
 	}));
-	return (
-		<View style={styles.container}>
+
+	const AnimateMarker = () => {
+		return (
 			<AnimatedMarker
 				nearbyUsersLocation={nearbyUsersLocationArr}
 				latitude={latitude}
 				longitude={longitude}
 			/>
+		);
+	};
+	console.log('AnimatedMarker nearbyUsers', nearbyUsersLocationArr);
+
+	return (
+		<View style={styles.container}>
+			{nearbyUsersLocationArr ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
 		</View>
 	);
 };
