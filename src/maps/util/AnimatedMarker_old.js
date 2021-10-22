@@ -19,9 +19,13 @@ const AnimatedMarker = (props) => {
 		latitudeDelta: LATITUDE_DELTA,
 		longitudeDelta: LONGITUDE_DELTA,
 	};
-
 	const [mapRegion, setmapRegion] = useState(initialMapRegion);
-	console.log('>>> mapRegion', mapRegion);
+	// const [mapRegion, setmapRegion] = useState({
+	// 	latitude: latitude,
+	// 	longitude: longitude,
+	// 	latitudeDelta: LATITUDE_DELTA,
+	// 	longitudeDelta: LONGITUDE_DELTA,
+	// });
 
 	useEffect(() => {
 		setmapRegion((prevMapRegion) => {
@@ -34,21 +38,22 @@ const AnimatedMarker = (props) => {
 	}, [latitude, longitude]);
 
 	const nearbyUsersLocation = props.nearbyUsersLocation;
+	//console.log('>>>', nearbyUsersLocation);
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
 		//received array of nearby user locations from getNearbyLocations
-		return nearbyUsersLocation.map((element, idx) => {
+		return nearbyUsersLocation.map((element, idx) => (
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
 				coordinate={{ latitude: element.latitude, longitude: element.longitude }}
-			/>;
-		});
+			/>
+		));
 	};
 
-	/* 	if you are not rendering a component in your function, then you must place it inside of useEffect
-	you cannot place it inside the return() */
+	//if you are not rendering a component in your function, then you must place it inside of useEffect
+	//you cannot place it inside the return()
 	useEffect(() => {
 		mapView.current.animateToRegion(
 			{
@@ -64,8 +69,8 @@ const AnimatedMarker = (props) => {
 	return (
 		<View style={styles.container}>
 			<MapView
-				style={styles.map}
-				initialRegion={initialMapRegion}
+				style={{ alignSelf: 'stretch', height: '100%' }}
+				initialRegion={mapRegion}
 				showsUserLocation={true}
 				onRegionChangeComplete={(region) => setmapRegion(region)}
 				ref={mapView}
@@ -92,13 +97,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height,
 	},
 	map: {
-		flex: 1,
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
-		alignSelf: 'stretch',
 	},
 });
