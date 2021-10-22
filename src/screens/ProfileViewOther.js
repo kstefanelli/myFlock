@@ -5,7 +5,15 @@ import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import { Button } from 'react-native-elements'
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
+import ProfileViewNavigator from '../navigation/ProfileNavigator';
 
+
+const navigation = ProfileViewNavigator()
+
+const logOutUser = () => {
+	auth.signOut().then(()=>{navigation.navigate('Login')
+	})
+  };
 const ProfileViewOther = () => {
 
 //line 12 needs to be connected to the database 'Users'
