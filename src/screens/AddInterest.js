@@ -31,10 +31,12 @@ const AddInterest = ({ navigation }) => {
       .where("email", "==", currentEmail)
       .onSnapshot((snapshot) => {
         setMyInterests(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map((doc) => 
+          ({
             id: doc.id,
             data: doc.data().interests,
-          }))
+          })
+          )
         );
       });
     //   }
