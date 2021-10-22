@@ -40,7 +40,7 @@ const EditProfileScreen = ({navigation}) => {
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
 			<StatusBar style="light" />
 			<Text style={styles.topTitle}>Shake your tail-feathers</Text>
-			<Text style={{marginBottom: 15}}>Update your profile here!</Text>
+			<Text style={{ marginBottom: 15 }}>Update your profile here!</Text>
 			<View style={styles.inputContainer}>
 				<Input
 					placeholder="Name"
@@ -89,9 +89,12 @@ const EditProfileScreen = ({navigation}) => {
 			<Text style={{marginTop: 10}}> or </Text>
 
 			<TouchableOpacity
-				style={{alignItems: 'center',justifyContent: 'center', marginTop: 5}}
-				onPress={() => navigation.navigate('AddInterest')}>
-					<Text style={{fontSize: 20, color: '#e8984e', textDecorationLine: 'underline'}}>Add Interests</Text>
+				style={{ alignItems: 'center', justifyContent: 'center', marginTop: 5 }}
+				onPress={() => navigation.navigate('Add Interest')}
+			>
+				<Text style={{ fontSize: 20, color: '#e8984e', textDecorationLine: 'underline' }}>
+					Add Interests
+				</Text>
 			</TouchableOpacity>
 			<View style={{ height: 100 }} />
 		</KeyboardAvoidingView>
@@ -100,7 +103,6 @@ const EditProfileScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
 	container: {
-
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
 		marginTop: 35,
 		padding: 8,
 		fontSize: 25,
-		color: '#1f142e'
+		color: '#1f142e',
 	},
 	inputContainer: {
 		width: 300,

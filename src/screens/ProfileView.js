@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 
-
 import { auth, db } from '../../firebase';
 
 import EditProfileScreen from './EditProfileScreen';
@@ -85,38 +84,38 @@ const ProfileView = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#1F142E',
-    borderColor: '#1F142E',
-    borderWidth: 5,
-    width: 200,
-    margin: 5,
-  },
-  imagestyle: {
-    alignItems: 'flex-end',
-    height: 15,
-    width: 15,
-  },
-  profileView: {
-    alignItems: 'center',
-    backgroundColor: '#E6E8DA',
-    height: '100%',
-  },
-  profileImage: {
-    height: 250,
-    width: 250,
-    marginBottom: 20,
-    borderRadius: 125,
-    borderWidth: 5,
-    borderColor: '#E8984E',
-    alignItems: 'center',
-  },
-  profileName: {
-    color: '#1F142E',
-    fontWeight: '800',
-    fontSize: 25,
-    marginTop: 20,
-    marginBottom: 15,
-  },
+	button: {
+		backgroundColor: '#1F142E',
+		borderColor: '#1F142E',
+		borderWidth: 5,
+		width: 200,
+		margin: 5,
+	},
+	imagestyle: {
+		alignItems: 'flex-end',
+		height: 15,
+		width: 15,
+	},
+	profileView: {
+		alignItems: 'center',
+		backgroundColor: '#E6E8DA',
+		height: '100%',
+	},
+	profileImage: {
+		height: 250,
+		width: 250,
+		marginBottom: 20,
+		borderRadius: 125,
+		borderWidth: 5,
+		borderColor: '#E8984E',
+		alignItems: 'center',
+	},
+	profileName: {
+		color: '#1F142E',
+		fontWeight: '800',
+		fontSize: 25,
+		marginTop: 20,
+		marginBottom: 15,
+	},
 });
 export default ProfileView;
