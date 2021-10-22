@@ -13,6 +13,10 @@ const AnimatedMarker = (props) => {
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+<<<<<<< Updated upstream:src/maps/util/AnimatedMarker_old.js
+=======
+	console.log('deltas= ', LATITUDE_DELTA, LONGITUDE_DELTA);
+>>>>>>> Stashed changes:src/maps/AnimatedMarker.js
 	const initialMapRegion = {
 		latitude: 47.7330388,
 		longitude: -122.40371218,
