@@ -9,38 +9,43 @@ import NestViewScreen from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Map from '../screens/Map';
-import NearbyUsers from '../maps/util/NearbyUsers';
+import getNearbyUsers from '../maps/util/getNearbyUsers';
+import TestFile from '../maps/TestFile';
+import AddInterest from '../screens/AddInterest';
 
 function TabNavigator(props) {
 	const Tab = createBottomTabNavigator();
 
 	return (
 		<Tab.Navigator
-			options={{ headerShown: false }}
-			screenOptions={({ route }) => ({
+			screenOptions={
+				({ headerShown: false }),
+				({ route }) => ({
+
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === 'Profile') {
 						iconName = focused ? 'user-alt' : 'user-alt';
 					} else if (route.name === 'Map') {
 						iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
-					} else if (route.name === 'Nest View') {
+					} else if (route.name === 'Messages') {
 						iconName = focused ? 'feather-alt' : 'feather-alt';
-					} else if (route.name === 'Chat') {
+					}
+					else if (route.name === 'ChatScreen') {
 						iconName = focused ? 'comment' : 'comment';
 					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 				},
 			})}
-			tabBarOptions={{
-				activeTintColor: '#1F142E',
-				inactiveTintColor: '#bf90b1',
-			}}
+			// tabBarOptions={{
+			// 	activeTintColor: '#1F142E',
+			// 	inactiveTintColor: '#bf90b1',
+			// }}
 		>
-			<Tab.Screen
+			<Tab.Screen options={{headerShown: false}}
 				name="Profile"
 				component={ProfileView}
-				options={{
+				/* options={{
 					title: 'Profile',
 					headerRight: () => (
 						<Button
@@ -49,12 +54,17 @@ function TabNavigator(props) {
 							color="#1F142E"
 						/>
 					),
-				}}
+				}} */
 			/>
-			<Tab.Screen name="Map" component={Map} />
-			<Tab.Screen name="Nest View" component={NestViewScreen} />
-			<Tab.Screen name="Chat" component={AddChatScreen} />
+
+			<Tab.Screen options={{headerShown: false}} name="Map" component={Map} />
+			<Tab.Screen options={{headerShown: false}} name="Messages" component={NestViewScreen} />
+
+			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
+			<Tab.Screen name="Nearby Users" component={getNearbyUsers} />
+			<Tab.Screen name="Test" component={TestFile} />
+			<Tab.Screen name="AddInterest" component={AddInterest} />
 		</Tab.Navigator>
 	);
 }
