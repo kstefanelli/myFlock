@@ -8,7 +8,8 @@ export const USERS = [
 		location: {
 			name: 'New York City',
 			latitude: 40.8150937,
-			longitude: 73.9112119,
+			longitude: -73.9112119,
+			geohash: 'dr72nn5mp',
 		},
 		pronouns: 'she/her/hers',
 		photoURL:
@@ -23,7 +24,8 @@ export const USERS = [
 		location: {
 			name: 'New York City',
 			latitude: 40.64492082,
-			longitude: 73.84318539,
+			longitude: -73.84318539,
+			geohash: 'dr5rpxjjc',
 		},
 		pronouns: 'she/her/hers',
 		profileImage:
@@ -239,7 +241,8 @@ export const USERS = [
 		location: {
 			name: 'Seattle',
 			latitude: 47.7330388,
-			longitude: 122.40371218,
+			longitude: -122.40371218,
+			geohash: 'c22zw9s34',
 		},
 		pronouns: 'he/him/his',
 		email: 'emre.pektemek@example.com',
@@ -267,7 +270,8 @@ export const USERS = [
 		location: {
 			name: 'Seattle',
 			latitude: 47.62818032,
-			longitude: 122.29212331,
+			longitude: -122.29212331,
+			geohash: 'c23ncnmw6',
 		},
 		pronouns: 'he/him/his',
 		email: 'ronfalcon.pektemek@example.com',
@@ -281,7 +285,8 @@ export const USERS = [
 		location: {
 			name: 'Seattle',
 			latitude: 47.69599351,
-			longitude: 122.3785803,
+			longitude: -122.3785803,
+			geohash: 'c22zr4y9k',
 		},
 		pronouns: 'they/them/their',
 		email: 'carlos.pektemek@example.com',

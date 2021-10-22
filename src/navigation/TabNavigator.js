@@ -9,7 +9,8 @@ import NestViewScreen from '../screens/NestViewScreen';
 import AddChatScreen from '../screens/AddChat';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Map from '../screens/Map';
-import NearbyUsers from '../maps/util/NearbyUsers';
+import getNearbyUsers from '../maps/util/getNearbyUsers';
+import TestFile from '../maps/TestFile';
 
 function TabNavigator(props) {
 	const Tab = createBottomTabNavigator();
@@ -17,8 +18,9 @@ function TabNavigator(props) {
 	return (
 		<Tab.Navigator
 			screenOptions={
-				{headerShown: false }, 
+				({ headerShown: false },
 				({ route }) => ({
+
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
 					if (route.name === 'Profile') {
@@ -28,18 +30,18 @@ function TabNavigator(props) {
 					} else if (route.name === 'Messages') {
 						iconName = focused ? 'feather-alt' : 'feather-alt';
 					}
-					else if (route.name === 'Chat') {
+					else if (route.name === 'ChatScreen') {
 						iconName = focused ? 'comment' : 'comment';
 					}
 					return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 				},
 			})}
-			tabBarOptions={{
-				activeTintColor: '#1F142E',
-				inactiveTintColor: '#bf90b1',
-			}}
+			// tabBarOptions={{
+			// 	activeTintColor: '#1F142E',
+			// 	inactiveTintColor: '#bf90b1',
+			// }}
 		>
-			<Tab.Screen
+			<Tab.Screen options={{headerShown: false}}
 				name="Profile"
 				component={ProfileView}
 				/* options={{
@@ -53,11 +55,14 @@ function TabNavigator(props) {
 					),
 				}} */
 			/>
-			<Tab.Screen name="Map" component={Map} /> 
-			<Tab.Screen name="Nest View" component={NestViewScreen} />
+
+			<Tab.Screen options={{headerShown: false}} name="Map" component={Map} />
+			<Tab.Screen options={{headerShown: false}} name="Messages" component={NestViewScreen} />
+
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
-
+			<Tab.Screen name="Nearby Users" component={getNearbyUsers} />
+			<Tab.Screen name="Test" component={TestFile} />
 		</Tab.Navigator>
 	);
 }

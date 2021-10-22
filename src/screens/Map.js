@@ -1,19 +1,21 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import UserLocation_Android from '../maps/UserLocation_Android';
-import InitialLocation from '../maps/InitialLocation';
+import getCurrentLocation from '../maps/getCurrentLocation';
 import { createStackNavigator } from '@react-navigation/stack';
-import marker_animate from '../maps/marker_animate';
+import AnimatedMarker from '../maps/AnimatedMarker';
+import getNearbyUsers from '../maps/util/getNearbyUsers';
+import TestFile from '../maps/TestFile';
 
 const Map = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="User Location" component={UserLocation_Android} />
-			<Stack.Screen name="Animated Marker" component={marker_animate} />
-			<Stack.Screen name="Initial Location" component={InitialLocation} />
+		<Stack.Navigator options={{ headerShown: false }}>
+			<Stack.Screen name="Get Current Location" component={getCurrentLocation} />
+			<Stack.Screen name="Animated Marker" component={AnimatedMarker} />
+			<Stack.Screen name="Find Nearby Users" component={getNearbyUsers} />
+			<Stack.Screen name="TestFile" component={TestFile} />
 		</Stack.Navigator>
 	);
 };
