@@ -19,30 +19,18 @@ const getNearbyUsers = ({ route }) => {
 	const givenRadius = 5;
 	//param passed from getCurrentLocation
 	const range = getGeohashRange(latitude, longitude, givenRadius);
-
-	/* 	const getMyUserData = async () => {
-		try {
-			const documentShot = (snapshot) => {
-				const user = snapshot.data()
-				const interests = user.interests;
-	
-		  const userData = documentSnapshot.data();
-		  setUser(userData);
-		} catch {
-		}
-	  }; */
 	if (!auth.currentUser) {
 		return <Text>Please login or sign up to see the map!</Text>;
 	} else {
 		useFocusEffect(
 			React.useCallback(() => {
-				db.collection('Users')
+				/* 				db.collection('Users')
 					.doc(currentUserId)
 					.get()
 					.then(async (snapshot) => {
 						const user = snapshot.data;
 						const interests = user.interests;
-					});
+					}); */
 				console.log('useEffect');
 				const unsubscribe = db
 					.collection('Users')

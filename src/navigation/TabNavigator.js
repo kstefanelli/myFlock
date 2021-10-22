@@ -18,7 +18,7 @@ function TabNavigator(props) {
 	return (
 		<Tab.Navigator
 			screenOptions={
-				({ headerShown: false }),
+				({ headerShown: false },
 				({ route }) => ({
 					tabBarIcon: ({ focused, color, size }) => {
 						let iconName;
