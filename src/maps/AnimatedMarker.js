@@ -13,24 +13,14 @@ const AnimatedMarker = (props) => {
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream:src/maps/util/AnimatedMarker_old.js
-=======
 	console.log('deltas= ', LATITUDE_DELTA, LONGITUDE_DELTA);
->>>>>>> Stashed changes:src/maps/AnimatedMarker.js
->>>>>>> Stashed changes
+
 	const initialMapRegion = {
 		latitude: 47.7330388,
 		longitude: -122.40371218,
 		latitudeDelta: LATITUDE_DELTA,
 		longitudeDelta: LONGITUDE_DELTA,
 	};
-<<<<<<< Updated upstream
-
-	const [mapRegion, setmapRegion] = useState(initialMapRegion);
-	console.log('>>> mapRegion', mapRegion);
-=======
 	const [mapRegion, setmapRegion] = useState(initialMapRegion);
 	// const [mapRegion, setmapRegion] = useState({
 	// 	latitude: latitude,
@@ -38,7 +28,6 @@ const AnimatedMarker = (props) => {
 	// 	latitudeDelta: LATITUDE_DELTA,
 	// 	longitudeDelta: LONGITUDE_DELTA,
 	// });
->>>>>>> Stashed changes
 
 	useEffect(() => {
 		setmapRegion((prevMapRegion) => {
@@ -51,38 +40,22 @@ const AnimatedMarker = (props) => {
 	}, [latitude, longitude]);
 
 	const nearbyUsersLocation = props.nearbyUsersLocation;
-<<<<<<< Updated upstream
-=======
 	//console.log('>>>', nearbyUsersLocation);
->>>>>>> Stashed changes
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
 		//received array of nearby user locations from getNearbyLocations
-<<<<<<< Updated upstream
-		return nearbyUsersLocation.map((element, idx) => {
-=======
 		return nearbyUsersLocation.map((element, idx) => (
->>>>>>> Stashed changes
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
 				coordinate={{ latitude: element.latitude, longitude: element.longitude }}
-<<<<<<< Updated upstream
-			/>;
-		});
-	};
-
-	/* 	if you are not rendering a component in your function, then you must place it inside of useEffect
-	you cannot place it inside the return() */
-=======
 			/>
 		));
 	};
 
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
->>>>>>> Stashed changes
 	useEffect(() => {
 		mapView.current.animateToRegion(
 			{
@@ -98,13 +71,8 @@ const AnimatedMarker = (props) => {
 	return (
 		<View style={styles.container}>
 			<MapView
-<<<<<<< Updated upstream
-				style={styles.map}
-				initialRegion={initialMapRegion}
-=======
 				style={{ alignSelf: 'stretch', height: '100%' }}
 				initialRegion={mapRegion}
->>>>>>> Stashed changes
 				showsUserLocation={true}
 				onRegionChangeComplete={(region) => setmapRegion(region)}
 				ref={mapView}
@@ -131,20 +99,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center',
 		justifyContent: 'center',
-<<<<<<< Updated upstream
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height,
-	},
-	map: {
-		flex: 1,
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height,
-		alignSelf: 'stretch',
-=======
 	},
 	map: {
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
->>>>>>> Stashed changes
 	},
 });
