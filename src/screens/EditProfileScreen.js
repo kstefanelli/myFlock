@@ -6,14 +6,22 @@ import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 
 const EditProfileScreen = ({ navigation }) => {
-	const [displayName, setDisplayName] = useState('');
+	const [name, setName] = useState('');
 	const [pronouns, setPronouns] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [bio, setBio] = useState('');
 
 	//button on line 51 needs to be hooked up with more logic on line 16, defining submit
 	//touchable opacity link needs to be added to stack navigator
-	const submit = () => {};
+	const submit = () => {
+		db.collection('Users').update({
+			name: name,
+			imageUrl: imageUrl,
+			bio: bio,
+			pronouns: pronouns,
+		})
+		.catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));
+	};
 
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -22,10 +30,10 @@ const EditProfileScreen = ({ navigation }) => {
 			<Text style={{ marginBottom: 15 }}>Update your profile here!</Text>
 			<View style={styles.inputContainer}>
 				<Input
-					placeholder="Display Name"
+					placeholder="Name"
 					type="text"
-					value={displayName}
-					onChangeText={(text) => setDisplayName(text)}
+					value={name}
+					onChangeText={(text) => setName(text)}
 				/>
 
 				<Input
