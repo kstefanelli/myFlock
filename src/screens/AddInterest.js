@@ -16,17 +16,13 @@ const AddInterest = ({ navigation }) => {
   const [filterdIntestests, setfilterdIntestests] = useState(interests);
   const [email, setEmail] = useState("");
   const [MyInterests, setMyInterests] = useState([]);
+  const [filltext,setFillText]=useState('');
 
   let currentEmail =
     auth.currentUser.email.charAt(0).toUpperCase() +
     auth.currentUser.email.slice(1);
   // on first render sets myInterest
   useEffect(() => {
-    // auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     currentEmail =
-    //       auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
-    //call db
     db.collection("Users")
       .where("email", "==", currentEmail)
       .onSnapshot((snapshot) => {
@@ -39,18 +35,17 @@ const AddInterest = ({ navigation }) => {
           )
         );
       });
-    //   }
-    // });
   }, []);
 
   const addInterestToMyProfile = () => {
+    console.log("set tag ---->", tagselected)
     // add interest in firebase
     if (newInterest.length) {
       db.collection("Users")
-      .where("email", "==", currentEmail)
+      .doc(MyInterests[0].id)
       .update(
           {
-            interests: firebase.firestore.FieldValue.arrayUnion(newInterest),
+            interests: firebase.firestore.FieldValue.arrayUnion(tagselected),
           },
           { merge: true }
         );
@@ -58,49 +53,6 @@ const AddInterest = ({ navigation }) => {
     setfilterdIntestests(interests);
   };
 
-  console.log("my interest---->", MyInterests);
-
-  // const addInterestToMyProfile = () => {
-  //   useEffect(() => {
-  //     auth().onAuthStateChanged((user) => {
-  //       if (user) {
-  //         let email = user.email.charAt(0).toUpperCase() + user.email.slice(1);
-  //         setEmail(email);
-  //         // setMyInterests();
-  //       }
-  //     });
-  //   }, []).then(
-  //     db
-  //       .collection("Users")
-  //       .where("email", "==", email)
-  //       .onSnapshot((snapshot) => {
-  //         setUserData(
-  //           snapshot.docs.map((doc) => ({
-  //             id: doc.id,
-  //             data: doc.data(),
-  //           }))
-  //         );
-  //       })
-  //   );
-
-  //   console.log('userdata--->',userData[0].interests)
-  //   //     .get()
-  //   //     .then(function (querySnapshot) {
-  //   //       querySnapshot.forEach(function (document) {
-  //   //         document.update({
-  //   //           interests: [...user.interests,newInterest],
-  //   //         });
-  //   //       });
-  //   //     })
-  //   // );
-
-  //   // onSnapshot((snapshot)=> {
-  //   //   setUserData(snapshot.docs.map(doc=> ({
-  //   //     id: doc.id,
-  //   //     data: doc.data(),
-  //   //   })))
-  //   // })
-  // };
 
   console.log("MyInterests", MyInterests);
 
@@ -111,6 +63,7 @@ const AddInterest = ({ navigation }) => {
   //   }
   //   setfilterdIntestests(interests);
   // };
+
   const searchTag = () => {
     if (newInterest.length) {
       const tags = interests.filter((interest) =>
@@ -122,12 +75,13 @@ const AddInterest = ({ navigation }) => {
     }
   };
 
+
   return (
     <View style={styles.container}>
       <StatusBar style="default" />
       <View style={styles.inputInterest}>
         <Input
-          placeholder="Type your interest here..."
+          placeholder="search interest..."
           autoFocus
           type="text"
           value={newInterest}
@@ -135,23 +89,30 @@ const AddInterest = ({ navigation }) => {
           onChange={searchTag}
         />
       </View>
-      <Button
-        title="Add"
-        containerStyle={styles.button}
-        type="outline"
-        // onPress={add}
-        onPress = {addInterestToMyProfile}
-      />
-
+      
       <View style={styles.interestTagContainer}>
         <ScrollView>
           {filterdIntestests.map((interest, index) => (
-            <TouchableOpacity key={index}>
+            <TouchableOpacity key={index}  
+             onPress={()=>{
+              if (newInterest.length) {
+                db.collection("Users")
+                .doc(MyInterests[0].id)
+                .update(
+                    {
+                      interests: firebase.firestore.FieldValue.arrayUnion(tagselected),
+                    },
+                    { merge: true }
+                  );
+              }
+              setTagSelected(interest)
+             }
+              
+            }
+            >
               <Text
                 style={styles.interestTag}
-                onPress={() => {
-                  setTagSelected(interest);
-                }}
+                  
               >
                 {interest}
               </Text>
@@ -190,16 +151,16 @@ const styles = StyleSheet.create({
   interestTag: {
     borderRadius: 10,
     fontSize: 20,
-    padding: 3,
-    marginLeft: 35,
+    padding: 5,
+    marginTop: 20,
     width: 300,
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-    borderWidth: 10,
-    // borderColor: "#BF90B1",
+    borderWidth: 2,
+    borderColor: "lightgrey",
     backgroundColor: "white",
-    borderColor: "white",
+    // borderColor: "white",
     // color:'white',
   },
   inputInterest: {
@@ -209,7 +170,7 @@ const styles = StyleSheet.create({
     width: 300,
     marginBottom: 30,
     marginTop: 0,
-    backgroundColor: "black",
+    // backgroundColor: "black",
     // borderWidth: 3,
   },
 });

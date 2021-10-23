@@ -7,6 +7,9 @@ import {
 	SafeAreaView,
 	Image,
 	TouchableOpacity,
+	Keyboard,
+	Platform,
+	TouchableWithoutFeedback,
 } from 'react-native';
 import { Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
