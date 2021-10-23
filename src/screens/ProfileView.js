@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { auth, db } from '../../firebase';
@@ -42,7 +42,7 @@ const ProfileView = ({ navigation }) => {
   const showProfile= () => {
     if (!isLoading)
     {return (
-      <>
+      <SafeAreaView style={styles.container}>
 
       <Text style={styles.profileName}>Hello, {userData?.[0]?.data?.name}! </Text>
       <>
@@ -61,7 +61,7 @@ const ProfileView = ({ navigation }) => {
           </View>
         ))}
       </ScrollView>
-      </>
+      </SafeAreaView>
     )
     } else {return (
       (
@@ -86,10 +86,17 @@ const ProfileView = ({ navigation }) => {
 const styles = StyleSheet.create({
 	button: {
 		backgroundColor: '#1F142E',
-		borderColor: '#1F142E',
+		borderColor: '#bf90b1',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,
+	},
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#e6e8da',
+		padding: 20,
 	},
 	imagestyle: {
 		alignItems: 'flex-end',
