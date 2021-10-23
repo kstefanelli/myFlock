@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Input, Button } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Stories from "../components/Stories";
@@ -9,11 +18,11 @@ import { auth, db } from "../../firebase";
 import { useFocusEffect } from "@react-navigation/native";
 import * as firebase from 'firebase';;
 
-const AddInterest = ({ navigation }) => {
+const AddInterest = ({ navigation}) => {
   const [newInterest, setNewInterest] = useState("");
   const [tagBagroundColor, setTagBagroundColor] = useState("");
   const [tagselected, setTagSelected] = useState('');
-  const [filterdIntestests, setfilterdIntestests] = useState(interests);
+  const [filterdIntestests, setfilterdIntestests] = useState([]);
   const [email, setEmail] = useState("");
   const [MyInterests, setMyInterests] = useState([]);
   const [filltext,setFillText]=useState('');
@@ -23,6 +32,7 @@ const AddInterest = ({ navigation }) => {
     auth.currentUser.email.slice(1);
   // on first render sets myInterest
   useEffect(() => {
+
     db.collection("Users")
       .where("email", "==", currentEmail)
       .onSnapshot((snapshot) => {
@@ -37,24 +47,6 @@ const AddInterest = ({ navigation }) => {
       });
   }, []);
 
-  const addInterestToMyProfile = () => {
-    console.log("set tag ---->", tagselected)
-    // add interest in firebase
-    if (newInterest.length) {
-      db.collection("Users")
-      .doc(MyInterests[0].id)
-      .update(
-          {
-            interests: firebase.firestore.FieldValue.arrayUnion(tagselected),
-          },
-          { merge: true }
-        );
-    }
-    setfilterdIntestests(interests);
-  };
-
-
-  console.log("MyInterests", MyInterests);
 
   // const add = () => {
   //   // add interest in firebase
@@ -65,7 +57,7 @@ const AddInterest = ({ navigation }) => {
   // };
 
   const searchTag = () => {
-    if (newInterest.length) {
+    if (newInterest.length>0) {
       const tags = interests.filter((interest) =>
         interest.toLowerCase().includes(newInterest.toLowerCase())
       );
@@ -77,6 +69,14 @@ const AddInterest = ({ navigation }) => {
 
 
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={{
+      flex: 1,
+    }}
+    keyboardVerticalOffset={90}
+  >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <StatusBar style="default" />
       <View style={styles.inputInterest}>
@@ -106,6 +106,9 @@ const AddInterest = ({ navigation }) => {
                   );
               }
               setTagSelected(interest)
+              navigation.navigate('Profile')
+              setfilterdIntestests([]);
+              setNewInterest('')
              }
               
             }
@@ -126,6 +129,8 @@ const AddInterest = ({ navigation }) => {
         </ScrollView>
       </View>
     </View>
+      </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
   );
 };
 
