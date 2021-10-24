@@ -1,26 +1,51 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useContext, useState } from 'react';
+import { KeyboardAvoidingView, StyleSheet, TouchableOpacity, View, Alert } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
+import { auth, db } from '../../firebase';
 
 const EditProfileScreen = ({ navigation }) => {
+	const {user, logout } = useContext(AuthContext)
 	const [name, setName] = useState('');
 	const [pronouns, setPronouns] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [bio, setBio] = useState('');
 
-	//button on line 51 needs to be hooked up with more logic on line 16, defining submit
-	//touchable opacity link needs to be added to stack navigator
-	const submit = () => {
-		db.collection('Users').update({
+	const getUser = async() => {
+		const currentUser = await db.collection('Users').doc(user.email).get().then((documentSnapshot) => {
+			if(documentSnapshot.exists) {
+				console.log("User Data: ", documentSnapshot.data())
+				const data = documentSnapshot.data();
+				setName(data.name);
+				setPronouns(data.pronouns);
+				setImageUrl(data.imageUrl);
+				setBio(data.bio);
+			}
+
+		})
+	const submit = (profile) => {
+		db.collection('Users').doc(user.email).update({
 			name: name,
 			imageUrl: imageUrl,
 			bio: bio,
 			pronouns: pronouns,
 		})
-		.catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));
+		.then(() => {
+			console.log("Profile Updated");
+			navigation.navigate('Profile');
+		})
+		.catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));;
+
+		//if user is logged in, update their profile
+		// db.collection('Users').doc(userRef).update({
+		// 	name: name,
+		// 	imageUrl: imageUrl,
+		// 	bio: bio,
+		// 	pronouns: pronouns,
+		// })
+		// .catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));
 	};
 
 	return (
