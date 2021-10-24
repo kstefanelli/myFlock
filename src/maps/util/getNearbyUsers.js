@@ -9,7 +9,7 @@ import TestFile from '../TestFile';
 const getNearbyUsers = ({ route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [location, setLocation] = useState('');
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState();
 	const [myInterests, setMyInterests] = useState([]);
 
 	const currentEmail =
@@ -23,14 +23,12 @@ const getNearbyUsers = ({ route }) => {
 	//param passed from getCurrentLocation
 	const range = getGeohashRange(latitude, longitude, givenRadius);
 
-	//CONSOLE LOGS
-	console.log('getNearbyUsers rendered');
-
 	if (!auth.currentUser) {
 		return <Text>Please login or sign up to see the map!</Text>;
 	} else {
 		//componentDidMount - setLocation, setMyInterests
 		useEffect(() => {
+			setIsLoading(true);
 			console.log('componentDidMount');
 			async function fetchMyUserData() {
 				try {
@@ -49,8 +47,10 @@ const getNearbyUsers = ({ route }) => {
 			return componentWillUnmount();
 		}, []);
 
-		/* 		console.log('this is location>', location);
-		console.log('interests>', myInterests); */
+		console.log('this is location>', location);
+		console.log('interests>', myInterests);
+		console.log('nearbyUsers>', NearbyUsersData);
+
 		//componentDidUpdate - setNearbyUsersData
 		useEffect(() => {
 			console.log('componentDidUpdate');
@@ -72,7 +72,7 @@ const getNearbyUsers = ({ route }) => {
 			return unsubscribe();
 		}, [isLoading]);
 	}
-
+	/* 
 	const ListOfUsersData = () => {
 		NearbyUsersData.map((objElement) => ({
 			name: objElement.data.name,
@@ -82,20 +82,15 @@ const getNearbyUsers = ({ route }) => {
 			longitude: objElement.data.longitude,
 			image: objElement.data.imageUrl,
 		}));
-	};
-
-	/* 	console.log('getNearbyUsers', NearbyUsersData);
-	 */ console.log('getNearbyUsers count', NearbyUsersData.length);
-
-	console.log('getNearbyUsers array exists', ListOfUsersData.length);
+	}; */
 
 	const AnimateMarker = () => {
-		return <TestFile ArrayOfUsers={ListOfUsersData} latitude={latitude} longitude={longitude} />;
+		return <TestFile ArrayOfUsers={NearbyUsersData} latitude={latitude} longitude={longitude} />;
 	};
 
 	return (
 		<View style={styles.container}>
-			{ListOfUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
+			{NearbyUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
 		</View>
 	);
 };
