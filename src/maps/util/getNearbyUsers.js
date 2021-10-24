@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import { auth, db } from '../../../firebase';
 import geohash from 'ngeohash';
-
-import { useFocusEffect } from '@react-navigation/native';
 import getGeohashRange from './getGeoHashRange';
 import AnimatedMarker from '../AnimatedMarker';
 import TestFile from '../TestFile';
@@ -51,8 +49,8 @@ const getNearbyUsers = ({ route }) => {
 			return componentWillUnmount();
 		}, []);
 
-		console.log('this is location>', location);
-		console.log('interests>', myInterests);
+		/* 		console.log('this is location>', location);
+		console.log('interests>', myInterests); */
 		//componentDidUpdate - setNearbyUsersData
 		useEffect(() => {
 			console.log('componentDidUpdate');
@@ -75,30 +73,29 @@ const getNearbyUsers = ({ route }) => {
 		}, [isLoading]);
 	}
 
-	/* 	const nearbyUsersLocationArr = NearbyUsersData.map((objElement) => ({
-		name: objElement.data.name,
-		interests: objElement.data.interests,
-		location: objElement.data.location,
-		latitude: objElement.data.latitude,
-		longitude: objElement.data.longitude,
-		image: objElement.data.imageUrl,
-	})); */
+	const ListOfUsersData = () => {
+		NearbyUsersData.map((objElement) => ({
+			name: objElement.data.name,
+			interests: objElement.data.interests,
+			location: objElement.data.location,
+			latitude: objElement.data.latitude,
+			longitude: objElement.data.longitude,
+			image: objElement.data.imageUrl,
+		}));
+	};
 
-	/* 	const AnimateMarker = () => {
-		return (
-			<AnimatedMarker
-				nearbyUsersLocation={nearbyUsersLocationArr}
-				latitude={latitude}
-				longitude={longitude}
-			/>
-		);
-	}; */
+	/* 	console.log('getNearbyUsers', NearbyUsersData);
+	 */ console.log('getNearbyUsers count', NearbyUsersData.length);
 
-	/* 	console.log('>> my array<<<', NearbyUsersData);
-	 */
+	console.log('getNearbyUsers array exists', ListOfUsersData.length);
+
+	const AnimateMarker = () => {
+		return <TestFile ArrayOfUsers={ListOfUsersData} latitude={latitude} longitude={longitude} />;
+	};
+
 	return (
 		<View style={styles.container}>
-			<Text>Fetching Nearby Users</Text>
+			{ListOfUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
 		</View>
 	);
 };
