@@ -16,6 +16,8 @@ const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	//create new authorized user
+	//should navigate to AddInterest
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
@@ -26,6 +28,7 @@ const LoginScreen = ({ navigation }) => {
 		return unsubscribe;
 	}, []);
 
+	//user has been created
 	const signIn = () => {
 		auth.signInWithEmailAndPassword(email, password);
 

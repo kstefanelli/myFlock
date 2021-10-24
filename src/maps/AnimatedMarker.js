@@ -38,7 +38,7 @@ const AnimatedMarker = (props) => {
 	}, [latitude, longitude]);
 
 	const nearbyUsersLocation = props.nearbyUsersLocation;
-	console.log('AnimatedMarker', nearbyUsersLocation);
+	console.log('>>>narbyUsersLocation array<<<', nearbyUsersLocation);
 
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
@@ -47,7 +47,10 @@ const AnimatedMarker = (props) => {
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
-				coordinate={{ latitude: element.latitude, longitude: element.longitude }}
+				coordinate={{
+					latitude: latitude,
+					longitude: longitude,
+				}}
 				description={element.name}
 			/>
 		));
@@ -69,7 +72,8 @@ const AnimatedMarker = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<MapView
+			<Text>Testing 123</Text>
+			{/* 			<MapView
 				style={styles.container}
 				initialRegion={mapRegion}
 				showsUserLocation={true}
@@ -85,7 +89,7 @@ const AnimatedMarker = (props) => {
 					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
 				{mapMarkers()}
-			</MapView>
+			</MapView> */}
 		</View>
 	);
 };

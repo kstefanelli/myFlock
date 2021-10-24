@@ -10,54 +10,81 @@ import TestFile from '../TestFile';
 
 const getNearbyUsers = ({ route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
-	//GEOHASHING
-	//encode - need to return my user's specific location
-	const { latitude, longitude } = route.params;
-	const myGeohash = geohash.encode(latitude, longitude);
+	const [location, setLocation] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
+	const [myInterests, setMyInterests] = useState([]);
 
+	const currentEmail =
+		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
+	//GEOHASHING
+	const { latitude, longitude } = route.params;
+	//encode - need to return my user's specific location
+	const myGeohash = geohash.encode(latitude, longitude);
 	//range - return nearby geohashes given radius
 	const givenRadius = 5;
 	//param passed from getCurrentLocation
 	const range = getGeohashRange(latitude, longitude, givenRadius);
+
+	//CONSOLE LOGS
+	console.log('getNearbyUsers rendered');
+
 	if (!auth.currentUser) {
 		return <Text>Please login or sign up to see the map!</Text>;
 	} else {
-		useFocusEffect(
-			React.useCallback(() => {
-				/* 				db.collection('Users')
-					.doc(currentUserId)
-					.get()
-					.then(async (snapshot) => {
-						const user = snapshot.data;
-						const interests = user.interests;
-					}); */
-				console.log('useEffect');
-				const unsubscribe = db
-					.collection('Users')
-					.where('location', '==', 'Seattle')
-					.onSnapshot((snapshot) => {
-						setNearbyUsersData(
-							snapshot.docs.map((doc) => ({
-								id: doc.id,
-								data: doc.data(),
-							}))
-						);
-					});
-				return unsubscribe;
-			}, [])
-		);
+		//componentDidMount - setLocation, setMyInterests
+		useEffect(() => {
+			console.log('componentDidMount');
+			async function fetchMyUserData() {
+				try {
+					db.collection('Users')
+						.where('email', '==', currentEmail)
+						.onSnapshot((snapshot) => {
+							setLocation(snapshot.docs[0].data().location);
+							setMyInterests(snapshot.docs[0].data().interests);
+						});
+				} catch (err) {
+					console.log('Reached an error');
+				}
+			}
+			fetchMyUserData();
+			const componentWillUnmount = () => setIsLoading(false);
+			return componentWillUnmount();
+		}, []);
+
+		console.log('this is location>', location);
+		console.log('interests>', myInterests);
+		//componentDidUpdate - setNearbyUsersData
+		useEffect(() => {
+			console.log('componentDidUpdate');
+			const unsubscribe = () => {
+				if (location !== '' && NearbyUsersData.length < 1) {
+					db.collection('Users')
+						.where('location', '==', location)
+						.where('interests', 'array-contains-any', myInterests)
+						.onSnapshot((snapshot) => {
+							setNearbyUsersData(
+								snapshot.docs.map((doc) => ({
+									id: doc.id,
+									data: doc.data(),
+								}))
+							);
+						});
+				}
+			};
+			return unsubscribe();
+		}, [isLoading]);
 	}
 
-	const nearbyUsersLocationArr = NearbyUsersData.map((objElement) => ({
+	/* 	const nearbyUsersLocationArr = NearbyUsersData.map((objElement) => ({
 		name: objElement.data.name,
 		interests: objElement.data.interests,
 		location: objElement.data.location,
 		latitude: objElement.data.latitude,
 		longitude: objElement.data.longitude,
 		image: objElement.data.imageUrl,
-	}));
+	})); */
 
-	const AnimateMarker = () => {
+	/* 	const AnimateMarker = () => {
 		return (
 			<AnimatedMarker
 				nearbyUsersLocation={nearbyUsersLocationArr}
@@ -65,12 +92,13 @@ const getNearbyUsers = ({ route }) => {
 				longitude={longitude}
 			/>
 		);
-	};
-	console.log('AnimatedMarker nearbyUsers', nearbyUsersLocationArr);
+	}; */
 
+	/* 	console.log('>> my array<<<', NearbyUsersData);
+	 */
 	return (
 		<View style={styles.container}>
-			{nearbyUsersLocationArr ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
+			<Text>Fetching Nearby Users</Text>
 		</View>
 	);
 };
