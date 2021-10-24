@@ -6,7 +6,7 @@ import getGeohashRange from './getGeoHashRange';
 import AnimatedMarker from '../AnimatedMarker';
 import TestFile from '../TestFile';
 
-const getNearbyUsers = ({ route }) => {
+const getNearbyUsers = ({ navigation, route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [location, setLocation] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
@@ -28,9 +28,10 @@ const getNearbyUsers = ({ route }) => {
 	} else {
 		//componentDidMount - setLocation, setMyInterests
 		useEffect(() => {
-			setIsLoading(true);
 			console.log('componentDidMount');
+			console.log('IS LOADING BEFORE', isLoading);
 			async function fetchMyUserData() {
+				console.log('IS LOADING DURING', isLoading);
 				try {
 					db.collection('Users')
 						.where('email', '==', currentEmail)
@@ -38,6 +39,9 @@ const getNearbyUsers = ({ route }) => {
 							setLocation(snapshot.docs[0].data().location);
 							setMyInterests(snapshot.docs[0].data().interests);
 						});
+					console.log('IS LOADING AT THE END', isLoading);
+					/* 					setIsLoading(false);
+					 */
 				} catch (err) {
 					console.log('Reached an error');
 				}
@@ -45,6 +49,11 @@ const getNearbyUsers = ({ route }) => {
 			fetchMyUserData();
 			const componentWillUnmount = () => setIsLoading(false);
 			return componentWillUnmount();
+
+			/* 			//forces the render again
+			let timer = setInterval(() => setIsLoading(false), 3000);
+			//removes the timer
+			return () => clearInterval(timer); */
 		}, []);
 
 		console.log('this is location>', location);
@@ -54,6 +63,8 @@ const getNearbyUsers = ({ route }) => {
 		useEffect(() => {
 			console.log('componentDidUpdate');
 			const unsubscribe = () => {
+				setIsLoading(true);
+				console.log('IS LOADING DIDUPDATE', isLoading);
 				if (location !== '' && NearbyUsersData.length < 1) {
 					db.collection('Users')
 						.where('location', '==', location)
@@ -67,6 +78,7 @@ const getNearbyUsers = ({ route }) => {
 							);
 						});
 				}
+				setIsLoading(false);
 			};
 			return unsubscribe();
 		}, [isLoading]);
@@ -87,12 +99,17 @@ const getNearbyUsers = ({ route }) => {
 	}; */
 
 	const AnimateMarker = () => {
-		return <TestFile ArrayOfUsers={NearbyUsersData} latitude={latitude} longitude={longitude} />;
+		navigation.navigate('TestFile', {
+			ArrayOfUsers: NearbyUsersData,
+			latitude: latitude,
+			longitude: longitude,
+		});
 	};
 
 	return (
 		<View style={styles.container}>
-			{NearbyUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
+			{/* {NearbyUsersData.length ? AnimateMarker() :  */}
+			<Text>Fetching Nearby Users</Text>
 		</View>
 	);
 };
