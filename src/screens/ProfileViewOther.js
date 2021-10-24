@@ -3,19 +3,19 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import { Button } from 'react-native-elements'
+//{USERS} is only for if you need to populate with dummy data once hooked up, delete this line
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
 
-const ProfileViewOther = () => {
+const ProfileViewOther = ({ navigation, route }) => {
 
-//line 12 needs to be connected to the database 'Users'
-	// var viewedUser = match user by email;
+	viewedUser = route.params.user[0].data;
 
 
 	return (
 		<View style={styles.profileView}>
 
-			<Text style={styles.profileName}>Meet {viewedUser.displayName}!</Text>
+			<Text style={styles.profileName}>Meet {viewedUser.name}!</Text>
 			<Image source={{ uri: viewedUser.photoURL }} style={styles.profileImage} />
 			<>
 				<Text style={{fontWeight: 'bold'}}>Bio: </Text>
@@ -33,9 +33,7 @@ const ProfileViewOther = () => {
                     </View>
                 ))}
             </ScrollView>
-			{/* This next line commented out for the same reason as it is in profileView */}
-			{/* <Text>Location: {viewedUser.location.name}</Text> */}
-			<Button buttonStyle={styles.button}  title="Start Chatting" />
+			<Button buttonStyle={styles.button}  onPress={startNewChat} title="Start Chatting" />
 		</View>
 
 	);

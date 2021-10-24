@@ -11,7 +11,7 @@ const EditProfileScreen = ( { navigation, route }) => {
 
 	const userId = route.params.user[0].id
 	const userData = route.params.user[0].data
-	console.log("DATA: ", userData)
+
 	const [name, setName] = useState(userData.name);
 	const [pronouns, setPronouns] = useState(userData.pronouns);
 	const [imageUrl, setImageUrl] = useState(userData.imageUrl);
@@ -32,14 +32,6 @@ const EditProfileScreen = ( { navigation, route }) => {
 		})
 		navigation.navigate('Profile');;
 
-		//if user is logged in, update their profile
-		// db.collection('Users').doc(userRef).update({
-		// 	name: name,
-		// 	imageUrl: imageUrl,
-		// 	bio: bio,
-		// 	pronouns: pronouns,
-		// })
-		// .catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));
 	};
 
 	return (
