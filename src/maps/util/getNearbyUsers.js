@@ -9,7 +9,7 @@ import TestFile from '../TestFile';
 const getNearbyUsers = ({ route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [location, setLocation] = useState('');
-	const [isLoading, setIsLoading] = useState();
+	const [isLoading, setIsLoading] = useState(true);
 	const [myInterests, setMyInterests] = useState([]);
 
 	const currentEmail =
@@ -49,7 +49,6 @@ const getNearbyUsers = ({ route }) => {
 
 		console.log('this is location>', location);
 		console.log('interests>', myInterests);
-		console.log('nearbyUsers>', NearbyUsersData);
 
 		//componentDidUpdate - setNearbyUsersData
 		useEffect(() => {
@@ -72,6 +71,9 @@ const getNearbyUsers = ({ route }) => {
 			return unsubscribe();
 		}, [isLoading]);
 	}
+
+	console.log('nearby users>', NearbyUsersData);
+
 	/* 
 	const ListOfUsersData = () => {
 		NearbyUsersData.map((objElement) => ({
