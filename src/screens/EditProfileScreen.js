@@ -6,37 +6,31 @@ import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 import { auth, db } from '../../firebase';
 
-const EditProfileScreen = ({ navigation }) => {
-	const {user, logout } = useContext(AuthContext)
-	const [name, setName] = useState('');
-	const [pronouns, setPronouns] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [bio, setBio] = useState('');
+const EditProfileScreen = ( { navigation, route }) => {
+	console.log("route", route.params.user)
 
-	const getUser = async() => {
-		const currentUser = await db.collection('Users').doc(user.email).get().then((documentSnapshot) => {
-			if(documentSnapshot.exists) {
-				console.log("User Data: ", documentSnapshot.data())
-				const data = documentSnapshot.data();
-				setName(data.name);
-				setPronouns(data.pronouns);
-				setImageUrl(data.imageUrl);
-				setBio(data.bio);
-			}
+	const userId = route.params.user[0].id
+	const userData = route.params.user[0].data
+	console.log("DATA: ", userData)
+	const [name, setName] = useState(userData.name);
+	const [pronouns, setPronouns] = useState(userData.pronouns);
+	const [imageUrl, setImageUrl] = useState(userData.imageUrl);
+	const [bio, setBio] = useState(userData.bio);
+	console.log("From PARAMS ID: ", userId)
 
-		})
+
 	const submit = (profile) => {
-		db.collection('Users').doc(user.email).update({
-			name: name,
-			imageUrl: imageUrl,
-			bio: bio,
-			pronouns: pronouns,
+
+		db.collection('Users')
+
+
+		.doc(userId).update({
+			name: name || userData.name,
+			imageUrl: imageUrl || userData.imageUrl,
+			bio: bio || userData.bio,
+			pronouns: pronouns || userData.pronouns,
 		})
-		.then(() => {
-			console.log("Profile Updated");
-			navigation.navigate('Profile');
-		})
-		.catch((error)=> alert(error.message)).then(()=> navigation.navigate('Profile'));;
+		navigation.navigate('Profile');;
 
 		//if user is logged in, update their profile
 		// db.collection('Users').doc(userRef).update({
@@ -78,7 +72,7 @@ const EditProfileScreen = ({ navigation }) => {
 				<Input placeholder="Bio" type="text" value={bio} onChangeText={(text) => setBio(text)} />
 			</View>
 
-			<Button buttonStyle={styles.button} onPress={submit} title="Submit" />
+			<Button buttonStyle={styles.button} disabled={!name||!imageUrl || !pronouns} onPress={submit} title="Submit" />
 
 			<TouchableOpacity
 				style={{ alignItems: 'center', justifyContent: 'center', marginTop: 5 }}

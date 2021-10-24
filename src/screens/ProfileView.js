@@ -80,7 +80,7 @@ const ProfileView = ({ navigation }) => {
 			{showProfile()}
 			<TouchableOpacity
 				style={{ alignItems: 'center', justifyContent: 'center', marginTop: 5 }}
-				onPress={() => navigation.navigate('Edit Profile')}
+				onPress={() => navigation.navigate('Edit Profile', { user: userData })}
 			>
 				<Text style={{ fontSize: 20, color: '#e8984e', textDecorationLine: 'underline' }}>
 					Edit Your Profile
