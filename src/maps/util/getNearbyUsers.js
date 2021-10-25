@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { auth, db } from '../../../firebase';
 import geohash from 'ngeohash';
 import getGeohashRange from './getGeoHashRange';
 import AnimatedMarker from '../AnimatedMarker';
 import TestFile from '../TestFile';
+import { Feather} from '@expo/vector-icons';
 
 const getNearbyUsers = ({ navigation, route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [location, setLocation] = useState('');
 	const [myInterests, setMyInterests] = useState([]);
+	const [zoomRadius, setZoomRadius] = useState(5);
 
 	const currentEmail =
 		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
@@ -22,6 +25,8 @@ const getNearbyUsers = ({ navigation, route }) => {
 	const givenRadius = 5;
 	//param passed from getCurrentLocation
 	const range = getGeohashRange(latitude, longitude, givenRadius);
+
+
 
 	if (!auth.currentUser) {
 		return <Text>Please login or sign up to see the map!</Text>;
@@ -56,6 +61,7 @@ const getNearbyUsers = ({ navigation, route }) => {
 		/* 		console.log('this is location>', location);
 		console.log('interests>', myInterests); */
 
+
 		//componentDidUpdate - setNearbyUsersData
 		useEffect(() => {
 			console.log('componentDidUpdate');
@@ -79,6 +85,8 @@ const getNearbyUsers = ({ navigation, route }) => {
 			};
 			return unsubscribe();
 		}, [isLoading]);
+
+
 	}
 
 	/* 	console.log('nearby users>', NearbyUsersData);
@@ -103,9 +111,46 @@ const getNearbyUsers = ({ navigation, route }) => {
 				ListOfUsersObject={createUsersList()}
 				latitude={latitude}
 				longitude={longitude}
+				zoomRadius={zoomRadius}
 			/>
 		);
 	};
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			title: 'Find Nearby Users',
+			headerStyle: {
+				backgroundColor: '#FFF',
+			},
+			headerTitleStyle: {
+				color: 'black',
+			},
+			headerTintColor: 'white',
+			headerRight: () => (
+				<View
+					style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						width: 80,
+						marginRight: 25,
+					}}
+				>
+					<Text style={{fontWeight:"500", fontSize:16}}> Zoom </Text>
+					<TouchableOpacity onPress={() => {zoomIn()}} activeOpacity={0.5}>
+					<Feather name="zoom-in" size={20} color="black" />
+					</TouchableOpacity>
+					<TouchableOpacity onPress={() => {zoomOut()}} activeOpacity={0.5}>
+					<Feather name="zoom-out" size={20} color="black" />
+					</TouchableOpacity>
+				</View>
+			),
+		});
+	}, [navigation]);
+
+	 const zoomIn = () => {console.log("zoomin called", zoomRadius);
+	 zoomRadius<=100? setZoomRadius(zoomRadius + 10) : alert('You cannot zoom in further.')};
+	const zoomOut = () => {console.log("zoom out called", zoomRadius);
+ zoomRadius > 5? setZoomRadius(zoomRadius - 10) : alert('You cannot zoom out further.')}
 
 	/* 	console.log(isLoading);
 	 */ return (
