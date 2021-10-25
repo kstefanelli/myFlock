@@ -53,10 +53,10 @@ const AnimatedMarker = (props) => {
 					longitude: element.longitude,
 				}}
 				title={element.name}
+				image={require('../../assets/user_profile_photos/PearlMann.png')}
 			/>
 		));
 	};
-
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
 	useEffect(() => {
@@ -71,7 +71,7 @@ const AnimatedMarker = (props) => {
 		);
 	}, [mapRegion]);
 
-	console.log('>>>> AnimatedMarker object', ListOfUsersObject);
+	console.log('>>>> AnimatedMarker object', ListOfUsersObject.length);
 
 	return (
 		<View style={styles.container}>
