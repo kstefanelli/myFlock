@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 const TestFile = (props) => {
-	const nearbyUsersDataArr = props.nearbyUsersData;
-	const nearbyUsersLocationArr = nearbyUsersDataArr.map((objElement) => ({
-		location: objElement.data.location,
-		latitude: objElement.data.latitude,
-		longitude: objElement.data.longitude,
-	}));
-	return <Text>This works in TestFile</Text>;
+	const { ListOfUsersObject } = props;
+	console.log('array in TestFile', typeof ListOfUsersObject);
+	const { latitude, longitude } = props;
+	return <Text>Here is my array: {JSON.stringify(ListOfUsersObject)}</Text>;
 };
 
 export default TestFile;

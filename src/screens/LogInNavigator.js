@@ -6,6 +6,8 @@ import ProfileView from './ProfileView';
 import LoginScreen from './Login';
 import RegisterScreen from './RegisterScreen';
 import TabNavigator from '../navigation/TabNavigator';
+import AddInterest from './AddInterest';
+import TestFile from '../maps/TestFile';
 
 //ProfileView will show Tabs
 //showTabNavigator --> home will be Profile
@@ -18,6 +20,8 @@ const LogInNavigator = (props) => {
 				<Stack.Screen name="Login" component={LoginScreen} />
 				<Stack.Screen name="Register" component={RegisterScreen} />
 				<Stack.Screen name="Tab" component={TabNavigator} />
+				<Stack.Screen name="Add Interest" component={AddInterest} />
+				<Stack.Screen name="Test" component={TestFile} />
 			</>
 		</Stack.Navigator>
 	);

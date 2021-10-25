@@ -35,12 +35,12 @@ export const USERS = [
 	},
 	{
 		userId: 125,
-		username: 'Hazel',
+		username: 'SuePepper',
 		age: 77,
 		location: {
 			name: 'New York City',
 			latitude: 40.77540368,
-			longitude: 73.8908428,
+			longitude: -73.8908428,
 		},
 		pronouns: 'she/her/hers',
 		profileImage:
@@ -72,7 +72,7 @@ export const USERS = [
 	},
 	{
 		id: 127,
-		username: 'Lydia',
+		username: 'Marlo',
 		age: 85,
 		location: {
 			name: 'New York City',
@@ -87,7 +87,7 @@ export const USERS = [
 	},
 	{
 		id: 1,
-		username: 'Ms. Irving Terry',
+		username: 'PearlWhite',
 		age: 24,
 		location: {
 			name: 'New York City',

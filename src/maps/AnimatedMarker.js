@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Circle, Image } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView, { Marker, Callout, Circle } from 'react-native-maps';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 const AnimatedMarker = (props) => {
 	const mapView = React.createRef();
 	const radiusMiles = 3; //miles
 	const radiusMeters = radiusMiles * 1609.34;
 
+	//props
+	const { ListOfUsersObject } = props;
 	const { latitude, longitude } = props;
+
 	const { width, height } = Dimensions.get('window');
 	const ASPECT_RATIO = width / height;
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
@@ -37,22 +40,23 @@ const AnimatedMarker = (props) => {
 		});
 	}, [latitude, longitude]);
 
-	const nearbyUsersLocation = props.nearbyUsersLocation;
-	console.log('AnimatedMarker', nearbyUsersLocation);
-
 	//we can return this function inside the return() because it returns a component
 	const mapMarkers = () => {
 		//received array of nearby user locations from getNearbyLocations
-		return nearbyUsersLocation.map((element, idx) => (
+
+		return ListOfUsersObject.map((element, idx) => (
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
-				coordinate={{ latitude: element.latitude, longitude: element.longitude }}
-				description={element.name}
+				coordinate={{
+					latitude: element.latitude,
+					longitude: element.longitude,
+				}}
+				title={element.name}
+				image={require('../../assets/user_profile_photos/PearlMann.png')}
 			/>
 		));
 	};
-
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
 	useEffect(() => {
@@ -66,6 +70,8 @@ const AnimatedMarker = (props) => {
 			2000
 		);
 	}, [mapRegion]);
+
+	console.log('>>>> AnimatedMarker object', ListOfUsersObject.length);
 
 	return (
 		<View style={styles.container}>
@@ -84,7 +90,7 @@ const AnimatedMarker = (props) => {
 					fillColor={'rgba(230,238,255,0.75)'}
 					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
-				{mapMarkers()}
+				{ListOfUsersObject ? mapMarkers() : <Text>Loading Users...</Text>}
 			</MapView>
 		</View>
 	);
@@ -105,5 +111,33 @@ const styles = StyleSheet.create({
 	map: {
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
+	},
+	bubble: {
+		flexDirection: 'column',
+		alignSelf: 'flex-start',
+		backgroundColor: '#fff',
+		borderRadius: 6,
+		borderColor: '#ccc',
+		borderWidth: 0.5,
+		padding: 15,
+		width: 150,
+	},
+	// Arrow below the bubble
+	arrow: {
+		backgroundColor: 'transparent',
+		borderColor: 'transparent',
+		borderTopColor: '#fff',
+		borderWidth: 16,
+		alignSelf: 'center',
+		marginTop: -32,
+	},
+	arrowBorder: {
+		backgroundColor: 'transparent',
+		borderColor: 'transparent',
+		borderTopColor: '#007a87',
+		borderWidth: 16,
+		alignSelf: 'center',
+		marginTop: -0.5,
+		// marginBottom: -15
 	},
 });
