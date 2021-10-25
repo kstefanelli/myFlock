@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
-  SafeAreaView,
   Image,
   TouchableOpacity,
   Keyboard,
