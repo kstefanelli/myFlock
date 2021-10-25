@@ -2,29 +2,17 @@ import React from 'react';
 import { Image, View, StyleSheet, Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AddInterest from '../screens/AddInterest';
-import LoginScreen from '../screens/Login';
-import Map from '../screens/Map';
+import ProfileView from '../screens/ProfileView';
+import EditProfileScreen from '../screens/EditProfileScreen';
 
-const StackNavigator = (props) => {
+const ProfileNavigator = (props) => {
 	const Stack = createStackNavigator();
 
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
-			<Stack.Screen
-				name="Map"
-				component={Map}
-				options={{
-					title: 'myFlock',
-					headerTitle: (props) => <LogoTitle {...props} />,
-					headerRight: () => (
-						<Button
-							onPress={() => navigation.navigate('AddInterest')}
-							title="interest"
-							color="#00cc00"
-						/>
-					),
-				}}
-			/>
+			<Stack.Screen name="Profile View" component={ProfileView} />
+			<Stack.Screen name="Edit Profile" component={EditProfileScreen} />
+			<Stack.Screen name="Add Interest" component={AddInterest} />
 		</Stack.Navigator>
 	);
 };
@@ -38,4 +26,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default StackNavigator;
+export default ProfileNavigator;

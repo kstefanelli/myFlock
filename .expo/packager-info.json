@@ -2,9 +2,6 @@
   "expoServerPort": null,
   "devToolsPort": 19002,
   "packagerPort": 19000,
-  "expoServerNgrokUrl": "https://ac-3a8.anonymous.myflock.exp.direct",
-  "packagerNgrokUrl": "https://packager.ac-3a8.anonymous.myflock.exp.direct",
-  "ngrokPid": 10203,
   "packagerPid": null,
   "webpackServerPort": null
 }
