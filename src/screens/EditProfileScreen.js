@@ -1,37 +1,36 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { KeyboardAvoidingView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useContext, useState } from 'react';
+import { KeyboardAvoidingView, StyleSheet, TouchableOpacity, View, Alert } from 'react-native';
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
+import { auth, db } from '../../firebase';
 
-const EditProfileScreen = ({navigation}) => {
-	const [name, setDisplayName] = useState('');
-	const [pronouns, setPronouns] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [bio, setBio] = useState('');
-	const [email, setEmail] = useState('');
-	const [location, setHometown] = useState('');
+const EditProfileScreen = ( { navigation, route }) => {
+	
 
-//button on line 51 needs to be hooked up with more logic on line 16, defining submit
-//touchable opacity link needs to be added to stack navigator
-	const submit = (authUser) => {
-		auth((authUser) =>{
-			authUser.user.updateProfile({
-				displayName: name,
-				email: email,
-				imageUrl: imageUrl || 'https://cdn.download.ams.birds.cornell.edu/api/v1/asset/202984001/1200',
-			})
-		}).then(db.collection('Users').updateProfile({
-			name: name,
-			pronouns: pronouns,
-			imageUrl: imageUrl,
-			bio: bio,
-			email: email,
-			hometown: location,
+	const userId = route.params.user[0].id
+	const userData = route.params.user[0].data
 
-		}))
-		.catch((error) => alert(error.message));
+	const [name, setName] = useState(userData.name);
+	const [pronouns, setPronouns] = useState(userData.pronouns);
+	const [imageUrl, setImageUrl] = useState(userData.imageUrl);
+	const [bio, setBio] = useState(userData.bio);
+	
+
+
+	const submit = (profile) => {
+
+		db.collection('Users')
+		.doc(userId).update({
+			name: name || userData.name,
+			imageUrl: imageUrl || userData.imageUrl,
+			bio: bio || userData.bio,
+			pronouns: pronouns || userData.pronouns,
+		}).then(()=>{
+		
+			navigation.navigate('Profile View', {userId: userId})
+		})
 
 	};
 
@@ -46,7 +45,9 @@ const EditProfileScreen = ({navigation}) => {
 					placeholder="Name"
 					type="text"
 					value={name}
-					onChangeText={(text) => setDisplayName(text)}
+
+					onChangeText={(text) => setName(text)}
+
 				/>
 
 				<Input
@@ -84,7 +85,7 @@ const EditProfileScreen = ({navigation}) => {
 
 			</View>
 
-			<Button buttonStyle={styles.button} onPress={submit} title="Submit" />
+			<Button buttonStyle={styles.button} disabled={!name||!imageUrl || !pronouns} onPress={submit} title="Submit" />
 
 			<Text style={{marginTop: 10}}> or </Text>
 
