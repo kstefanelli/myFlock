@@ -7,9 +7,22 @@ import { Button } from 'react-native-elements'
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
 
-const ProfileViewOther = ({ navigation, route }) => {
+const ProfileViewOther = ({ navigation }) => {
 
 	viewedUser = route.params.user[0].data;
+
+	const startNewChat = () => {
+		db.collection('chats').doc(thisChatName).set({
+			chatName: thisChatName,
+		},
+		{ merge: true });
+		db.collection('chats').doc(thisChatName).update({
+			users: db.FieldValue.arrayUnion(auth.currentUser.uid, viewedUser.uid)
+		}).then(() => {
+		navigation.navigate('Chat', {
+			user: viewedUser
+		})
+	});
 
 
 	return (
