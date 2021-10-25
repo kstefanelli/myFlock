@@ -8,7 +8,7 @@ const AnimatedMarker = (props) => {
 	const radiusMeters = radiusMiles * 1609.34;
 
 	//props
-	const { ArrayOfUsers } = props;
+	const { ListOfUsersObject } = props;
 	const { latitude, longitude } = props;
 
 	const { width, height } = Dimensions.get('window');
@@ -41,10 +41,10 @@ const AnimatedMarker = (props) => {
 	}, [latitude, longitude]);
 
 	//we can return this function inside the return() because it returns a component
-	/* 	const mapMarkers = () => {
+	const mapMarkers = () => {
 		//received array of nearby user locations from getNearbyLocations
 
-		return nearbyUsersLocation.map((element, idx) => (
+		return ListOfUsersObject.map((element, idx) => (
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
@@ -55,7 +55,7 @@ const AnimatedMarker = (props) => {
 				description={element.name}
 			/>
 		));
-	}; */
+	};
 
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
 	//you cannot place it inside the return()
@@ -71,7 +71,7 @@ const AnimatedMarker = (props) => {
 		);
 	}, [mapRegion]);
 
-	console.log('>>>> received it', latitude, longitude, 'array<<<', nearbyUsersLocation.length);
+	console.log('>>>> AnimatedMarker object', ListOfUsersObject);
 
 	return (
 		<View style={styles.container}>
@@ -90,7 +90,7 @@ const AnimatedMarker = (props) => {
 					fillColor={'rgba(230,238,255,0.75)'}
 					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
-				{ArrayOfUsers.length ? <Text>Received Users Location</Text> : <Text>Loading Users...</Text>}
+				{ListOfUsersObject ? mapMarkers() : <Text>Loading Users...</Text>}
 			</MapView>
 		</View>
 	);

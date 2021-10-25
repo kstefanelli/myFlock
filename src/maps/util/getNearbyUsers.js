@@ -29,9 +29,7 @@ const getNearbyUsers = ({ navigation, route }) => {
 		//componentDidMount - setLocation, setMyInterests
 		useEffect(() => {
 			console.log('componentDidMount');
-			console.log('IS LOADING BEFORE', isLoading);
 			async function fetchMyUserData() {
-				console.log('IS LOADING DURING', isLoading);
 				try {
 					db.collection('Users')
 						.where('email', '==', currentEmail)
@@ -39,7 +37,6 @@ const getNearbyUsers = ({ navigation, route }) => {
 							setLocation(snapshot.docs[0].data().location);
 							setMyInterests(snapshot.docs[0].data().interests);
 						});
-					console.log('IS LOADING AT THE END', isLoading);
 					/* 					setIsLoading(false);
 					 */
 				} catch (err) {
@@ -56,15 +53,14 @@ const getNearbyUsers = ({ navigation, route }) => {
 			return () => clearInterval(timer); */
 		}, []);
 
-		console.log('this is location>', location);
-		console.log('interests>', myInterests);
+		/* 		console.log('this is location>', location);
+		console.log('interests>', myInterests); */
 
 		//componentDidUpdate - setNearbyUsersData
 		useEffect(() => {
 			console.log('componentDidUpdate');
 			const unsubscribe = () => {
 				setIsLoading(true);
-				console.log('IS LOADING DIDUPDATE', isLoading);
 				if (location !== '' && NearbyUsersData.length < 1) {
 					db.collection('Users')
 						.where('location', '==', location)
@@ -84,11 +80,10 @@ const getNearbyUsers = ({ navigation, route }) => {
 		}, [isLoading]);
 	}
 
-	console.log('nearby users>', NearbyUsersData);
-
-	/* 
-	const ListOfUsersData = () => {
-		NearbyUsersData.map((objElement) => ({
+	/* 	console.log('nearby users>', NearbyUsersData);
+	 */
+	function createUsersList() {
+		const ListOfUsersData = NearbyUsersData.map((objElement) => ({
 			name: objElement.data.name,
 			interests: objElement.data.interests,
 			location: objElement.data.location,
@@ -96,20 +91,25 @@ const getNearbyUsers = ({ navigation, route }) => {
 			longitude: objElement.data.longitude,
 			image: objElement.data.imageUrl,
 		}));
-	}; */
+		return ListOfUsersData;
+	}
+
+	console.log('>>> NearbyUsers List >>>', createUsersList());
 
 	const AnimateMarker = () => {
-		navigation.navigate('TestFile', {
-			ArrayOfUsers: NearbyUsersData,
-			latitude: latitude,
-			longitude: longitude,
-		});
+		return (
+			<AnimatedMarker
+				ListOfUsersObject={createUsersList()}
+				latitude={latitude}
+				longitude={longitude}
+			/>
+		);
 	};
 
-	return (
+	/* 	console.log(isLoading);
+	 */ return (
 		<View style={styles.container}>
-			{/* {NearbyUsersData.length ? AnimateMarker() :  */}
-			<Text>Fetching Nearby Users</Text>
+			{NearbyUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
 		</View>
 	);
 };

@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-const TestFile = ({ route }) => {
-	const { ArrayOfUsers } = route.params;
-	const { latitude, longitude } = route.params;
-
-	const ListOfUsersData = ArrayOfUsers.map((objElement) => ({
-		name: objElement.data.name,
-		interests: objElement.data.interests,
-		location: objElement.data.location,
-		latitude: objElement.data.latitude,
-		longitude: objElement.data.longitude,
-		image: objElement.data.imageUrl,
-	}));
-
-	return <Text>Here is my array: {ListOfUsersData}</Text>;
+const TestFile = (props) => {
+	const { ListOfUsersObject } = props;
+	console.log('array in TestFile', typeof ListOfUsersObject);
+	const { latitude, longitude } = props;
+	return <Text>Here is my array: {JSON.stringify(ListOfUsersObject)}</Text>;
 };
 
 export default TestFile;
