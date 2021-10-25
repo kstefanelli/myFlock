@@ -43,27 +43,6 @@ const AddInterest = ({ navigation }) => {
 			});
 	}, []);
 
-	const add = () => {
-		// add interest in firebase
-		if (newInterest.length) {
-			interests.unshift(newInterest);
-		}
-		setfilterdIntestests(interests);
-	};
-	const searchTag = () => {
-		if (newInterest.length) {
-			const tags = interests.filter((interest) =>
-				interest.toLowerCase().includes(newInterest.toLowerCase())
-			);
-			setfilterdIntestests(tags);
-		} else {
-			setfilterdIntestests(interests);
-		}
-	};
-	const selectTag = () => {
-		settagSelected(true);
-	};
-
 	// const add = () => {
 	//   // add interest in firebase
 	//   if (newInterest.length) {

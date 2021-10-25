@@ -53,8 +53,20 @@ const AnimatedMarker = (props) => {
 					longitude: element.longitude,
 				}}
 				title={element.name}
-				image={require('../../assets/user_profile_photos/PearlMann.png')}
-			/>
+			>
+				<Callout>
+					<View>
+						<View style={styles.bubble}>
+							<Image
+								style={styles.image}
+								source={require('../../assets/user_profile_photos/PearlMann.png')}
+							/>
+						</View>
+						<View style={styles.arrowBorder} />
+						<View style={styles.arrow} />
+					</View>
+				</Callout>
+			</Marker>
 		));
 	};
 	//if you are not rendering a component in your function, then you must place it inside of useEffect
@@ -64,8 +76,8 @@ const AnimatedMarker = (props) => {
 			{
 				latitude: mapRegion.latitude,
 				longitude: mapRegion.longitude,
-				latitudeDelta: LATITUDE_DELTA * Number(radiusMiles / 15),
-				longitudeDelta: LONGITUDE_DELTA * Number(radiusMiles / 15),
+				latitudeDelta: LATITUDE_DELTA * Number(radiusMiles / 5),
+				longitudeDelta: LONGITUDE_DELTA * Number(radiusMiles / 5),
 			},
 			2000
 		);
