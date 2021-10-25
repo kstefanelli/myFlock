@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import MapView, { Marker, Callout, Circle } from 'react-native-maps';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const AnimatedMarker = (props) => {
 	const mapView = React.createRef();
 	const radiusMiles = 3; //miles
 	const radiusMeters = radiusMiles * 1609.34;
 
+	const navigation = useNavigation();
+
 	//props
-	const { ListOfUsersObject } = props;
+	const { NearbyUsersObject } = props;
+	function createUsersList() {
+		const UsersProfileData = NearbyUsersObject.map((objElement) => ({
+			name: objElement.data.name,
+			interests: objElement.data.interests,
+			location: objElement.data.location,
+			latitude: objElement.data.latitude,
+			longitude: objElement.data.longitude,
+			image: objElement.data.imageUrl,
+		}));
+		return UsersProfileData;
+	}
+
+	const UsersProfileObject = createUsersList();
 	const { latitude, longitude } = props;
 
 	const { width, height } = Dimensions.get('window');
@@ -44,7 +60,7 @@ const AnimatedMarker = (props) => {
 	const mapMarkers = () => {
 		//received array of nearby user locations from getNearbyLocations
 
-		return ListOfUsersObject.map((element, idx) => (
+		return UsersProfileObject.map((element, idx) => (
 			<Marker
 				key={idx}
 				pinColor="#bf90b1"
@@ -53,13 +69,18 @@ const AnimatedMarker = (props) => {
 					longitude: element.longitude,
 				}}
 				title={element.name}
+				onPress={() => {
+					console.log('onclick pressed');
+					navigation.navigate('Other Profile Views', { user: NearbyUsersObject, idx });
+				}}
 			>
 				<Callout>
 					<View>
 						<View style={styles.bubble}>
+							<Text style={styles.name}>{element.name}</Text>
 							<Image
 								style={styles.image}
-								source={require('../../assets/user_profile_photos/PearlMann.png')}
+								source={require('../../assets/user_profile_photos/Sue Pepper.png')}
 							/>
 						</View>
 						<View style={styles.arrowBorder} />
@@ -76,14 +97,12 @@ const AnimatedMarker = (props) => {
 			{
 				latitude: mapRegion.latitude,
 				longitude: mapRegion.longitude,
-				latitudeDelta: LATITUDE_DELTA * Number(radiusMiles / 5),
-				longitudeDelta: LONGITUDE_DELTA * Number(radiusMiles / 5),
+				latitudeDelta: LATITUDE_DELTA * Number(radiusMiles / 10),
+				longitudeDelta: LONGITUDE_DELTA * Number(radiusMiles / 10),
 			},
 			2000
 		);
 	}, [mapRegion]);
-
-	console.log('>>>> AnimatedMarker object', ListOfUsersObject.length);
 
 	return (
 		<View style={styles.container}>
@@ -102,7 +121,7 @@ const AnimatedMarker = (props) => {
 					fillColor={'rgba(230,238,255,0.75)'}
 					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
-				{ListOfUsersObject ? mapMarkers() : <Text>Loading Users...</Text>}
+				{UsersProfileObject ? mapMarkers() : <Text>Loading Users...</Text>}
 			</MapView>
 		</View>
 	);

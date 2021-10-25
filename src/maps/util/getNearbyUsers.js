@@ -4,9 +4,8 @@ import { auth, db } from '../../../firebase';
 import geohash from 'ngeohash';
 import getGeohashRange from './getGeoHashRange';
 import AnimatedMarker from '../AnimatedMarker';
-import TestFile from '../TestFile';
 
-const getNearbyUsers = ({ navigation, route }) => {
+const getNearbyUsers = ({ route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [location, setLocation] = useState('');
@@ -83,7 +82,7 @@ const getNearbyUsers = ({ navigation, route }) => {
 
 	/* 	console.log('nearby users>', NearbyUsersData);
 	 */
-	function createUsersList() {
+	/* 	function createUsersList() {
 		const ListOfUsersData = NearbyUsersData.map((objElement) => ({
 			name: objElement.data.name,
 			interests: objElement.data.interests,
@@ -93,22 +92,21 @@ const getNearbyUsers = ({ navigation, route }) => {
 			image: objElement.data.imageUrl,
 		}));
 		return ListOfUsersData;
-	}
+	} */
 
-	console.log('>>> NearbyUsers List >>>', createUsersList());
+	console.log('>>>getNearbyUsers to pass into AnimateMarker>>>', NearbyUsersData);
 
 	const AnimateMarker = () => {
 		return (
 			<AnimatedMarker
-				ListOfUsersObject={createUsersList()}
+				NearbyUsersObject={NearbyUsersData}
 				latitude={latitude}
 				longitude={longitude}
 			/>
 		);
 	};
 
-	/* 	console.log(isLoading);
-	 */ return (
+	return (
 		<View style={styles.container}>
 			{NearbyUsersData.length ? AnimateMarker() : <Text>Fetching Nearby Users</Text>}
 		</View>
