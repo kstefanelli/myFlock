@@ -4,7 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './src/navigation/TabNavigator';
 import { auth, db } from './firebase';
-import ProfileViewNavigator from './src/screens/ProfileViewNavigator';
+import ProfileViewNavigator from './src/screens/LogInNavigator';
+import LogInNavigator from './src/screens/LogInNavigator';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ function App() {
 						<TabNavigator />
 					</>
 				) : (
-					<ProfileViewNavigator />
+					<LogInNavigator />
 				)}
 			</NavigationContainer>
 		</>

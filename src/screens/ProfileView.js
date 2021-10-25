@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-elements';
-// import { logOutUser } from '../auth/logOutUser';
+
 import { auth, db } from '../../firebase';
-import { useFocusEffect } from '@react-navigation/native';
+
+import EditProfileScreen from './EditProfileScreen';
+
 const ProfileView = ({ navigation }) => {
-  //this user alternative is to pull from dummy data to display a profile
-  // auth.currentUser
 
   let currentEmail;
   const [userData, setUserData] = useState({});
@@ -42,7 +42,8 @@ const ProfileView = ({ navigation }) => {
   const showProfile= () => {
     if (!isLoading)
     {return (
-      <>
+      <SafeAreaView style={styles.container}>
+
       <Text style={styles.profileName}>Hello, {userData?.[0]?.data?.name}! </Text>
       <>
         <Text style={{ fontWeight: 'bold', marginBottom: 10 }}>({userData?.[0]?.data?.pronouns})</Text>
@@ -53,14 +54,14 @@ const ProfileView = ({ navigation }) => {
         <Text style={{marginLeft: 10, marginRight: 10}}>{userData?.[0]?.data?.bio} </Text>
       </>
       <Text style={{ fontWeight: 'bold' }}>Interests: </Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{marginLeft: 20, marginRight: 20}}>
         {userData?.[0]?.data?.interests.map((interest, index) => (
           <View key={index} style={{ alignItems: 'center' }}>
-            <Text style={{ color: '#1F142E', marginTop: 15 }}> *{interest}* </Text>
+            <Text style={{ color: '#1F142E', marginTop: 15 }}> *{interest.toLowerCase()}* </Text>
           </View>
         ))}
       </ScrollView>
-      </>
+      </SafeAreaView>
     )
     } else {return (
       (
@@ -73,43 +74,55 @@ const ProfileView = ({ navigation }) => {
   return (
     <View style={styles.profileView}>
     {showProfile()}
+		<TouchableOpacity
+				style={{alignItems: 'center',justifyContent: 'center', marginTop: 5}}
+				onPress={() => navigation.navigate('EditProfileScreen')}>
+					<Text style={{fontSize: 20, color: '#e8984e', textDecorationLine: 'underline'}}>Edit Your Profile</Text>
+		</TouchableOpacity>
       <Button buttonStyle={styles.button} title='Log Out' onPress={logOutUser} />
     </View>
   );
 };
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#1F142E',
-    borderColor: '#1F142E',
-    borderWidth: 5,
-    width: 200,
-    margin: 5,
-  },
-  imagestyle: {
-    alignItems: 'flex-end',
-    height: 15,
-    width: 15,
-  },
-  profileView: {
-    alignItems: 'center',
-    backgroundColor: '#E6E8DA',
-    height: '100%',
-  },
-  profileImage: {
-    height: 250,
-    width: 250,
-    marginBottom: 20,
-    borderRadius: 125,
-    borderWidth: 5,
-    borderColor: '#E8984E',
-    alignItems: 'center',
-  },
-  profileName: {
-    color: '#1F142E',
-    fontWeight: '800',
-    fontSize: 25,
-    marginTop: 20,
-    marginBottom: 15,
-  },
+	button: {
+		backgroundColor: '#1F142E',
+		borderColor: '#bf90b1',
+		borderWidth: 5,
+		width: 200,
+		margin: 5,
+	},
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#e6e8da',
+		padding: 20,
+	},
+	imagestyle: {
+		alignItems: 'flex-end',
+		height: 15,
+		width: 15,
+	},
+	profileView: {
+		alignItems: 'center',
+		backgroundColor: '#E6E8DA',
+		height: '100%',
+	},
+	profileImage: {
+		height: 250,
+		width: 250,
+		marginBottom: 20,
+		borderRadius: 125,
+		borderWidth: 5,
+		borderColor: '#E8984E',
+		alignItems: 'center',
+	},
+	profileName: {
+		color: '#1F142E',
+		fontWeight: '800',
+		fontSize: 25,
+		marginTop: 20,
+		marginBottom: 15,
+	},
 });
 export default ProfileView;
