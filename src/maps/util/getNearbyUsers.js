@@ -4,7 +4,6 @@ import { auth, db } from '../../../firebase';
 import geohash from 'ngeohash';
 import getGeohashRange from './getGeoHashRange';
 import AnimatedMarker from '../AnimatedMarker';
-import TestFile from '../TestFile';
 
 const getNearbyUsers = ({ route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);

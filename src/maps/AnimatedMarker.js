@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import MapView, { Marker, Callout, Circle } from 'react-native-maps';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const AnimatedMarker = (props, { navigation }) => {
+const AnimatedMarker = (props) => {
 	const mapView = React.createRef();
 	const radiusMiles = 3; //miles
 	const radiusMeters = radiusMiles * 1609.34;
+
+	const navigation = useNavigation();
 
 	//props
 	const { NearbyUsersObject } = props;
@@ -66,7 +69,10 @@ const AnimatedMarker = (props, { navigation }) => {
 					longitude: element.longitude,
 				}}
 				title={element.name}
-				onPress={() => navigation.navigate('Other Profile Views', { user: UsersProfileObject })}
+				onPress={() => {
+					console.log('onclick pressed');
+					navigation.navigate('Other Profile Views', { user: NearbyUsersObject, idx });
+				}}
 			>
 				<Callout>
 					<View>
@@ -97,8 +103,6 @@ const AnimatedMarker = (props, { navigation }) => {
 			2000
 		);
 	}, [mapRegion]);
-
-	console.log('>>>> AnimatedMarker object', UsersProfileObject.length);
 
 	return (
 		<View style={styles.container}>
