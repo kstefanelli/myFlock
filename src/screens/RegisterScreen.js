@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Keyboard,
+  Platform,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 import { auth, db } from '../../firebase';
@@ -39,7 +45,13 @@ const register = () => {
   };
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={styles.container}>
+    <KeyboardAvoidingView
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={{flex:1}}
+    keyboardVerticalOffset={-50}
+  >
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
       <StatusBar style="light" />
       <Text h3 style={{ marginBottom: 50 }}>
         Create an account
@@ -82,6 +94,8 @@ const register = () => {
       </View>
       <Button buttonStyle={styles.button} onPress={register} title="Register" />
       <View style={{ height: 100 }} />
+      </ View>
+      </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
 
   );
