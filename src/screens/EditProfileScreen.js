@@ -6,34 +6,30 @@ import { Button, Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
 import { auth, db } from '../../firebase';
 
-const EditProfileScreen = ( { navigation, route }) => {
-	
+const EditProfileScreen = ({ navigation, route }) => {
+	console.log('route', route.params.user);
 
-	const userId = route.params.user[0].id
-	const userData = route.params.user[0].data
+	const userId = route.params.user[0].id;
+	const userData = route.params.user[0].data;
 
 	const [name, setName] = useState(userData.name);
 	const [pronouns, setPronouns] = useState(userData.pronouns);
 	const [imageUrl, setImageUrl] = useState(userData.imageUrl);
 	const [bio, setBio] = useState(userData.bio);
-	
-
+	console.log('From PARAMS ID: ', userId);
 
 	const submit = (profile) => {
-
 		db.collection('Users')
-		.doc(userId).update({
-			name: name || userData.name,
-			imageUrl: imageUrl || userData.imageUrl,
-			bio: bio || userData.bio,
-			pronouns: pronouns || userData.pronouns,
-		}).then(()=>{
-		
-			navigation.navigate('Profile View', {userId: userId})
-		})
 
+			.doc(userId)
+			.update({
+				name: name || userData.name,
+				imageUrl: imageUrl || userData.imageUrl,
+				bio: bio || userData.bio,
+				pronouns: pronouns || userData.pronouns,
+			});
+		navigation.navigate('Profile');
 	};
-
 
 	return (
 		<KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -41,14 +37,7 @@ const EditProfileScreen = ( { navigation, route }) => {
 			<Text style={styles.topTitle}>Shake your tail-feathers</Text>
 			<Text style={{ marginBottom: 15 }}>Update your profile here!</Text>
 			<View style={styles.inputContainer}>
-				<Input
-					placeholder="Name"
-					type="text"
-					value={name}
-
-					onChangeText={(text) => setName(text)}
-
-				/>
+				<Input placeholder="Name" type="text" value={name} onChangeText={(text) => setName(text)} />
 
 				<Input
 					placeholder="Pronouns"
@@ -65,29 +54,14 @@ const EditProfileScreen = ( { navigation, route }) => {
 				/>
 
 				<Input placeholder="Bio" type="text" value={bio} onChangeText={(text) => setBio(text)} />
-
-
-				<Input
-					placeholder="Email"
-					type="text"
-					value={email}
-					onChangeText={(text) => setDisplayName(text)}
-				/>
-				{/* this field can be added later */}
-				{/* <Input
-					placeholder="Hometown"
-					type="text"
-					value={location}
-					onChangeText={(text) => setDisplayName(text)}
-				/> */}
-
-
-
 			</View>
 
-			<Button buttonStyle={styles.button} disabled={!name||!imageUrl || !pronouns} onPress={submit} title="Submit" />
-
-			<Text style={{marginTop: 10}}> or </Text>
+			<Button
+				buttonStyle={styles.button}
+				disabled={!name || !imageUrl || !pronouns}
+				onPress={submit}
+				title="Submit"
+			/>
 
 			<TouchableOpacity
 				style={{ alignItems: 'center', justifyContent: 'center', marginTop: 5 }}
@@ -112,7 +86,6 @@ const styles = StyleSheet.create({
 	},
 	topTitle: {
 		alignItems: 'center',
-		marginTop: 35,
 		padding: 8,
 		fontSize: 25,
 		color: '#1f142e',
@@ -131,3 +104,9 @@ const styles = StyleSheet.create({
 
 export default EditProfileScreen;
 
+//note for Audrey useEffect(() => {
+// auth.onAuthStateChanged((authUser) => {
+// 	if (authUser) {
+// 	  setIsLoggedIn(false)
+//   alert('You have been logged out of myFlock!')
+//   redirect to login;

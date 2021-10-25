@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import { auth, db } from '../../firebase';
@@ -7,6 +7,9 @@ import { auth, db } from '../../firebase';
 import EditProfileScreen from './EditProfileScreen';
 
 const ProfileView = ({ navigation }) => {
+	let currentEmail;
+	const [userData, setUserData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
 
 	const logOutUser = () => {
 		auth.signOut().then(() => {
@@ -20,6 +23,7 @@ const ProfileView = ({ navigation }) => {
 				setIsLoading(false);
 				currentEmail =
 					auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
+				console.log('calling db');
 				db.collection('Users')
 					.where('email', '==', currentEmail)
 					.onSnapshot((snapshot) => {
@@ -70,7 +74,7 @@ const ProfileView = ({ navigation }) => {
 			);
 		}
 	};
-	
+	console.log('Here’s our test', userData?.[0]?.data?.pronouns);
 	return (
 		<View style={styles.profileView}>
 			{showProfile()}
@@ -85,22 +89,14 @@ const ProfileView = ({ navigation }) => {
 			<Button buttonStyle={styles.button} title="Log Out" onPress={logOutUser} />
 		</View>
 	);
-
 };
 const styles = StyleSheet.create({
 	button: {
 		backgroundColor: '#1F142E',
-		borderColor: '#bf90b1',
+		borderColor: '#1F142E',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,
-	},
-	container: {
-		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#e6e8da',
-		padding: 20,
 	},
 	imagestyle: {
 		alignItems: 'flex-end',
