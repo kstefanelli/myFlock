@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Circle, Image } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import MapView, { Marker, Circle } from 'react-native-maps';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 const AnimatedMarker = (props) => {
 	const mapView = React.createRef();
@@ -49,10 +49,10 @@ const AnimatedMarker = (props) => {
 				key={idx}
 				pinColor="#bf90b1"
 				coordinate={{
-					latitude: latitude,
-					longitude: longitude,
+					latitude: element.latitude,
+					longitude: element.longitude,
 				}}
-				description={element.name}
+				title={element.name}
 			/>
 		));
 	};

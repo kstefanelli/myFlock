@@ -8,8 +8,8 @@ import TestFile from '../TestFile';
 
 const getNearbyUsers = ({ navigation, route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
-	const [location, setLocation] = useState('');
 	const [isLoading, setIsLoading] = useState(true);
+	const [location, setLocation] = useState('');
 	const [myInterests, setMyInterests] = useState([]);
 
 	const currentEmail =
@@ -63,7 +63,8 @@ const getNearbyUsers = ({ navigation, route }) => {
 				setIsLoading(true);
 				if (location !== '' && NearbyUsersData.length < 1) {
 					db.collection('Users')
-						.where('location', '==', location)
+						/* 						.where('email', '!=', currentEmail)
+						 */ .where('location', '==', location)
 						.where('interests', 'array-contains-any', myInterests)
 						.onSnapshot((snapshot) => {
 							setNearbyUsersData(
