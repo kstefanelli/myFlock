@@ -1,43 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import {
+	StyleSheet,
+	View,
+	Text,
+	ScrollView,
+	TouchableWithoutFeedback,
+	Keyboard,
+	Platform,
+	KeyboardAvoidingView,
+} from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Stories from '../components/Stories';
 import { interests } from '../../data/interests';
 import { auth, db } from '../../firebase';
+import { useFocusEffect } from '@react-navigation/native';
+import * as firebase from 'firebase';
 
 const AddInterest = ({ navigation }) => {
 	const [newInterest, setNewInterest] = useState('');
 	const [tagBagroundColor, setTagBagroundColor] = useState('');
-	const [tagselected, settagSelected] = useState(false);
-	const [filterdIntestests, setfilterdIntestests] = useState(interests);
+	const [tagselected, setTagSelected] = useState('');
+	const [filterdIntestests, setfilterdIntestests] = useState([]);
 	const [email, setEmail] = useState('');
-	const [myInterest, setMyInterest] = useState([]);
+	const [MyInterests, setMyInterests] = useState([]);
+	const [filltext, setFillText] = useState('');
 
-	const addInterestToMyProfile = () => {
-		useEffect(() => {
-			auth().onAuthStateChanged((user) => {
-				if (user) {
-					let email = user.email;
-					setEmail(email);
-					setMyInterest = user.interest;
-				}
+	let currentEmail =
+		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
+	// on first render sets myInterest
+	useEffect(() => {
+		db.collection('Users')
+			.where('email', '==', currentEmail)
+			.onSnapshot((snapshot) => {
+				setMyInterests(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						data: doc.data().interests,
+					}))
+				);
 			});
-		}, []).then(
-			db
-				.collection('Users')
-				.where('email', '==', email)
-				.get()
-				.then(function (querySnapshot) {
-					querySnapshot.forEach(function (document) {
-						document.update({
-							interests: [...user.interests, newInterest],
-						});
-					});
-				})
-		);
-	};
+	}, []);
 
 	const add = () => {
 		// add interest in firebase
@@ -60,43 +64,82 @@ const AddInterest = ({ navigation }) => {
 		settagSelected(true);
 	};
 
-	return (
-		<View style={styles.container}>
-			<StatusBar style="default" />
-			{/* <View style={styles.inputInterest}>
-        <Input
-          placeholder="Type your interest here..."
-          autoFocus
-          type="text"
-          value={newInterest}
-          onChangeText={(text) => setNewInterest(text)}
-          onChange={searchTag}
-        />
-      </View>
-      <Button
-        title="Create New"
-        containerStyle={styles.button}
-        type="outline"
-        onPress={add}
-      /> */}
+	// const add = () => {
+	//   // add interest in firebase
+	//   if (newInterest.length) {
+	//     interests.unshift(newInterest);
+	//   }
+	//   setfilterdIntestests(interests);
+	// };
 
-			<View style={styles.interestTagContainer}>
-				<ScrollView>
-					{filterdIntestests.map((interest, index) => (
-						<TouchableOpacity key={index}>
-							<Text style={styles.interestTag} onPress={addInterestToMyProfile}>
-								{interest}
-							</Text>
-							<View>
-								<ScrollView>
-									<Stories interest={interest} navigation={navigation} />
-								</ScrollView>
-							</View>
-						</TouchableOpacity>
-					))}
-				</ScrollView>
-			</View>
-		</View>
+	const searchTag = () => {
+		if (newInterest.length > 0) {
+			const tags = interests.filter((interest) =>
+				interest.toLowerCase().includes(newInterest.toLowerCase())
+			);
+			setfilterdIntestests(tags);
+		} else {
+			setfilterdIntestests(interests);
+		}
+	};
+
+	return (
+		<KeyboardAvoidingView
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+			style={{
+				flex: 1,
+			}}
+			keyboardVerticalOffset={90}
+		>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<View style={styles.container}>
+					<StatusBar style="default" />
+					<View style={styles.inputInterest}>
+						<Input
+							placeholder="search interest..."
+							autoFocus
+							type="text"
+							value={newInterest}
+							onChangeText={(text) => setNewInterest(text)}
+							onChange={searchTag}
+						/>
+					</View>
+
+					<View style={styles.interestTagContainer}>
+						<ScrollView>
+							{filterdIntestests.map((interest, index) => (
+								<TouchableOpacity
+									key={index}
+									onPress={() => {
+										if (newInterest.length) {
+											db.collection('Users')
+												.doc(MyInterests[0].id)
+												.update(
+													{
+														interests: firebase.firestore.FieldValue.arrayUnion(tagselected),
+													},
+													{ merge: true }
+												);
+										}
+										setTagSelected(interest);
+										navigation.navigate('Profile');
+										setfilterdIntestests([]);
+										setNewInterest('');
+									}}
+								>
+									<Text style={styles.interestTag}>{interest}</Text>
+									<View>
+										<ScrollView>
+											{/* <Stories interest={interest} navigation={navigation} /> */}
+										</ScrollView>
+									</View>
+								</TouchableOpacity>
+							))}
+						</ScrollView>
+					</View>
+				</View>
+			</TouchableWithoutFeedback>
+		</KeyboardAvoidingView>
 	);
 };
 
@@ -122,16 +165,16 @@ const styles = StyleSheet.create({
 	interestTag: {
 		borderRadius: 10,
 		fontSize: 20,
-		padding: 3,
-		marginLeft: 35,
+		padding: 5,
+		marginTop: 20,
 		width: 300,
 		alignItems: 'center',
 		justifyContent: 'center',
 		textAlign: 'center',
-		borderWidth: 10,
-		// borderColor: "#BF90B1",
+		borderWidth: 2,
+		borderColor: 'lightgrey',
 		backgroundColor: 'white',
-		borderColor: 'white',
+		// borderColor: "white",
 		// color:'white',
 	},
 	inputInterest: {
@@ -141,7 +184,7 @@ const styles = StyleSheet.create({
 		width: 300,
 		marginBottom: 30,
 		marginTop: 0,
-		backgroundColor: 'black',
+		// backgroundColor: "black",
 		// borderWidth: 3,
 	},
 });

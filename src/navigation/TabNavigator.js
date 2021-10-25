@@ -10,6 +10,9 @@ import AddChatScreen from '../screens/AddChat';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Map from '../screens/Map';
 import getNearbyUsers from '../maps/util/getNearbyUsers';
+
+import TestFile from '../maps/TestFile';
+import AddInterest from '../screens/AddInterest';
 import ProfileNavigator from './ProfileNavigator';
 
 ProfileNavigator;
@@ -63,6 +66,10 @@ function TabNavigator(props) {
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
 			<Tab.Screen name="Nearby Users" component={getNearbyUsers} />
+
+			<Tab.Screen name="Test" component={TestFile} />
+			<Tab.Screen name="AddInterest" component={AddInterest} />
+
 		</Tab.Navigator>
 	);
 }

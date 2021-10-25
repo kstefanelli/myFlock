@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import MapView, { Marker, Circle } from 'react-native-maps';
+import MapView, { Marker, Callout, Circle } from 'react-native-maps';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 const AnimatedMarker = (props) => {
@@ -111,5 +111,33 @@ const styles = StyleSheet.create({
 	map: {
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
+	},
+	bubble: {
+		flexDirection: 'column',
+		alignSelf: 'flex-start',
+		backgroundColor: '#fff',
+		borderRadius: 6,
+		borderColor: '#ccc',
+		borderWidth: 0.5,
+		padding: 15,
+		width: 150,
+	},
+	// Arrow below the bubble
+	arrow: {
+		backgroundColor: 'transparent',
+		borderColor: 'transparent',
+		borderTopColor: '#fff',
+		borderWidth: 16,
+		alignSelf: 'center',
+		marginTop: -32,
+	},
+	arrowBorder: {
+		backgroundColor: 'transparent',
+		borderColor: 'transparent',
+		borderTopColor: '#007a87',
+		borderWidth: 16,
+		alignSelf: 'center',
+		marginTop: -0.5,
+		// marginBottom: -15
 	},
 });

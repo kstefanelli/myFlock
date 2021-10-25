@@ -7,6 +7,9 @@ import {
 	SafeAreaView,
 	Image,
 	TouchableOpacity,
+	Keyboard,
+	Platform,
+	TouchableWithoutFeedback,
 } from 'react-native';
 import { Input, Text } from 'react-native-elements';
 import { StatusBar } from 'expo-status-bar';
@@ -16,8 +19,6 @@ const LoginScreen = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	//create new authorized user
-	//should navigate to AddInterest
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged((authUser) => {
 			if (authUser) {
@@ -28,7 +29,6 @@ const LoginScreen = ({ navigation }) => {
 		return unsubscribe;
 	}, []);
 
-	//user has been created
 	const signIn = () => {
 		auth.signInWithEmailAndPassword(email, password);
 
@@ -36,64 +36,78 @@ const LoginScreen = ({ navigation }) => {
 	};
 
 	return (
-		<KeyboardAvoidingView behavior="padding" style={styles.container}>
-			<StatusBar style="light" />
-			<Text h3 style={{ marginTop: 80, textAlign: 'center' }}>
-				Welcome Back!
-			</Text>
-			<Image
-				source={require('../../assets/supplementary_images/bird.png')}
-				style={{ height: 160, width: 160, marginBottom: 10, marginTop: 10 }}
-			/>
+		<KeyboardAvoidingView
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+			style={{ flex: 1 }}
+			keyboardVerticalOffset={0}
+		>
+			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+				<View style={styles.container}>
+					<StatusBar style="light" />
+					<Text h3 style={{ marginTop: 80, textAlign: 'center' }}>
+						Welcome Back!
+					</Text>
+					<Image
+						source={require('../../assets/supplementary_images/bird.png')}
+						style={{ height: 160, width: 160, marginBottom: 10, marginTop: 10 }}
+					/>
 
-			<View style={styles.inputContainer}>
-				<Text h3 style={{ marginBottom: 10 }}>
-					Log in to find out where your peeps are at...
-				</Text>
-				<Input
-					placeholder="Email"
-					autoFocus
-					type="Email"
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-				/>
-				<Input
-					placeholder="Password"
-					secureTextEntry
-					type="password"
-					value={password}
-					onChangeText={(text) => setPassword(text)}
-				/>
-			</View>
-			<TouchableOpacity
-				style={{
-					alignItems: 'center',
-					justifyContent: 'center',
-					borderColor: '#e8984e',
-					borderWidth: 3,
-					width: 200,
-					height: 50,
-					marginTop: 30,
-					marginBottom: 40,
-				}}
-				onPress={signIn}
-			>
-				<Text style={{ fontSize: 22, color: '#1f142e' }}>Login</Text>
-			</TouchableOpacity>
+					<View style={styles.inputContainer}>
+						<Text h3 style={{ marginBottom: 10 }}>
+							Log in to find out where your peeps are at...
+						</Text>
+						<Input
+							placeholder="Email"
+							autoFocus
+							type="Email"
+							value={email}
+							onChangeText={(text) => setEmail(text)}
+						/>
+						<Input
+							placeholder="Password"
+							secureTextEntry
+							type="password"
+							value={password}
+							onChangeText={(text) => setPassword(text)}
+						/>
+					</View>
+					<TouchableOpacity
+						style={{
+							alignItems: 'center',
+							justifyContent: 'center',
+							borderColor: '#e8984e',
+							borderWidth: 3,
+							width: 200,
+							height: 50,
+							marginTop: 30,
+							marginBottom: 40,
+						}}
+						onPress={signIn}
+					>
+						<Text style={{ fontSize: 22, color: '#1f142e' }}>Login</Text>
+					</TouchableOpacity>
 
-			<TouchableOpacity
-				style={{ alignItems: 'center', justifyContent: 'center' }}
-				onPress={() => navigation.navigate('Register')}
-			>
-				<Text style={{ fontSize: 18, color: 'black' }}>Don't have an account? </Text>
-				<Text style={{ fontSize: 18, color: 'black', textDecorationLine: 'underline' }}>
-					Join us!
-				</Text>
-			</TouchableOpacity>
+					<TouchableOpacity
+						style={{ alignItems: 'center', justifyContent: 'center' }}
+						onPress={() => navigation.navigate('Register')}
+					>
+						<Text style={{ fontSize: 18, color: 'black' }}>Don't have an account? </Text>
+						<Text
+							style={{
+								fontSize: 18,
+								color: 'black',
+								textDecorationLine: 'underline',
+							}}
+						>
+							Join us!
+						</Text>
+					</TouchableOpacity>
 
-			{/* <Button buttonStyle={styles.button} onPress={logOutUser} title="Logout - Temp" /> */}
+					{/* <Button buttonStyle={styles.button} onPress={logOutUser} title="Logout - Temp" /> */}
 
-			<View style={{ height: 100 }} />
+					<View style={{ height: 100 }} />
+				</View>
+			</TouchableWithoutFeedback>
 		</KeyboardAvoidingView>
 	);
 };
