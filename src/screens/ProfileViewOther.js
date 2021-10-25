@@ -1,11 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 import { Button } from 'react-native-elements'
 //{USERS} is only for if you need to populate with dummy data once hooked up, delete this line
 import { USERS } from '../../data/users';
 import { auth, db } from '../../firebase'
+import ProfileViewNavigator from '../navigation/ProfileNavigator';
+
 
 const ProfileViewOther = ({ navigation }) => {
 
@@ -25,24 +27,27 @@ const ProfileViewOther = ({ navigation }) => {
 	});
 
 
+
 	return (
 		<View style={styles.profileView}>
 
+
 			<Text style={styles.profileName}>Meet {viewedUser.name}!</Text>
+
 			<Image source={{ uri: viewedUser.photoURL }} style={styles.profileImage} />
 			<>
 				<Text style={{fontWeight: 'bold'}}>Bio: </Text>
-				<Text>{viewedUser.bio} </Text>
+				<Text style={{marginLeft: 10, marginRight: 10}}>{viewedUser.bio} </Text>
 			</>
 			<>
 
-				<Text>({viewedUser.pronouns}) </Text>
+
 			</>
 			<Text style={{fontWeight: 'bold'}}>Interests: </Text>
-			<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+			<ScrollView horizontal showsHorizontalScrollIndicator={false} style={{marginLeft: 20, marginRight: 20}}>
                 {viewedUser.interests.map((interest, index) => (
                     <View key={index} style={{alignItems: 'center'}}>
-                        <Text style={{color: '#1f142e'}}>{interest.toLowerCase()}, </Text>
+                        <Text style={{color: '#1f142e', marginTop: 15, marginBotom: 15}}> *{interest.toLowerCase()} * </Text>
                     </View>
                 ))}
             </ScrollView>
@@ -54,7 +59,6 @@ const ProfileViewOther = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	button: {
-
 		backgroundColor: '#1F142E',
 		borderColor: '#bf90b1',
 		borderWidth: 5,
@@ -69,11 +73,13 @@ const styles = StyleSheet.create({
 	profileView: {
 		alignItems: 'center',
 		backgroundColor: '#e6e8da',
+		height: '100%',
 	},
 	profileImage: {
 		height: 250,
 		width: 250,
 		marginBottom: 20,
+		marginTop: 20,
 		borderRadius: 125,
 		borderWidth: 5,
 		borderColor: '#e8984e',
@@ -85,7 +91,7 @@ const styles = StyleSheet.create({
 		fontWeight: '800',
 		fontSize: 20,
 		marginTop: 10,
-		marginBottom: 15,
+		marginBottom: 10,
 	},
 });
 
