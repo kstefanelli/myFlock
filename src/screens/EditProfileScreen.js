@@ -22,15 +22,15 @@ const EditProfileScreen = ( { navigation, route }) => {
 	const submit = (profile) => {
 
 		db.collection('Users')
-
-
 		.doc(userId).update({
 			name: name || userData.name,
 			imageUrl: imageUrl || userData.imageUrl,
 			bio: bio || userData.bio,
 			pronouns: pronouns || userData.pronouns,
+		}).then(()=>{
+			console.log("User updated")
+			navigation.navigate('Profile View', {userId: userId})
 		})
-		navigation.navigate('Profile');;
 
 	};
 
