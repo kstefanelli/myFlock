@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {Icon} from 'react-native-elements'
 import ProfileView from '../screens/ProfileView';
 import ChatScreen from '../screens/ChatScreen';
 import NestViewScreen from '../screens/NestViewScreen';
@@ -60,16 +59,12 @@ function TabNavigator(props) {
 				}} */
 			/>
 
-			<Tab.Screen options={{ headerShown: false }} name="Map" component={Map} />
+			<Tab.Screen options={{ headerShown: false }} name="Discover Users" component={Map} />
 			<Tab.Screen options={{ headerShown: false }} name="Messages" component={NestViewScreen} />
 
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
-			<Tab.Screen name="Nearby Users" component={getNearbyUsers} />
-
-			<Tab.Screen name="Test" component={TestFile} />
 			<Tab.Screen name="AddInterest" component={AddInterest} />
-
 		</Tab.Navigator>
 	);
 }

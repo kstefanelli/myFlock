@@ -92,7 +92,7 @@ export const USERS = [
 		location: {
 			name: 'New York City',
 			latitude: 40.78961392,
-			longitude: 73.99668535,
+			longitude: -73.99668535,
 		},
 		pronouns: 'she/her/hers',
 		intro: "Charlotte D'Amore",

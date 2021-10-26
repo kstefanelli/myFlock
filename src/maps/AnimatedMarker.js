@@ -80,7 +80,7 @@ const AnimatedMarker = (props) => {
 							<Text style={styles.name}>{element.name}</Text>
 							<Image
 								style={styles.image}
-								source={require('../../assets/user_profile_photos/Sue Pepper.png')}
+								source={require(`../../assets/myFlockIcons/Budgie.png`)}
 							/>
 						</View>
 						<View style={styles.arrowBorder} />

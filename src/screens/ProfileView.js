@@ -124,5 +124,15 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		marginBottom: 15,
 	},
+	interest: {
+		position: 'absolute',
+		width: 91,
+		height: 32,
+		left: 142,
+		top: 825,
+		backgroundColor: '#FFFFFF',
+		borderColor: '#E94057',
+		borderRadius: 5,
+	},
 });
 export default ProfileView;
