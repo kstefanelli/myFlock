@@ -13,12 +13,15 @@ import { auth, db } from '../../firebase';
 const NestViewScreen = ({navigation}) => {
   const [chats, setChats] = useState([])
 
+  const currentEmail =
+					auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
+
   useFocusEffect(
     React.useCallback(() => {
-    // console.log('usefocus triggered');
+
     const unsubscribe = () => {
       db.collection("chats").
-      where('parties', 'array-contains', auth.currentUser.email)
+      where('parties', 'array-contains', currentEmail)
       .onSnapshot((snapshot)=> {
         setChats(snapshot.docs.map(doc=> ({
           id: doc.id,
