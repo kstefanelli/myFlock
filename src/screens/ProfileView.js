@@ -57,13 +57,13 @@ const ProfileView = ({ navigation }) => {
 						<Text style={{ marginLeft: 10, marginRight: 10 }}>{userData?.[0]?.data?.bio} </Text>
 					</>
 					<Text style={{ fontWeight: 'bold' }}>Interests: </Text>
-					<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+					<View style={styles.interest}>
 						{userData?.[0]?.data?.interests.map((interest, index) => (
-							<View key={index} style={styles.interest}>
+							<View key={index}>
 								<InterestButton text={interest} backgroundColor={'#E8984E'} textColor={'black'} />
 							</View>
 						))}
-					</ScrollView>
+					</View>
 				</>
 			);
 		} else {
@@ -124,8 +124,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 		alignItems: 'center',
+		padding: 20,
 		// // // position: 'absolute',
-		// // width: 91,
+		width: '100%',
 		// // height: 32,
 		// left: 142,
 		// top: 825,
