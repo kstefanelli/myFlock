@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		paddingTop: 30,
+		paddingTop: 200,
 	},
 	interestTagContainer: {
 		paddingTop: 30,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		textAlign: 'center',
-		borderWidth: 2,
+		// borderWidth: 2,
 		borderColor: 'lightgrey',
 		backgroundColor: 'white',
 		// borderColor: "white",
