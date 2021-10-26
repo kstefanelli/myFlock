@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
-
 import { auth, db } from '../../firebase';
 
 import EditProfileScreen from './EditProfileScreen';
+import Loading from '../reusable-components/Loading';
 
 const ProfileView = ({ navigation }) => {
 	let currentEmail;
@@ -53,6 +53,10 @@ const ProfileView = ({ navigation }) => {
 					</>
 					<Image source={{ uri: userData?.[0]?.data?.imageUrl }} style={styles.profileImage} />
 					<>
+						<Text style={{ fontWeight: 'bold' }}>Age</Text>
+						<Text style={{ marginLeft: 10, marginRight: 10 }}>{userData?.[0]?.data?.age} </Text>
+					</>
+					<>
 						<Text style={{ fontWeight: 'bold' }}>About You:</Text>
 						<Text style={{ marginLeft: 10, marginRight: 10 }}>{userData?.[0]?.data?.bio} </Text>
 					</>
@@ -68,8 +72,8 @@ const ProfileView = ({ navigation }) => {
 			);
 		} else {
 			return (
-				<View>
-					<Text> Loading...</Text>
+				<View style={styles.container}>
+					<Loading />
 				</View>
 			);
 		}
@@ -91,6 +95,11 @@ const ProfileView = ({ navigation }) => {
 	);
 };
 const styles = StyleSheet.create({
+	container: {
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 	button: {
 		backgroundColor: '#1F142E',
 		borderColor: '#1F142E',
@@ -123,6 +132,16 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		marginTop: 20,
 		marginBottom: 15,
+	},
+	interest: {
+		position: 'absolute',
+		width: 91,
+		height: 32,
+		left: 142,
+		top: 825,
+		backgroundColor: '#FFFFFF',
+		borderColor: '#E94057',
+		borderRadius: 5,
 	},
 });
 export default ProfileView;

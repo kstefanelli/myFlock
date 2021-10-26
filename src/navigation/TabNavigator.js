@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, Button, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {Icon} from 'react-native-elements'
 import ProfileView from '../screens/ProfileView';
 import ChatScreen from '../screens/ChatScreen';
 import NestViewScreen from '../screens/NestViewScreen';
@@ -28,12 +27,14 @@ function TabNavigator(props) {
 						let iconName;
 						if (route.name === 'Profile') {
 							iconName = focused ? 'user-alt' : 'user-alt';
-						} else if (route.name === 'Map') {
+						} else if (route.name === 'Discover Users') {
 							iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
 						} else if (route.name === 'Messages') {
 							iconName = focused ? 'feather-alt' : 'feather-alt';
 						} else if (route.name === 'ChatScreen') {
 							iconName = focused ? 'comment' : 'comment';
+						} else if (route.name === 'Interests') {
+							iconName = focused ? 'seedling' : 'seedling';
 						}
 						return <Icon type="ionicon" name={iconName} size={size} color={color} />;
 					},
@@ -60,16 +61,12 @@ function TabNavigator(props) {
 				}} */
 			/>
 
-			<Tab.Screen options={{ headerShown: false }} name="Map" component={Map} />
+			<Tab.Screen options={{ headerShown: false }} name="Discover Users" component={Map} />
 			<Tab.Screen options={{ headerShown: false }} name="Messages" component={NestViewScreen} />
 
 			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
-			<Tab.Screen name="Nearby Users" component={getNearbyUsers} />
-
-			<Tab.Screen name="Test" component={TestFile} />
-			<Tab.Screen name="AddInterest" component={AddInterest} />
-
+			<Tab.Screen name="Interests" component={AddInterest} />
 		</Tab.Navigator>
 	);
 }
