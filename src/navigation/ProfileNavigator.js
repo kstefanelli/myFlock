@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AddInterest from '../screens/AddInterest';
 import ProfileView from '../screens/ProfileView';
 import EditProfileScreen from '../screens/EditProfileScreen';
+import Map from '../screens/Map';
 
 const ProfileNavigator = (props) => {
 	const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ const ProfileNavigator = (props) => {
 			<Stack.Screen name="Profile View" component={ProfileView} />
 			<Stack.Screen name="Edit Profile" component={EditProfileScreen} />
 			<Stack.Screen name="Add Interest" component={AddInterest} />
+			<Stack.Screen name="Discover Users" component={Map} />
 		</Stack.Navigator>
 	);
 };

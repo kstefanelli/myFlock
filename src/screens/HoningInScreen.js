@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 //import all the components we are going to use
 import { Button, View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { InterestButton } from '../reusable-components/Button';
 
 const HoningInScreen = ({ navigation }) => {
 	const [ageValue, setAgeValue] = useState(0);
@@ -24,7 +25,7 @@ const HoningInScreen = ({ navigation }) => {
 					style={styles.slider}
 					maximumValue={100}
 					minimumValue={13}
-					minimumTrackTintColor="#307ecc"
+					minimumTrackTintColor="#E94057"
 					maximumTrackTintColor="#000000"
 					step={1}
 					value={ageValue}
@@ -32,13 +33,13 @@ const HoningInScreen = ({ navigation }) => {
 				/>
 			</View>
 			<View style={styles.container}>
-				<Text style={{ color: 'black' }}>RADIUS FILTER</Text>
-				<Text style={{ color: 'black' }}>MAX RADIUS: {radiusValue}</Text>
+				<Text style={styles.pillText}>RADIUS FILTER</Text>
+				<Text style={styles.pillText}>MAX RADIUS: {radiusValue}</Text>
 				<Slider
 					style={styles.slider}
 					maximumValue={100}
 					minimumValue={0}
-					minimumTrackTintColor="#307ecc"
+					minimumTrackTintColor="#E94057"
 					maximumTrackTintColor="#000000"
 					step={1}
 					value={radiusValue}
@@ -46,7 +47,10 @@ const HoningInScreen = ({ navigation }) => {
 				/>
 			</View>
 			<View style={styles.container}>
-				<Button
+				<InterestButton
+					text={'DISCOVER NEW FRIENDS IN YOUR NEARBY AREA'}
+					backgroundColor={'#E8984E'}
+					textColor={'black'}
 					buttonStyle={styles.button}
 					onPress={() =>
 						navigation.navigate('Find Nearby Users', { age: ageValue, radius: radiusValue })
@@ -65,8 +69,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	button: {
-		backgroundColor: '#1F142E',
-		borderColor: '#FFFFFF',
+		backgroundColor: '#E94057',
+		borderColor: '#E94057',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,
@@ -80,10 +84,10 @@ const styles = StyleSheet.create({
 		marginVertical: 4,
 		marginHorizontal: 4,
 		borderRadius: 50,
-		borderColor: '#1F142E',
+		borderColor: '#E94057',
 	},
 	pillText: {
-		color: '#000',
+		color: '#E94057',
 		fontSize: 15,
 		letterSpacing: 0.2,
 	},
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
 		opacity: 1,
 		height: 50,
 		marginTop: 10,
-		color: '#e6e8da',
+		color: '#E94057',
 	},
 });
 
