@@ -27,7 +27,7 @@ function TabNavigator(props) {
 						let iconName;
 						if (route.name === 'Profile') {
 							iconName = focused ? 'user-alt' : 'user-alt';
-						} else if (route.name === 'Map') {
+						} else if (route.name === 'Discover Users') {
 							iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
 						} else if (route.name === 'Messages') {
 							iconName = focused ? 'feather-alt' : 'feather-alt';

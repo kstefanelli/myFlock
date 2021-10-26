@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { Button, View, StyleSheet, Text } from 'react-native';
 import getCurrentLocation from '../maps/getCurrentLocation';
 import { createStackNavigator } from '@react-navigation/stack';
 import AnimatedMarker from '../maps/AnimatedMarker';

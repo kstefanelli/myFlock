@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import MapView, { Marker, Callout, Circle } from 'react-native-maps';
 import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Loading from '../reusable-components/Loading';
 
 const AnimatedMarker = (props) => {
 	const mapView = React.createRef();
-	const radiusMiles = 3; //miles
+	const radiusMiles = props.radius; //miles;
 	const radiusMeters = radiusMiles * 1609.34;
 
 	const navigation = useNavigation();
@@ -24,6 +25,7 @@ const AnimatedMarker = (props) => {
 		return UsersProfileData;
 	}
 
+	console.log('arrives in Animated Marker');
 	const UsersProfileObject = createUsersList();
 	const { latitude, longitude } = props;
 
@@ -70,14 +72,14 @@ const AnimatedMarker = (props) => {
 				}}
 				title={element.name}
 				onPress={() => {
-					console.log('onclick pressed');
 					navigation.navigate('Other Profile Views', { user: NearbyUsersObject, idx });
 				}}
 			>
 				<Callout>
 					<View>
 						<View style={styles.bubble}>
-							<Text style={styles.name}>{element.name}</Text>
+							<Text style={styles.title}>{element.name}</Text>
+							<Text style={styles.title}>{element.age}</Text>
 							<Image
 								style={styles.image}
 								source={require(`../../assets/myFlockIcons/Budgie.png`)}
@@ -109,19 +111,18 @@ const AnimatedMarker = (props) => {
 			<MapView
 				style={styles.container}
 				initialRegion={mapRegion}
-				showsUserLocation={true}
 				onRegionChangeComplete={(region) => setmapRegion(region)}
 				ref={mapView}
 			>
 				<Circle
 					center={{ latitude: mapRegion.latitude, longitude: mapRegion.longitude }}
 					radius={radiusMeters} //in meters
-					strokeColor="#4F6D7A"
+					strokeColor="'rgba(230,238,255,0.75)'"
 					strokeWidth={2}
 					fillColor={'rgba(230,238,255,0.75)'}
 					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
-				{UsersProfileObject ? mapMarkers() : <Text>Loading Users...</Text>}
+				{UsersProfileObject ? mapMarkers() : <Loading />}
 			</MapView>
 		</View>
 	);
@@ -138,6 +139,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		width: Dimensions.get('window').width,
 		height: Dimensions.get('window').height,
+	},
+	title: {
+		fontWeight: 'bold',
+		fontSize: 16,
 	},
 	map: {
 		width: Dimensions.get('window').width,

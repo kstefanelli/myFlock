@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native';
 import { auth, db } from '../../../firebase';
 /* import geohash from 'ngeohash';
 import getGeohashRange from './geohash/getGeoHashRange'; */
 import AnimatedMarker from '../AnimatedMarker';
 import Loading from '../../reusable-components/Loading';
 
-const getNearbyUsers = ({ route }) => {
+const getNearbyUsers = ({ navigation, route }) => {
 	const [NearbyUsersData, setNearbyUsersData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [location, setLocation] = useState('');
@@ -14,24 +14,17 @@ const getNearbyUsers = ({ route }) => {
 	const [latitude, setLatitude] = useState(0);
 	const [longitude, setLongitude] = useState(0);
 
+	const { age } = route.params;
+	const { radius } = route.params;
+
 	const currentEmail =
 		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
-	//GEOHASHING
-	/* 	const { latitude, longitude } = route.params;
-	 */ /* 	//encode - need to return my user's specific location
-	const myGeohash = geohash.encode(latitude, longitude);
-	//range - return nearby geohashes given radius
-	const givenRadius = 5;
-	//param passed from getCurrentLocation
-	const range = getGeohashRange(latitude, longitude, givenRadius); */
-
-	const { age } = route.params;
 
 	useEffect(() => {
 		if (!auth.currentUser) {
 			return;
 		}
-		console.log('componentDidMount');
+		console.log('componentDidUpdate');
 		async function fetchMyUserData() {
 			try {
 				db.collection('Users')
@@ -47,8 +40,8 @@ const getNearbyUsers = ({ route }) => {
 			}
 		}
 		fetchMyUserData();
-		const componentWillUnmount = () => setIsLoading(false);
-		return componentWillUnmount();
+		const componentDidUpdate = () => setIsLoading(false);
+		return componentDidUpdate();
 	}, [currentEmail, auth.currentUser]);
 
 	useEffect(() => {
@@ -60,8 +53,7 @@ const getNearbyUsers = ({ route }) => {
 			setIsLoading(true);
 			if (location !== '' && NearbyUsersData.length < 1 && myInterests.length > 0) {
 				db.collection('Users')
-					/* 					.where('email', '!=', currentEmail)
-					 */ .where('location', '==', location)
+					.where('location', '==', location)
 					.where('age', '>=', age)
 					.where('interests', 'array-contains-any', myInterests)
 					.onSnapshot((snapshot) => {
@@ -82,8 +74,8 @@ const getNearbyUsers = ({ route }) => {
 		return <Text>Please login or sign up to see the map!</Text>;
 	}
 
-	console.log('>>>getNearbyUsers to pass into AnimateMarker>>>', NearbyUsersData);
-
+	console.log('>>>getNearbyUsers to pass into AnimateMarker>>>');
+	console.log(age, radius);
 	return (
 		<View style={styles.container}>
 			{NearbyUsersData.length ? (
@@ -91,6 +83,7 @@ const getNearbyUsers = ({ route }) => {
 					NearbyUsersObject={NearbyUsersData}
 					latitude={latitude}
 					longitude={longitude}
+					radius={radius}
 				/>
 			) : (
 				<Loading />
