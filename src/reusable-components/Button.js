@@ -1,12 +1,33 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const RoundedButton = ({ label, onPress }) => {
+export const InterestButton = ({ onPress, text, backgroundColor }) => {
+	const bgColor = {
+		backgroundColor,
+	};
+
 	return (
-		<TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={onPress}>
-			<Text style={{ fontSize: 22, color: 'white', fontWeight: 'bold' }}>{label}</Text>
+		<TouchableOpacity onPress={onPress} style={[styles.pillContainer, bgColor]}>
+			<Text style={styles.pillText}>{text}</Text>
 		</TouchableOpacity>
 	);
 };
 
-export default RoundedButton;
+const styles = StyleSheet.create({
+	pillContainer: {
+		// make the container as big as the text
+		//alignSelf: 'center',
+		justifyContent: 'center',
+		paddingVertical: 2,
+		paddingHorizontal: 16,
+		marginRight: 7,
+		marginBottom: 7,
+		borderRadius: 10,
+	},
+	pillText: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontSize: 15,
+		color: '#FFFFFF',
+	},
+});

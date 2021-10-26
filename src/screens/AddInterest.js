@@ -41,7 +41,7 @@ const AddInterest = ({ navigation }) => {
 					}))
 				);
 			});
-	}, []);
+	}, [currentEmail]);
 
 	// const add = () => {
 	//   // add interest in firebase
@@ -101,8 +101,8 @@ const AddInterest = ({ navigation }) => {
 												);
 										}
 										setTagSelected(interest);
-										navigation.navigate('Profile');
-										setfilterdIntestests([]);
+										navigation.navigate('Profile View');
+										setfilterdIntestests(interests);
 										setNewInterest('');
 									}}
 								>

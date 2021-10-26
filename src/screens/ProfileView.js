@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements';
 import { auth, db } from '../../firebase';
 
 import EditProfileScreen from './EditProfileScreen';
-import Loading from '../reusable-components/Loading';
+import { InterestButton } from '../reusable-components/Button';
 
 const ProfileView = ({ navigation }) => {
 	let currentEmail;
@@ -53,29 +53,21 @@ const ProfileView = ({ navigation }) => {
 					</>
 					<Image source={{ uri: userData?.[0]?.data?.imageUrl }} style={styles.profileImage} />
 					<>
-						<Text style={{ fontWeight: 'bold' }}>Age</Text>
-						<Text style={{ marginLeft: 10, marginRight: 10 }}>{userData?.[0]?.data?.age} </Text>
-					</>
-					<>
 						<Text style={{ fontWeight: 'bold' }}>About You:</Text>
 						<Text style={{ marginLeft: 10, marginRight: 10 }}>{userData?.[0]?.data?.bio} </Text>
 					</>
 					<Text style={{ fontWeight: 'bold' }}>Interests: </Text>
-					<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+					<View style={styles.interest}>
 						{userData?.[0]?.data?.interests.map((interest, index) => (
-							<View key={index} style={{ alignItems: 'center' }}>
-								<Text style={{ color: '#1F142E', marginTop: 15 }}> *{interest}* </Text>
+							<View key={index}>
+								<InterestButton text={interest} backgroundColor={'#E8984E'} textColor={'black'} />
 							</View>
 						))}
-					</ScrollView>
+					</View>
 				</>
 			);
 		} else {
-			return (
-				<View style={styles.container}>
-					<Loading />
-				</View>
-			);
+			return <Text>Loading</Text>;
 		}
 	};
 	console.log('Here’s our test', userData?.[0]?.data?.pronouns);
@@ -95,11 +87,6 @@ const ProfileView = ({ navigation }) => {
 	);
 };
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
 	button: {
 		backgroundColor: '#1F142E',
 		borderColor: '#1F142E',
@@ -134,13 +121,17 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 	},
 	interest: {
-		position: 'absolute',
-		width: 91,
-		height: 32,
-		left: 142,
-		top: 825,
-		backgroundColor: '#FFFFFF',
-		borderColor: '#E94057',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		alignItems: 'center',
+		padding: 20,
+		// // // position: 'absolute',
+		width: '100%',
+		// // height: 32,
+		// left: 142,
+		// top: 825,
+		/* 		backgroundColor: '#FFFFFF',
+		 */ borderColor: '#E94057',
 		borderRadius: 5,
 	},
 });
