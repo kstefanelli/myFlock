@@ -1,5 +1,7 @@
 ![cover for myFlock](assets/supplementary_images/cover.png)
 
+Watch the video overview: 
+[Capstone Presentation](https://youtu.be/KBKhrSB6zYQ)
 
 
 ## Our Inspiration:
