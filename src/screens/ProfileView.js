@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Button, Text } from 'react-native-elements';
 import { auth, db } from '../../firebase';
 
 import EditProfileScreen from './EditProfileScreen';
@@ -39,7 +39,7 @@ const ProfileView = ({ navigation }) => {
 			}
 		});
 		return unsubscribe;
-	}, []);
+	}, [currentEmail]);
 	//show profile function based on if state is set
 	const showProfile = () => {
 		if (!isLoading) {
@@ -89,7 +89,7 @@ const ProfileView = ({ navigation }) => {
 const styles = StyleSheet.create({
 	button: {
 		backgroundColor: '#1F142E',
-		borderColor: '#1F142E',
+		borderColor: '#bf90b1',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,

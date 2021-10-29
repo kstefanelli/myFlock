@@ -16,6 +16,7 @@ const AnimatedMarker = (props) => {
 	function createUsersList() {
 		const UsersProfileData = NearbyUsersObject.map((objElement) => ({
 			name: objElement.data.name,
+			age: objElement.data.age,
 			interests: objElement.data.interests,
 			location: objElement.data.location,
 			latitude: objElement.data.latitude,
@@ -24,8 +25,6 @@ const AnimatedMarker = (props) => {
 		}));
 		return UsersProfileData;
 	}
-
-	console.log('arrives in Animated Marker');
 	const UsersProfileObject = createUsersList();
 	const { latitude, longitude } = props;
 
@@ -35,8 +34,8 @@ const AnimatedMarker = (props) => {
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 	const initialMapRegion = {
-		latitude: 47.7330388,
-		longitude: -122.40371218,
+		latitude: props.latitude ? props.latitude : 47.7330388,
+		longitude: props.longitude ? props.longitude : -122.40371218,
 		latitudeDelta: LATITUDE_DELTA,
 		longitudeDelta: LONGITUDE_DELTA,
 	};
@@ -75,18 +74,15 @@ const AnimatedMarker = (props) => {
 					navigation.navigate('Other Profile Views', { user: NearbyUsersObject, idx });
 				}}
 			>
-				<Callout>
+				<Callout tooltip>
 					<View>
-						<View style={styles.bubble}>
+						<View>
 							<Text style={styles.title}>{element.name}</Text>
 							<Text style={styles.title}>{element.age}</Text>
-							<Image
-								style={styles.image}
-								source={require(`../../assets/myFlockIcons/Budgie.png`)}
-							/>
+							<Image source={require('../../assets/supplementary_images/bird.png')} />
 						</View>
-						<View style={styles.arrowBorder} />
-						<View style={styles.arrow} />
+						{/* 						<View style={styles.arrowBorder} />
+						<View style={styles.arrow} /> */}
 					</View>
 				</Callout>
 			</Marker>
@@ -110,17 +106,18 @@ const AnimatedMarker = (props) => {
 		<View style={styles.container}>
 			<MapView
 				style={styles.container}
-				initialRegion={mapRegion}
+				initialRegion={initialMapRegion}
 				onRegionChangeComplete={(region) => setmapRegion(region)}
 				ref={mapView}
 			>
 				<Circle
-					center={{ latitude: mapRegion.latitude, longitude: mapRegion.longitude }}
+					center={{ latitude: initialMapRegion.latitude, longitude: initialMapRegion.longitude }}
 					radius={radiusMeters} //in meters
 					strokeColor="'rgba(230,238,255,0.75)'"
 					strokeWidth={2}
 					fillColor={'rgba(230,238,255,0.75)'}
-					onRegionChangeComplete={(region) => setmapRegion(region)}
+					/* 					onRegionChangeComplete={(region) => setmapRegion(region)}
+					 */
 				/>
 				{UsersProfileObject ? mapMarkers() : <Loading />}
 			</MapView>
@@ -175,5 +172,9 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		marginTop: -0.5,
 		// marginBottom: -15
+	},
+	image: {
+		width: '100%',
+		height: 80,
 	},
 });
