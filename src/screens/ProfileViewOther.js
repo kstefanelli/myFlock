@@ -15,24 +15,27 @@ const ProfileViewOther = ({ navigation, route }) => {
 	const currentEmail =
 		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
 
-	console.log('Auth current user>', auth.currentUser);
+  console.log('user>', viewedUser);
+  console.log('currentUser>', auth.currentUser)
 
-	const startNewChat = () => {
-		db.collection('chats').doc(thisChatName).set(
-			{
-				chatName: thisChatName,
-			},
-			{ merge: true }
-		);
-		db.collection('chats')
-			.doc(thisChatName)
-			.update({
-				parties: firebase.firestore.FieldValue.arrayUnion(currentEmail, viewedUser.email),
-				photos: firebase.firestore.FieldValue.arrayUnion(
-					auth.currentUser.photoURL,
-					viewedUser.imageUrl
-				),
-			});
+  const startNewChat = () => {
+    db.collection('chats').doc(thisChatName).set(
+      {
+        chatName: thisChatName,
+      },
+      {merge: true}
+    );
+    db.collection('chats')
+      .doc(thisChatName)
+      .update({
+        parties: firebase.firestore.FieldValue.arrayUnion(currentEmail, viewedUser.email),
+        photos: firebase.firestore.FieldValue.arrayUnion(
+          auth.currentUser.photoURL,
+          viewedUser.imageUrl
+        ),
+        names: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.displayName, viewedUser.name),
+      });
+
 
 		navigation.navigate('ChatScreen', { chatName: thisChatName });
 	};

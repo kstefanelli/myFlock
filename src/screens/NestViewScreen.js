@@ -9,107 +9,112 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { auth, db } from '../../firebase';
 
-const NestViewScreen = ({ navigation }) => {
-	const [chats, setChats] = useState([]);
+const NestViewScreen = ({navigation}) => {
+  const [chats, setChats] = useState([])
 
-	const currentEmail =
-		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
+  const currentEmail =
+					auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
 
-	useFocusEffect(
-		React.useCallback(() => {
-			const unsubscribe = () => {
-				db.collection('chats')
-					.where('parties', 'array-contains', currentEmail)
-					.onSnapshot((snapshot) => {
-						setChats(
-							snapshot.docs.map((doc) => ({
-								id: doc.id,
-								data: doc.data(),
-							}))
-						);
-					});
-				{
-					noChat();
-				}
-			};
-			return unsubscribe();
-		}, [currentEmail])
-	);
+  useFocusEffect(
+    React.useCallback(() => {
 
-	const enterChat = (id) => {
-		navigation.navigate('ChatScreen', { chatName: id });
-	};
+    const unsubscribe = () => {
+      db.collection("chats").
+      where('parties', 'array-contains', currentEmail)
+      .onSnapshot((snapshot)=> {
+        setChats(snapshot.docs.map(doc=> ({
+          id: doc.id,
+          data: doc.data(),
 
-	const noChat = () => {
-		if (chats.length < 1) {
-			return (
-				<View
-					style={{
-						flex: 1,
-						justifyContent: 'center',
-						alignItems: 'center',
-					}}
-				>
-					<FontAwesome5 name="earlybirds" size={200} color="black" />
+        })))
+      });
+      {noChat()}
+    }
+    return unsubscribe();
+  }, [])
+  );
 
-					<TouchableOpacity
-						style={{ alignItems: 'center', justifyContent: 'center', marginTop: 50 }}
-						onPress={() => navigation.goBack()}
-					>
-						<Text style={{ fontSize: 18, color: 'black', textAlign: 'center' }}>
-							No chirps yet! Fly over the map to peek at other birds with your interests!
-						</Text>
-					</TouchableOpacity>
-				</View>
-			);
-		} else {
-			return (
-				<View style={styles.eggContainer}>
-					{chats.map(({ id, data }) => (
-						<EggItem key={id} id={data.chatName} photos={data.photos} enterChat={enterChat} />
-					))}
-				</View>
-			);
-		}
-	};
+  const enterChat = (id) => {
+    navigation.navigate("ChatScreen",{chatName:id})
+  };
 
-	useLayoutEffect(() => {
-		navigation.setOptions({
-			title: 'Messages',
-		});
-	}, [navigation]);
+  const noChat = () => {
 
-	return (
-		<SafeAreaView style={{ backgroundColor: '#E6E8DA' }}>
-			<ScrollView style={styles.container}>
-				<Text h2 style={{ marginTop: 10, marginBottom: 10, textAlign: 'center' }}>
-					Birds of a Feather
-				</Text>
+    if (chats.length < 1 ) {
+      return (
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <FontAwesome5 name="earlybirds" size={200} color="black" />
 
-				<View
-					style={{
-						marginBottom: 10,
-						borderBottomColor: '#e8984e',
-						borderBottomWidth: 5,
-					}}
-				/>
-				{noChat()}
+          <TouchableOpacity
+            style={{alignItems: 'center', justifyContent: 'center', marginTop: 50}}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={{fontSize: 18, color: 'black', textAlign: 'center'}}>
+              No chirps yet! Fly over the map to peek at other birds with your interests!
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.eggContainer}>
+          {chats.map(({id, data:{photos, names}}) => (
+            <EggItem key ={id}
+            id={id}
+            photos={photos}
+            names ={names}
+            enterChat={enterChat} />
+          ))}
 
-				<View
-					style={{
-						marginTop: 10,
-						borderBottomColor: '#e8984e',
-						borderBottomWidth: 5,
-					}}
-				/>
+        </View>
+      );
+    }
+  };
 
-				<Text h2 style={{ marginTop: 10, marginBottom: 10, textAlign: 'center' }}>
-					Flock Together
-				</Text>
-			</ScrollView>
-		</SafeAreaView>
-	);
-};
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Messages"
+    })
+  }, [navigation])
+
+  return (
+    <SafeAreaView style={{backgroundColor: "#E6E8DA"}} >
+      <ScrollView style={styles.container}>
+      <Text h2 style={{marginTop: 10, marginBottom: 10, textAlign: 'center'}}>
+          Birds of a Feather
+        </Text>
+
+        <View
+          style={{
+            marginBottom: 10,
+            borderBottomColor: '#e8984e',
+            borderBottomWidth: 5,
+          }}
+        />
+        {noChat()}
+
+        <View
+          style={{
+            marginTop: 10,
+            borderBottomColor: '#e8984e',
+            borderBottomWidth: 5,
+          }}
+        />
+
+        <Text h2 style={{marginTop: 10, marginBottom: 10, textAlign: 'center'}}>
+          Flock Together
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
+  )
+}
+
 
 export default NestViewScreen;
 
