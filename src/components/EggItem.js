@@ -6,9 +6,10 @@ import {auth, db} from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const EggItem = ({id, photos, enterChat, navigation}) => {
+const EggItem = ({id, photos, names, enterChat, navigation}) => {
   const [eggPicture, setEggPicture] = useState("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)")
   const [chatMessages, setChatMessages] = useState("")
+  const [name, setName] = useState('Your Flock')
 
   useFocusEffect(
     React.useCallback(() => {
@@ -27,6 +28,18 @@ const EggItem = ({id, photos, enterChat, navigation}) => {
         setEggPicture("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)"
           )
       }
+      if(names !== undefined) {
+        for (let i =0; i<names.length; i++){
+          let name = names[i];
+          if (name !==undefined && name !== auth.currentUser.displayName){setName(name); break}
+          else {
+            setName("Flocker")
+        }
+      }
+      }
+      else {
+        setName("Your Flock")
+      }
       };
 
     return unsubscribe();
@@ -34,7 +47,6 @@ const EggItem = ({id, photos, enterChat, navigation}) => {
    );
 
    useEffect(() => {
-    //  console.log('setting chats in nestview')
 		const unsubscribe = db
 			.collection('chats')
 			.doc(id)
@@ -66,7 +78,7 @@ const EggItem = ({id, photos, enterChat, navigation}) => {
           }}
         />
         <ListItem.Content >
-          <ListItem.Title style={{fontWeight: '800', color: '#354A18'}}>{id}</ListItem.Title>
+          <ListItem.Title style={{fontWeight: '800', color: '#354A18'}}>Your Chat With {name}</ListItem.Title>
           <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail"
           style={{color: '#354A18'}}>
             {chatMessages?.[0]?.data.message}

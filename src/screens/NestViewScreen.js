@@ -65,12 +65,14 @@ const NestViewScreen = ({navigation}) => {
     } else {
       return (
         <View style={styles.eggContainer}>
-          {chats.map(({id, data:{photos}}) => (
+          {chats.map(({id, data:{photos, names}}) => (
             <EggItem key ={id}
             id={id}
             photos={photos}
+            names ={names}
             enterChat={enterChat} />
           ))}
+
         </View>
       );
     }
@@ -96,12 +98,6 @@ const NestViewScreen = ({navigation}) => {
             borderBottomWidth: 5,
           }}
         />
-        {/* {chats.map(({id, data: {chatName}})=> (
-          <EggItem key ={id}
-          id={id}
-          chatName={chatName}
-          enterChat={enterChat} />
-        ))} */}
         {noChat()}
 
         <View
