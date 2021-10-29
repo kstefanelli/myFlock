@@ -25,7 +25,7 @@ function TabNavigator(props) {
               iconName = focused ? 'map-marker-alt' : 'map-marker-alt';
             } else if (route.name === 'Messages') {
               iconName = focused ? 'feather-alt' : 'feather-alt';
-            } else if (route.name === 'ChatScreen') {
+            } else if (route.name === 'Chat') {
               iconName = focused ? 'comment' : 'comment';
             } else if (route.name === 'Interests') {
               iconName = focused ? 'seedling' : 'seedling';
@@ -38,7 +38,7 @@ function TabNavigator(props) {
       <Tab.Screen options={{ headerShown: false }} name="Profile" component={ProfileNavigator} />
       <Tab.Screen options={{ headerShown: false }} name="Discover Users" component={Map} />
       <Tab.Screen options={{ headerShown: false }} name="Messages" component={NestViewScreen} />
-      <Tab.Screen name="ChatScreen" component={ChatScreen} />
+      <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen options={{ headerShown: false }}  name="Interests" component={AddInterest} />
     </Tab.Navigator>
   );
