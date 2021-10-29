@@ -4,7 +4,9 @@
 //import React in our code
 import React, { useState } from 'react';
 //import all the components we are going to use
-import { Button, View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { View, SafeAreaView, StyleSheet } from 'react-native';
+import { Button, Text } from 'react-native-elements';
+
 import Slider from '@react-native-community/slider';
 import { InterestButton } from '../reusable-components/Button';
 
@@ -17,40 +19,49 @@ const HoningInScreen = ({ navigation }) => {
 			<View style={styles.container}>
 				{/*Text to show slider value*/}
 				<View styles={styles.pillContainer}>
-					<Text style={styles.pillText}>AGE FILTER</Text>
+					<Text style={styles.pillText}>AGE</Text>
 					<Text style={styles.pillText}>MIN AGE: {ageValue}</Text>
 				</View>
 				{/*Slider with max, min, step and initial value*/}
 				<Slider
 					style={styles.slider}
-					maximumValue={100}
+					maximumValue={50}
 					minimumValue={13}
-					minimumTrackTintColor="#E94057"
-					maximumTrackTintColor="#000000"
+					minimumTrackTintColor="#E8984E"
+					maximumTrackTintColor="#E8984E"
 					step={1}
 					value={ageValue}
 					onValueChange={(ageValue) => setAgeValue(ageValue)}
 				/>
 			</View>
 			<View style={styles.container}>
-				<Text style={styles.pillText}>RADIUS FILTER</Text>
-				<Text style={styles.pillText}>MAX RADIUS: {radiusValue}</Text>
+				<Text style={styles.pillText}>RADIUS</Text>
+				<Text style={styles.pillText}>MAX RADIUS: {radiusValue} MILES</Text>
 				<Slider
 					style={styles.slider}
-					maximumValue={100}
+					maximumValue={50}
 					minimumValue={0}
-					minimumTrackTintColor="#E94057"
-					maximumTrackTintColor="#000000"
+					minimumTrackTintColor="#E8984E"
+					maximumTrackTintColor="#E8984E"
 					step={1}
 					value={radiusValue}
 					onValueChange={(radiusValue) => setRadiusValue(radiusValue)}
 				/>
 			</View>
 			<View style={styles.container}>
-				<InterestButton
+				{/* 				<InterestButton
 					text={'DISCOVER NEW FRIENDS IN YOUR NEARBY AREA'}
 					backgroundColor={'#E8984E'}
 					textColor={'black'}
+					buttonStyle={styles.button}
+					onPress={() =>
+						navigation.navigate('Find Nearby Users', { age: ageValue, radius: radiusValue })
+					}
+					title="Discover New Friends"
+				/> */}
+			</View>
+			<View style={styles.container}>
+				<Button
 					buttonStyle={styles.button}
 					onPress={() =>
 						navigation.navigate('Find Nearby Users', { age: ageValue, radius: radiusValue })
@@ -69,8 +80,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	button: {
-		backgroundColor: '#E94057',
-		borderColor: '#E94057',
+		alignSelf: 'center',
+		backgroundColor: '#1F142E',
+		borderColor: '#bf90b1',
 		borderWidth: 5,
 		width: 200,
 		margin: 5,
@@ -87,15 +99,15 @@ const styles = StyleSheet.create({
 		borderColor: '#E94057',
 	},
 	pillText: {
-		color: '#E94057',
-		fontSize: 15,
+		color: '#E8984E',
+		fontSize: 20,
 		letterSpacing: 0.2,
 	},
 	slider: {
 		opacity: 1,
 		height: 50,
 		marginTop: 10,
-		color: '#E94057',
+		color: '#E8984E',
 	},
 });
 

@@ -24,7 +24,7 @@ const getNearbyUsers = ({ navigation, route }) => {
 		if (!auth.currentUser) {
 			return;
 		}
-		console.log('componentDidUpdate');
+		console.log('componentDidUpdate fetchMyUserData');
 		async function fetchMyUserData() {
 			try {
 				db.collection('Users')
@@ -48,7 +48,7 @@ const getNearbyUsers = ({ navigation, route }) => {
 		if (!auth.currentUser) {
 			return;
 		}
-		console.log('componentDidUpdate');
+		console.log('componentDidUpdate setIsLoading');
 		const unsubscribe = () => {
 			setIsLoading(true);
 			if (location !== '' && NearbyUsersData.length < 1 && myInterests.length > 0) {
@@ -74,8 +74,6 @@ const getNearbyUsers = ({ navigation, route }) => {
 		return <Text>Please login or sign up to see the map!</Text>;
 	}
 
-	console.log('>>>getNearbyUsers to pass into AnimateMarker>>>');
-	console.log(age, radius);
 	return (
 		<View style={styles.container}>
 			{NearbyUsersData.length ? (

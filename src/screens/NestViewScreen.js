@@ -1,14 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, {useState, useLayoutEffect, useEffect} from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
-import {Text, Avatar} from 'react-native-elements';
-import { SafeAreaView } from 'react-native-safe-area-context'
-import EggItem from '../components/EggItem'
-import {FontAwesome5} from '@expo/vector-icons';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Text, Avatar } from 'react-native-elements';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import EggItem from '../components/EggItem';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import { auth, db } from '../../firebase';
-
 
 const NestViewScreen = ({navigation}) => {
   const [chats, setChats] = useState([])
@@ -65,12 +64,14 @@ const NestViewScreen = ({navigation}) => {
     } else {
       return (
         <View style={styles.eggContainer}>
-          {chats.map(({id, data:{photos}}) => (
+          {chats.map(({id, data:{photos, names}}) => (
             <EggItem key ={id}
             id={id}
             photos={photos}
+            names ={names}
             enterChat={enterChat} />
           ))}
+
         </View>
       );
     }
@@ -96,12 +97,6 @@ const NestViewScreen = ({navigation}) => {
             borderBottomWidth: 5,
           }}
         />
-        {/* {chats.map(({id, data: {chatName}})=> (
-          <EggItem key ={id}
-          id={id}
-          chatName={chatName}
-          enterChat={enterChat} />
-        ))} */}
         {noChat()}
 
         <View
@@ -120,10 +115,11 @@ const NestViewScreen = ({navigation}) => {
   )
 }
 
+
 export default NestViewScreen;
 
 const styles = StyleSheet.create({
-  container:{
-    height: "100%"
-  }
-})
+	container: {
+		height: '100%',
+	},
+});

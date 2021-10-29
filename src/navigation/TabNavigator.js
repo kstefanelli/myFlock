@@ -10,6 +10,7 @@ import ProfileNavigator from './ProfileNavigator';
 
 ProfileNavigator;
 function TabNavigator(props) {
+
   const Tab = createBottomTabNavigator();
 
   return (
@@ -42,6 +43,7 @@ function TabNavigator(props) {
       <Tab.Screen options={{ headerShown: false }}  name="Interests" component={AddInterest} />
     </Tab.Navigator>
   );
+
 }
 
 export default TabNavigator;

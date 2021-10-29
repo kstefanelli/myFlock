@@ -27,6 +27,8 @@ const AddInterest = ({ navigation }) => {
 	const [MyInterests, setMyInterests] = useState([]);
 	const [filltext, setFillText] = useState('');
 
+	console.log('AddInterest called');
+
 	let currentEmail =
 		auth.currentUser.email.charAt(0).toUpperCase() + auth.currentUser.email.slice(1);
 	// on first render sets myInterest
@@ -132,8 +134,12 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
+
 		paddingTop: 100,
 		marginBottom: -20
+
+		justifyContent: 'center',
+
 	},
 	interestTagContainer: {
 		paddingTop: 30,

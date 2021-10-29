@@ -5,6 +5,7 @@ import AddInterest from '../screens/AddInterest';
 import ProfileView from '../screens/ProfileView';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import Map from '../screens/Map';
+import ProfileViewOther from '../screens/ProfileViewOther';
 
 const ProfileNavigator = (props) => {
 	const Stack = createStackNavigator();
