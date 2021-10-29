@@ -68,7 +68,7 @@ const AddInterest = ({ navigation }) => {
 			style={{
 				flex: 1,
 			}}
-			keyboardVerticalOffset={90}
+			keyboardVerticalOffset={0}
 		>
 			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 				<View style={styles.container}>
@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		flexDirection: 'row',
 		flexWrap: 'wrap',
-		paddingTop: 200,
+		paddingTop: 100,
+		marginBottom: -20
 	},
 	interestTagContainer: {
 		paddingTop: 30,
