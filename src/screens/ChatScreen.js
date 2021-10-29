@@ -21,7 +21,7 @@ import * as firebase from 'firebase';
 const ChatScreen = ({ navigation, route }) => {
 	// console.log('auth.currentUser', auth.currentUser.email);
 
-	console.log('chat screen >>>', route.params.viewedUser);
+	//console.log('chat screen >>>', route.params.viewedUser);
 	if (!route.params) {
 		route.params = {
 			chatName: Math.floor(Math.random() * 10000).toString(),

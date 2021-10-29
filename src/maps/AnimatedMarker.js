@@ -33,6 +33,10 @@ const AnimatedMarker = (props) => {
 	const LATITUDE_DELTA = Platform.OS === global.platformIOS ? 1.5 : 0.5;
 	const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
+	const myLatitude = props.latitude ? props.latitude : 47.7330388;
+
+	const myLongitude = props.longitude ? props.longitude : -122.40371218;
+
 	const initialMapRegion = {
 		latitude: props.latitude ? props.latitude : 47.7330388,
 		longitude: props.longitude ? props.longitude : -122.40371218,
@@ -40,12 +44,6 @@ const AnimatedMarker = (props) => {
 		longitudeDelta: LONGITUDE_DELTA,
 	};
 	const [mapRegion, setmapRegion] = useState(initialMapRegion);
-	// const [mapRegion, setmapRegion] = useState({
-	// 	latitude: latitude,
-	// 	longitude: longitude,
-	// 	latitudeDelta: LATITUDE_DELTA,
-	// 	longitudeDelta: LONGITUDE_DELTA,
-	// });
 
 	useEffect(() => {
 		setmapRegion((prevMapRegion) => {
@@ -102,6 +100,8 @@ const AnimatedMarker = (props) => {
 		);
 	}, [mapRegion]);
 
+	console.log('Animated Marker');
+
 	return (
 		<View style={styles.container}>
 			<MapView
@@ -111,13 +111,12 @@ const AnimatedMarker = (props) => {
 				ref={mapView}
 			>
 				<Circle
-					center={{ latitude: initialMapRegion.latitude, longitude: initialMapRegion.longitude }}
+					center={{ latitude: myLatitude, longitude: myLongitude }}
 					radius={radiusMeters} //in meters
 					strokeColor="'rgba(230,238,255,0.75)'"
 					strokeWidth={2}
 					fillColor={'rgba(230,238,255,0.75)'}
-					/* 					onRegionChangeComplete={(region) => setmapRegion(region)}
-					 */
+					onRegionChangeComplete={(region) => setmapRegion(region)}
 				/>
 				{UsersProfileObject ? mapMarkers() : <Loading />}
 			</MapView>

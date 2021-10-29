@@ -28,6 +28,10 @@ const EditProfileScreen = ({ navigation, route }) => {
 				bio: bio || userData.bio,
 				pronouns: pronouns || userData.pronouns,
 			});
+		/* 
+		auth.currentUser.updateProfile({
+			photoURL: imageUrl || userData.imageUrl,
+		}); */
 		navigation.navigate('Profile');
 	};
 
