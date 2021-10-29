@@ -28,7 +28,11 @@ const EditProfileScreen = ({ navigation, route }) => {
 				bio: bio || userData.bio,
 				pronouns: pronouns || userData.pronouns,
 			});
-		navigation.navigate('Profile');
+
+		auth.currentUser.updateProfile({
+			photoURL: imageUrl || userData.imageUrl,
+		});
+		navigation.navigate('Profile View');
 	};
 
 	return (

@@ -21,12 +21,14 @@ import * as firebase from 'firebase';
 const ChatScreen = ({ navigation, route }) => {
 	// console.log('auth.currentUser', auth.currentUser.email);
 
+	//console.log('chat screen >>>', route.params.viewedUser);
 	if (!route.params) {
 		route.params = {
 			chatName: Math.floor(Math.random() * 10000).toString(),
 		};
 	}
 
+	console.log('auth object >>>', auth.currentUser);
 	// const auth.currentUser = route.params.user;
 	const [input, setInput] = useState('');
 	const [messages, setMessages] = useState([]);
@@ -34,13 +36,17 @@ const ChatScreen = ({ navigation, route }) => {
 	const sendMessage = () => {
 		Keyboard.dismiss();
 
-		db.collection('chats').doc(route.params.chatName).collection('messages').add({
-			timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
-			message: input,
-			displayName: auth.currentUser.displayName,
-			email: auth.currentUser.email,
-			photoUrl: auth.currentUser.photoURL,
-		});
+		db.collection('chats')
+			.doc(route.params.chatName)
+			.collection('messages')
+			.add({
+				chatTitle: `Your Conversation with ${route.params.viewedUser.name}`,
+				timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+				message: input,
+				displayName: auth.currentUser.displayName,
+				email: auth.currentUser.email,
+				photoUrl: auth.currentUser.photoURL,
+			});
 
 		setInput('');
 	};
