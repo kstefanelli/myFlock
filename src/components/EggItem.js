@@ -1,10 +1,15 @@
 /* eslint-disable no-unused-vars */
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ListItem, Avatar} from 'react-native-elements';
-import {auth, db} from '../../firebase';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
+import { auth, db } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
+const EggItem = ({ id, photos, enterChat, navigation }) => {
+	const [eggPicture, setEggPicture] = useState(
+		'https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)'
+	);
+	const [chatMessages, setChatMessages] = useState('');
 
 const EggItem = ({id, photos, names, enterChat, navigation}) => {
   const [eggPicture, setEggPicture] = useState("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)")
@@ -47,6 +52,7 @@ const EggItem = ({id, photos, names, enterChat, navigation}) => {
    );
 
    useEffect(() => {
+
 		const unsubscribe = db
 			.collection('chats')
 			.doc(id)
@@ -87,12 +93,13 @@ const EggItem = ({id, photos, names, enterChat, navigation}) => {
       </ListItem>
     </View>
   );
+
 };
 
 export default EggItem;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#E6E8DA'
-  }
+	container: {
+		backgroundColor: '#E6E8DA',
+	},
 });

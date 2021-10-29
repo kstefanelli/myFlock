@@ -63,10 +63,7 @@ function TabNavigator(props) {
 
 			<Tab.Screen options={{ headerShown: false }} name="Discover Users" component={Map} />
 			<Tab.Screen options={{ headerShown: false }} name="Messages" component={NestViewScreen} />
-
-			{/* <Tab.Screen name="Chat" component={AddChatScreen} /> */}
 			<Tab.Screen name="ChatScreen" component={ChatScreen} />
-			<Tab.Screen name="Interests" component={AddInterest} />
 		</Tab.Navigator>
 	);
 }
