@@ -5,11 +5,6 @@ import { ListItem, Avatar } from 'react-native-elements';
 import { auth, db } from '../../firebase';
 import { useFocusEffect } from '@react-navigation/native';
 
-const EggItem = ({ id, photos, enterChat, navigation }) => {
-	const [eggPicture, setEggPicture] = useState(
-		'https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)'
-	);
-	const [chatMessages, setChatMessages] = useState('');
 
 const EggItem = ({id, photos, names, enterChat, navigation}) => {
   const [eggPicture, setEggPicture] = useState("https://literaryyard.files.wordpress.com/2017/11/smiling-face-funny-bird-picture.jpg?w=639)")

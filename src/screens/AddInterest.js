@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -136,9 +137,7 @@ const styles = StyleSheet.create({
 		flexWrap: 'wrap',
 
 		paddingTop: 100,
-		marginBottom: -20
-
-		justifyContent: 'center',
+		marginBottom: -20,
 
 	},
 	interestTagContainer: {
