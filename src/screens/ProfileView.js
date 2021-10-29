@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 		color: '#1F142E',
 		fontWeight: '800',
 		fontSize: 25,
-		marginTop: 20,
+		marginTop: 70,
 		marginBottom: 15,
 	},
 	interest: {

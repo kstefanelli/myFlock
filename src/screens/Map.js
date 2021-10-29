@@ -15,8 +15,8 @@ const Map = (props) => {
 
 	return (
 		<Stack.Navigator options={{ headerShown: false }}>
-			<Stack.Screen name="Honing In" component={HoningInScreen} />
-			<Stack.Screen name="Find Nearby Users" component={getNearbyUsers} />
+			<Stack.Screen options={{ headerShown: false }} name="Honing In" component={HoningInScreen} />
+			<Stack.Screen options={{ headerShown: false }} name="Find Nearby Users" component={getNearbyUsers} />
 			<Stack.Screen name="Animated Marker" component={AnimatedMarker} />
 			<Stack.Screen name="Other Profile Views" component={ProfileViewOther} />
 			<Stack.Screen name="Profile View" component={ProfileView} />
