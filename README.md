@@ -6,6 +6,7 @@ Watch the video overview:
 
 ## Our Inspiration:
 Birds of a feather flock together! We wanted to create a mobile app that  facilitates the discovery of platonic friends and activity partners based on two simple factors: shared interests and proximity.
+[Figma Prototype](https://www.figma.com/proto/YO1CsONzmAFOB8seehE1ut/myFlock?page-id=0%3A1&node-id=6%3A18&viewport=241%2C48%2C0.35&scaling=scale-down&starting-point-node-id=6%3A18)
 
 ## Try Out the App:
 If you want to test our app, the prerequisite is that you have Expo installed on your device.
