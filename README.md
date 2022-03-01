@@ -1,9 +1,5 @@
 ![cover for myFlock](assets/supplementary_images/cover.png)
 
-Watch the video overview: 
-[Capstone Presentation](https://youtu.be/KBKhrSB6zYQ)
-
-
 ## Our Inspiration:
 Birds of a feather flock together! We wanted to create a mobile app that  facilitates the discovery of platonic friends and activity partners based on two simple factors: shared interests and proximity.
 [Figma Prototype](https://www.figma.com/proto/YO1CsONzmAFOB8seehE1ut/myFlock?page-id=0%3A1&node-id=6%3A18&viewport=241%2C48%2C0.35&scaling=scale-down&starting-point-node-id=6%3A18)
